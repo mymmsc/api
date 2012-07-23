@@ -17,4 +17,353 @@
   <ItemGroup>
     <None Include="ReadMe.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="FileListTransferCBInterface.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="RakAssert.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="RakMemoryOverride.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Export.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="RakAlloca.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="RakNetDefines.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="RakNetDefinesOverrides.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DS_List.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="FileListTransfer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="NativeFeatureIncludes.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="NativeFeatureIncludesOverrides.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="NativeTypes.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="PacketPriority.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="RakNetSmartPtr.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="RakNetSocket.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="RakNetTime.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="RakNetTypes.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="RakPeer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="RakPeerInterface.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="SocketIncludes.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="WindowsIncludes.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="BitStream.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DS_ByteQueue.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DS_Map.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DS_MemoryPool.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DS_OrderedList.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DS_Queue.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DS_ThreadsafeAllocatingQueue.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="FileList.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="FileListNodeContext.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="FileOperations.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Gets.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="IncrementalReadInterface.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Itoa.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MessageIdentifiers.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MTUSize.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="PacketizedTCP.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="PluginInterface2.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="RakSleep.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="RakString.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="RakThread.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="RakWString.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ReliabilityLayer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="SignaledEvent.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="SimpleMutex.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="SocketLayer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="SuperFastHash.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="TCPInterface.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ThreadPool.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="WSAStartupSingleton.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="_FindFirst.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CCRakNetSlidingWindow.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DS_BPlusTree.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DS_Heap.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DS_HuffmanEncodingTree.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DS_HuffmanEncodingTreeFactory.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DS_HuffmanEncodingTreeNode.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DS_LinkedList.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DS_Multilist.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DS_RangeList.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="GetTime.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="gettimeofday.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="InternalPacket.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="LinuxStrings.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="LocklessTypes.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="NetworkIDManager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="NetworkIDObject.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="RakNetStatistics.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="RakNetVersion.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Rand.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="SecureHandshake.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="SHA1.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="SingleProducerConsumer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="StringCompressor.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="StringTable.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="RakMemoryOverride.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="FileListTransfer.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="RakNetSocket.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="RakNetTypes.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="RakPeer.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="BitStream.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DS_ByteQueue.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="FileList.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="FileOperations.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Gets.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="IncrementalReadInterface.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Itoa.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="PacketizedTCP.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="PluginInterface2.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="RakSleep.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="RakString.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="RakThread.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="RakWString.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ReliabilityLayer.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="SignaledEvent.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="SimpleMutex.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="SocketLayer.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="SuperFastHash.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="TCPInterface.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="WSAStartupSingleton.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="_FindFirst.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CCRakNetSlidingWindow.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DS_HuffmanEncodingTree.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="GetTime.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="gettimeofday.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="LinuxStrings.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="LocklessTypes.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="NetworkIDManager.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="NetworkIDObject.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="RakNetStatistics.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Rand.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="SecureHandshake.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="SHA1.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="StringCompressor.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="StringTable.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
 </Project>

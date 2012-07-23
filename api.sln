@@ -3,6 +3,10 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libapi", "libapi\libapi.vcxproj", "{22DD9AE5-81E9-40E3-9907-649CBFC15F92}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "p2sp", "p2sp\p2sp.vcxproj", "{5CC2DFE2-E35D-4BA8-9BE1-4BA146CD296A}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test-p2sp", "test-p2sp\test-p2sp.vcxproj", "{03BD5CC3-BBBB-4AE6-BFB6-96346916F662}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -13,6 +17,14 @@ Global
 		{22DD9AE5-81E9-40E3-9907-649CBFC15F92}.Debug|Win32.Build.0 = Debug|Win32
 		{22DD9AE5-81E9-40E3-9907-649CBFC15F92}.Release|Win32.ActiveCfg = Release|Win32
 		{22DD9AE5-81E9-40E3-9907-649CBFC15F92}.Release|Win32.Build.0 = Release|Win32
+		{5CC2DFE2-E35D-4BA8-9BE1-4BA146CD296A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{5CC2DFE2-E35D-4BA8-9BE1-4BA146CD296A}.Debug|Win32.Build.0 = Debug|Win32
+		{5CC2DFE2-E35D-4BA8-9BE1-4BA146CD296A}.Release|Win32.ActiveCfg = Release|Win32
+		{5CC2DFE2-E35D-4BA8-9BE1-4BA146CD296A}.Release|Win32.Build.0 = Release|Win32
+		{03BD5CC3-BBBB-4AE6-BFB6-96346916F662}.Debug|Win32.ActiveCfg = Debug|Win32
+		{03BD5CC3-BBBB-4AE6-BFB6-96346916F662}.Debug|Win32.Build.0 = Debug|Win32
+		{03BD5CC3-BBBB-4AE6-BFB6-96346916F662}.Release|Win32.ActiveCfg = Release|Win32
+		{03BD5CC3-BBBB-4AE6-BFB6-96346916F662}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

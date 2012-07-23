@@ -37,7 +37,9 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <CodeAnalysisRuleSet>SecurityRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <PrecompiledHeader>
@@ -50,6 +52,9 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <Lib>
+      <TreatLibWarningAsErrors>true</TreatLibWarningAsErrors>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -70,6 +75,125 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BitStream.h" />
+    <ClInclude Include="CCRakNetSlidingWindow.h" />
+    <ClInclude Include="DS_BPlusTree.h" />
+    <ClInclude Include="DS_ByteQueue.h" />
+    <ClInclude Include="DS_Heap.h" />
+    <ClInclude Include="DS_HuffmanEncodingTree.h" />
+    <ClInclude Include="DS_HuffmanEncodingTreeFactory.h" />
+    <ClInclude Include="DS_HuffmanEncodingTreeNode.h" />
+    <ClInclude Include="DS_LinkedList.h" />
+    <ClInclude Include="DS_List.h" />
+    <ClInclude Include="DS_Map.h" />
+    <ClInclude Include="DS_MemoryPool.h" />
+    <ClInclude Include="DS_Multilist.h" />
+    <ClInclude Include="DS_OrderedList.h" />
+    <ClInclude Include="DS_Queue.h" />
+    <ClInclude Include="DS_RangeList.h" />
+    <ClInclude Include="DS_ThreadsafeAllocatingQueue.h" />
+    <ClInclude Include="Export.h" />
+    <ClInclude Include="FileList.h" />
+    <ClInclude Include="FileListNodeContext.h" />
+    <ClInclude Include="FileListTransfer.h" />
+    <ClInclude Include="FileListTransferCBInterface.h" />
+    <ClInclude Include="FileOperations.h" />
+    <ClInclude Include="Gets.h" />
+    <ClInclude Include="GetTime.h" />
+    <ClInclude Include="gettimeofday.h" />
+    <ClInclude Include="IncrementalReadInterface.h" />
+    <ClInclude Include="InternalPacket.h" />
+    <ClInclude Include="Itoa.h" />
+    <ClInclude Include="LinuxStrings.h" />
+    <ClInclude Include="LocklessTypes.h" />
+    <ClInclude Include="MessageIdentifiers.h" />
+    <ClInclude Include="MTUSize.h" />
+    <ClInclude Include="NativeFeatureIncludes.h" />
+    <ClInclude Include="NativeFeatureIncludesOverrides.h" />
+    <ClInclude Include="NativeTypes.h" />
+    <ClInclude Include="NetworkIDManager.h" />
+    <ClInclude Include="NetworkIDObject.h" />
+    <ClInclude Include="PacketizedTCP.h" />
+    <ClInclude Include="PacketPriority.h" />
+    <ClInclude Include="PluginInterface2.h" />
+    <ClInclude Include="RakAlloca.h" />
+    <ClInclude Include="RakAssert.h" />
+    <ClInclude Include="RakMemoryOverride.h" />
+    <ClInclude Include="RakNetDefines.h" />
+    <ClInclude Include="RakNetDefinesOverrides.h" />
+    <ClInclude Include="RakNetSmartPtr.h" />
+    <ClInclude Include="RakNetSocket.h" />
+    <ClInclude Include="RakNetStatistics.h" />
+    <ClInclude Include="RakNetTime.h" />
+    <ClInclude Include="RakNetTypes.h" />
+    <ClInclude Include="RakNetVersion.h" />
+    <ClInclude Include="RakPeer.h" />
+    <ClInclude Include="RakPeerInterface.h" />
+    <ClInclude Include="RakSleep.h" />
+    <ClInclude Include="RakString.h" />
+    <ClInclude Include="RakThread.h" />
+    <ClInclude Include="RakWString.h" />
+    <ClInclude Include="Rand.h" />
+    <ClInclude Include="ReliabilityLayer.h" />
+    <ClInclude Include="SecureHandshake.h" />
+    <ClInclude Include="SHA1.h" />
+    <ClInclude Include="SignaledEvent.h" />
+    <ClInclude Include="SimpleMutex.h" />
+    <ClInclude Include="SingleProducerConsumer.h" />
+    <ClInclude Include="SocketIncludes.h" />
+    <ClInclude Include="SocketLayer.h" />
+    <ClInclude Include="StringCompressor.h" />
+    <ClInclude Include="StringTable.h" />
+    <ClInclude Include="SuperFastHash.h" />
+    <ClInclude Include="TCPInterface.h" />
+    <ClInclude Include="ThreadPool.h" />
+    <ClInclude Include="WindowsIncludes.h" />
+    <ClInclude Include="WSAStartupSingleton.h" />
+    <ClInclude Include="_FindFirst.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="BitStream.cpp" />
+    <ClCompile Include="CCRakNetSlidingWindow.cpp" />
+    <ClCompile Include="DS_ByteQueue.cpp" />
+    <ClCompile Include="DS_HuffmanEncodingTree.cpp" />
+    <ClCompile Include="FileList.cpp" />
+    <ClCompile Include="FileListTransfer.cpp" />
+    <ClCompile Include="FileOperations.cpp" />
+    <ClCompile Include="Gets.cpp" />
+    <ClCompile Include="GetTime.cpp" />
+    <ClCompile Include="gettimeofday.cpp" />
+    <ClCompile Include="IncrementalReadInterface.cpp" />
+    <ClCompile Include="Itoa.cpp" />
+    <ClCompile Include="LinuxStrings.cpp" />
+    <ClCompile Include="LocklessTypes.cpp" />
+    <ClCompile Include="NetworkIDManager.cpp" />
+    <ClCompile Include="NetworkIDObject.cpp" />
+    <ClCompile Include="PacketizedTCP.cpp" />
+    <ClCompile Include="PluginInterface2.cpp" />
+    <ClCompile Include="RakMemoryOverride.cpp" />
+    <ClCompile Include="RakNetSocket.cpp" />
+    <ClCompile Include="RakNetStatistics.cpp" />
+    <ClCompile Include="RakNetTypes.cpp" />
+    <ClCompile Include="RakPeer.cpp" />
+    <ClCompile Include="RakSleep.cpp" />
+    <ClCompile Include="RakString.cpp" />
+    <ClCompile Include="RakThread.cpp" />
+    <ClCompile Include="RakWString.cpp" />
+    <ClCompile Include="Rand.cpp" />
+    <ClCompile Include="ReliabilityLayer.cpp" />
+    <ClCompile Include="SecureHandshake.cpp" />
+    <ClCompile Include="SHA1.cpp" />
+    <ClCompile Include="SignaledEvent.cpp" />
+    <ClCompile Include="SimpleMutex.cpp" />
+    <ClCompile Include="SocketLayer.cpp" />
+    <ClCompile Include="StringCompressor.cpp" />
+    <ClCompile Include="StringTable.cpp" />
+    <ClCompile Include="SuperFastHash.cpp" />
+    <ClCompile Include="TCPInterface.cpp" />
+    <ClCompile Include="WSAStartupSingleton.cpp" />
+    <ClCompile Include="_FindFirst.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
