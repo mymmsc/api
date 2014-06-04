@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="mymmsc-j2ee">
+        <wb-resource deploy-path="/" source-path="/src"/>
+        <dependent-module archiveName="mymmsc-utils.jar" deploy-path="/" handle="module:/resource/mymmsc-utils/mymmsc-utils">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+    </wb-module>
+</project-modules>

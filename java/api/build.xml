@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE project   [
+<!ENTITY common SYSTEM "common.xml">
+]>
+<project name="standard" default="help" basedir=".">
+
+	<!-- ===================== Property Definitions =========================== -->
+
+	<!--
+         All properties should be defined in this section.
+         Any host-specific properties should be defined
+         in the build.properties file.
+
+         In this app, the following properties are defined in build.properties:
+
+        o  webserver.home  - the home directory of your Web Server installation
+        o  webapps.home    - the place to copy the war file to deploy it
+        -->
+
+	<property file="build.properties" />
+
+
+	<property name="app.home" value="." />
+	<property name="javadoc.pkg.top" value="${package.top}" />
+
+	<property name="src.home" value="${app.home}/src" />
+	<property name="lib.home" value="${app.home}/lib" />
+	<property name="classes.home" value="${app.home}/classes" />
+	<property name="doc.home" value="${jar.home}/doc" />
+	<property name="bak.home" value="${app.home}/bak" />
+	<property name="source" value="1.6" />
+	<property name="target" value="1.6" />
+
+	<!-- ==================== Compilation Classpath =========================== -->
+
+	<!--
+         This section creates the classpath for compilation.
+        -->
+
+	<path id="compile.classpath">
+
+		<!-- The object files for this application -->
+		<pathelement location="${classes.home}" />
+
+		<!-- The lib files for this application -->
+		<fileset dir="${lib.home}">
+			<include name="*.jar" />
+			<include name="*.zip" />
+		</fileset>
+
+		<!-- The lib files for mymmsc -->
+		<fileset dir="${mymmsc.lib.java.home}">
+			<include name="**/*.jar" />
+		</fileset>
+
+		<pathelement location="${jar.home}/classes.ext" />
+
+	</path>
+
+	<!-- ==================== "help" Target =================================== -->
+
+	<!--
+         This is the default ant target executed if no target is specified.
+         This helps avoid users just typing 'ant' and running a
+         default target that may not do what they are anticipating...
+        -->
+
+	<target name="help">
+		<echo message="Please specify a target! [usage: ant &lt;targetname&gt;]" />
+		<echo message="Here is a list of possible targets: " />
+		<echo message="  clean-all.....Delete build dir, all .class and war files" />
+		<echo message="  prepare.......Creates directories if required" />
+		<echo message="  compile.......Compiles source files" />
+		<echo message="  build.........Build war file from .class and other files" />
+		<echo message="  deploy........Copy war file to the webapps directory" />
+		<echo message="  javadoc.......Generates javadoc for this application" />
+	</target>
+
+	<!-- ==================== "clean-all" Target ============================== -->
+
+	<!--
+          This target should clean up any traces of the application
+          so that if you run a new build directly after cleaning, all
+          files will be replaced with what's current in source control
+        -->
+
+	<target name="clean-all">
+		<delete dir="${classes.home}" />
+
+		<!-- delete the backup -->
+		<delete dir="${bak.home}" />
+
+		<!-- delete the javadoc -->
+		<delete dir="${doc.home}" />
+
+		<!-- delete the class -->
+		<delete dir="${jar.home}/lib" />
+		<delete dir="${jar.home}/classes" />
+
+	</target>
+
+	<!-- ==================== "prepare" Target ================================ -->
+
+	<!--
+          This target is executed prior to any of the later targets
+          to make sure the directories exist. It only creates them
+          if they need to be created....
+          Other, similar, preparation steps can be placed here.
+        -->
+
+	<target name="prepare">
+
+		<echo message="xdoclet    Home = ${xdoclet.home}" />
+		<echo message="MyMMSC-lib Home = ${mymmsc.lib.java.home}" />
+		<mkdir dir="${classes.home}" />
+
+		<mkdir dir="${doc.home}" />
+		<mkdir dir="${doc.home}/api" />
+
+		<mkdir dir="${lib.home}" />
+
+		<!-- create the class -->
+		<mkdir dir="${jar.home}/lib" />
+		<mkdir dir="${jar.home}/classes" />
+
+	</target>
+
+	<!-- ==================== "compile" Target ================================ -->
+
+	<!--
+          This only compiles java files that are newer
+          than their corresponding .class files.
+     -->
+
+	<target name="compile" depends="prepare">
+		<javac debug="true" encoding="${jar.encoding}" destdir="${classes.home}" bootclasspath="${jdk6.lib}" includeantruntime="on" source="${source}" target="${target}" optimize="true">
+			<src path="${src.home}" />
+			<exclude name="**/.svn/**" />
+			<exclude name="**/bin*" />
+			<classpath refid="compile.classpath" />
+		</javac>
+	</target>
+
+	<!-- ==================== "release" Target ================================= -->
+
+	<!--
+         This target simply copies the war file from the deploy
+         directory into the Tomcat webapp directory.
+     -->
+
+	<target name="release" depends="compile">
+
+		<!-- Now, copy all the jar files we need -->
+		<copy todir="${jar.home}/classes">
+			<fileset dir="${classes.home}">
+				<include name="**/*.class" />
+			</fileset>
+		</copy>
+
+		<!-- Create the <jar> file -->
+		<jar jarfile="${jar.home}/lib/${jar.name}-${jar.version}.jar" basedir="${jar.home}/classes" />
+
+		<!-- copy all the jar files to mymmsc -->
+		<copy todir="${mymmsc.lib.java.home}">
+			<fileset dir="${jar.home}/lib">
+				<include name="**/*.jar" />
+			</fileset>
+		</copy>
+
+	</target>
+
+	<!-- =================================================================== -->
+	<!-- Creates the API documentation                                       -->
+	<!-- =================================================================== -->
+
+	<!--
+         This task creates javadoc. It is dependent upon only the
+         'compile' target so it is not executed in a normal build.
+         As a result, the target needs to be run on its own.
+    -->
+
+	<target name="javadoc" depends="compile">
+		<javadoc destdir="${doc.home}/api" packagenames="${javadoc.pkg.top}.*" doctitle="MyMMSC Developer's API" windowtitle="MyMMSC Developer's API" private="true">
+			<sourcepath path="${src.home}" />
+
+		</javadoc>
+	</target>
+
+</project>
