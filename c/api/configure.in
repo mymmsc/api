@@ -2727,7 +2727,7 @@ AC_CONFIG_FILES([Makefile
                  api.pc])
 
 if test -d $srcdir/test; then
-   AC_CONFIG_FILES([test/Makefile test/internal/Makefile])
+   AC_CONFIG_FILES([test/Makefile])
 fi
 
 #
