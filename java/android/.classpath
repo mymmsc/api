@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<classpath>
-	<classpathentry excluding="**/.svn/**|**/bin*" kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/android-4"/>
-	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/mymmsc-api"/>
-	<classpathentry kind="output" path="bin"/>
-</classpath>
