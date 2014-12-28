@@ -20,6 +20,7 @@ API_EXPORT = \
 	include/api/core.h \
 	include/api/crc64.h \
 	include/api/errno.h \
+	include/api/file.h \
 	include/api/hashtable.h \
 	include/api/lib.h \
 	include/api/log.h \
