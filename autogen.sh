@@ -3,7 +3,6 @@ if [ -x "`which autoreconf 2>/dev/null`" ] ; then
    exec autoreconf -imvf
 fi
 
-mkdir -p include/api/arch/unix
 LIBTOOLIZE=libtoolize
 SYSNAME=`uname`
 if [ "x$SYSNAME" = "xDarwin" ] ; then
