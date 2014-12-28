@@ -2,11 +2,11 @@
 #define API_LOG_H
 
 #include <api.h>
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
 #include <string.h>
-#include <assert.h>
 
 #ifdef _WIN32
 #include <io.h>
