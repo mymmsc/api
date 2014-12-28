@@ -1,5 +1,5 @@
 AUTOMAKE_OPTIONS = dist-bzip2 foreign 1.9 subdir-objects
-SUBDIRS          = base event modules compat samples test
+SUBDIRS          = base compat event samples test
 ACLOCAL_AMFLAGS  = -I build
 
 RELEASE          = -release 1.0
