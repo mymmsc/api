@@ -56,10 +56,10 @@ API void* api_mallocz(size_t size);
 API void api_freep(void *arg);
 
 #if 1
-#define api_malloc      malloc
-#define api_calloc      calloc
-#define api_realloc     realloc
-#define api_free        free
+#define api_malloc  malloc
+#define api_calloc  calloc
+#define api_realloc realloc
+#define api_free    free
 #else
 API void * api_malloc(size_t size);
 API void * api_calloc(size_t n, size_t size);
