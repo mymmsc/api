@@ -7,8 +7,9 @@
  * @brief API Strings library
  */
 
-#include "api/errno.h"
-#include "api/lib.h"
+#include <api/errno.h>
+#include <api/lib.h>
+
 #define API_WANT_IOVEC
 #include "api/want.h"
 

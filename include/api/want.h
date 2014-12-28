@@ -1,7 +1,8 @@
 #ifndef API_WANT_H
 #define API_WANT_H
 
-#include "api.h"        /* configuration data */
+#include <api.h>        /* configuration data */
+
 /**
  * @file api_want.h
  * @brief API Standard Headers Support
