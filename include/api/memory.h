@@ -48,17 +48,10 @@
 # define roundup(x, y)   ((((x)+((y)-1))/(y))*(y))
 #endif
 
-#if 1
 #define api_malloc  malloc
 #define api_calloc  calloc
 #define api_realloc realloc
 #define api_free    free
-#else
-API void * api_malloc(size_t size);
-API void * api_calloc(size_t n, size_t size);
-API void * api_realloc(void *p, size_t size);
-API void api_free(void *p);
-#endif
 
 /*
  * msvc and icc7 compile memset() to the inline "rep stos"
