@@ -10,6 +10,10 @@
 #include <stdint.h>
 #include <stddef.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef void (HashFunc)(const void *key, int len, uint32_t seed, void *out);
 
 #define __WITH_MURMUR
@@ -175,6 +179,10 @@ API void api_hashtable_resize(api_hashtable_t *table, unsigned int new_size);
 /// @brief Sets the global security seed to be used in hash function.
 /// @param seed The seed to use.
 API void api_hashtable_set_seed(uint32_t seed);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* ! API_HASHTABLE_H */
 

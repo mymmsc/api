@@ -21,14 +21,9 @@
 #  define freeAlignedMem(buff)         free(buff)
 #endif
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #define api_memmove     memmove
 
-#define api_safefree(x) \
-	do { if ((x) != NULL) {api_free(x); (x)=NULL;} } while(0)
+#define api_safefree(x) do { if ((x) != NULL) {api_free(x); (x)=NULL;} } while(0)
 
 //rounded division & shift
 #define RSHIFT(a,b) ((a) > 0 ? ((a) + ((1<<(b))>>1))>>(b) : ((a) + ((1<<(b))>>1)-1)>>(b))
@@ -53,9 +48,6 @@ extern "C" {
 # define roundup(x, y)   ((((x)+((y)-1))/(y))*(y))
 #endif
 
-API void* api_mallocz(size_t size);
-API void api_freep(void *arg);
-
 #if 1
 #define api_malloc  malloc
 #define api_calloc  calloc
@@ -68,14 +60,6 @@ API void * api_realloc(void *p, size_t size);
 API void api_free(void *p);
 #endif
 
-extern void *(* nmemcpy)(void *to, const void *from, size_t len);
-void *sse_memcpy_32(void *to, const void *from, size_t len);
-void *sse_memcpy_64(void *to, const void *from, size_t len);
-void *mmx_memcpy_32(void *to, const void *from, size_t len);
-void *mmx_memcpy_64(void *to, const void *from, size_t len);
-
-
-//----------------< Memory Pool >----------------
 /*
  * msvc and icc7 compile memset() to the inline "rep stos"
  * while ZeroMemory() and bzero() are the calls.
@@ -91,9 +75,6 @@ void *mmx_memcpy_64(void *to, const void *from, size_t len);
 #define api_align(d, a)     (((d) + (a - 1)) & ~(a - 1))
 #define api_align_ptr(p, a) (uint8_t *)(((uintptr_t)(p) + ((uintptr_t)a - 1)) & ~((uintptr_t)a - 1))
 
-typedef struct api_pool_s        api_pool_t;
-//typedef struct api_chain_s       api_chain_t;
-
 /*
  * API_MAX_ALLOC_FROM_POOL should be (api_pagesize - 1), i.e. 4095 on x86.
  * On Windows NT it decreases a number of locked pages in a kernel.
@@ -104,6 +85,25 @@ typedef struct api_pool_s        api_pool_t;
 
 #define API_POOL_ALIGNMENT       16
 #define API_MIN_POOL_SIZE        api_align((sizeof(api_pool_t) + 2 * sizeof(api_pool_large_t)), API_POOL_ALIGNMENT)
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+API void* api_mallocz(size_t size);
+API void api_freep(void *arg);
+
+extern void *(* nmemcpy)(void *to, const void *from, size_t len);
+API void *sse_memcpy_32(void *to, const void *from, size_t len);
+API void *sse_memcpy_64(void *to, const void *from, size_t len);
+API void *mmx_memcpy_32(void *to, const void *from, size_t len);
+API void *mmx_memcpy_64(void *to, const void *from, size_t len);
+
+
+//----------------< Memory Pool >----------------
+typedef struct api_pool_s        api_pool_t;
+//typedef struct api_chain_s       api_chain_t;
 
 typedef void (*api_pool_cleanup_pt)(void *data);
 

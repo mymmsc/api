@@ -6,8 +6,8 @@
 #include <fcntl.h> // for file 
 #include <sys/stat.h>
 
-#include "api/log.h"
-#include "api/file.h"
+#include <api/log.h>
+#include <api/file.h>
 
 #ifndef _WIN32
 #include <sys/time.h>
@@ -16,9 +16,9 @@
 #include <direct.h>
 #endif
 
-#include "api/time.h"
-#include "api/lib.h"
-#include "api/strings.h"
+#include <api/time.h>
+#include <api/lib.h>
+#include <api/strings.h>
 #include <time.h>
 
 typedef struct __log_struct{
@@ -265,19 +265,6 @@ int api_log(log_level_e level, const char *fmt, va_list args)
 	}
 	return iRet;
 }
-
-
-/*
-if (common->log_indent > 255) {
-      min = 255;
-    } else {
-      min = common->log_indent;
-    }
-
-    memset(indent, ' ', min);
-    indent[min] = '\0';
-
-*/
 
 int api_log_message(log_level_e level, const char *format, ...)
 {
