@@ -1,4 +1,5 @@
-#include "api/bitset.h"
+#include <api/bitset.h>
+#include <api/memory.h>
 //////////////////////////////////////////////////////////////////////////////////////////
 
 api_status_t api_bitset_create(api_bitset_t **bitset, api_bool_t is_h2l, api_uint8_t uuid[16], api_off_t length, api_size_t sizeOfBit)
