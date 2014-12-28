@@ -1,1 +1,1 @@
-SUBDIRS          = google
+SUBDIRS          = socks5
