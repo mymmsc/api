@@ -142,17 +142,17 @@ struct api_pool_s {
 };
 
 
-api_pool_t *api_create_pool(size_t size);
-void api_destroy_pool(api_pool_t *pool);
-void api_reset_pool(api_pool_t *pool);
+API api_pool_t *api_create_pool(size_t size);
+API void api_destroy_pool(api_pool_t *pool);
+API void api_reset_pool(api_pool_t *pool);
 
-void *api_palloc(api_pool_t *pool, size_t size);
-void *api_pnalloc(api_pool_t *pool, size_t size);
-void *api_pcalloc(api_pool_t *pool, size_t size);
-void *api_pmemalign(api_pool_t *pool, size_t size, size_t alignment);
-api_int_t api_pfree(api_pool_t *pool, void *p);
+API void *api_palloc(api_pool_t *pool, size_t size);
+API void *api_pnalloc(api_pool_t *pool, size_t size);
+API void *api_pcalloc(api_pool_t *pool, size_t size);
+API void *api_pmemalign(api_pool_t *pool, size_t size, size_t alignment);
+API api_int_t api_pfree(api_pool_t *pool, void *p);
 
-api_pool_cleanup_t *api_pool_cleanup_add(api_pool_t *p, size_t size);
+API api_pool_cleanup_t *api_pool_cleanup_add(api_pool_t *p, size_t size);
 
 #ifdef __cplusplus
 }
