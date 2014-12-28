@@ -1,4 +1,5 @@
 #include "api/slab.h"
+#include "api/log.h"
 
 #define API_SLAB_PAGE_MASK   3
 #define API_SLAB_PAGE        0

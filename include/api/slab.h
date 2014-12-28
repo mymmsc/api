@@ -1,7 +1,6 @@
 #ifndef _API_SLAB_H_INCLUDED_
 #define _API_SLAB_H_INCLUDED_
 
-
 #include "api/lib.h"
 #include "api/atomic.h"
 #include "api/shmtx.h"
