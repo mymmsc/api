@@ -1,0 +1,16 @@
+#libapi pkg-config source file
+
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+includedir=@includedir@
+
+Name: libapi
+Description: The MyMMSC(MSF) Portable Runtime library 
+Version: @VERSION@
+Requires:
+Conflicts:
+Libs: -L${libdir} -l@API_LIBNAME@ @LIBS@
+Libs.private: @LIBS@
+Cflags: @CPPFLAGS@ @CFLAGS@ -I${includedir}
+
