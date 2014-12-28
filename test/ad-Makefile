@@ -1,1 +1,0 @@
-gcc -I../include -L ~/runtime/lib -ljson-c ../base/creative.c test-ad.c -o test-ad
