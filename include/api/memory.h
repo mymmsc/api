@@ -27,7 +27,8 @@ extern "C" {
 
 #define api_memmove     memmove
 
-#define api_safefree(x) do { if ((x) != NULL) {api_free(x); (x)=NULL;} } while(0)
+#define api_safefree(x) \
+	do { if ((x) != NULL) {api_free(x); (x)=NULL;} } while(0)
 
 //rounded division & shift
 #define RSHIFT(a,b) ((a) > 0 ? ((a) + ((1<<(b))>>1))>>(b) : ((a) + ((1<<(b))>>1)-1)>>(b))
