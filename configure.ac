@@ -980,9 +980,6 @@ AC_CONFIG_FILES(Makefile \
                 include/api/platform.h \
                 base/Makefile \
                 event/Makefile \
-                compat/Makefile \
-                compat/conhash/Makefile \
-                compat/hiredis/Makefile \
                 samples/Makefile \
                 test/Makefile \
                 libapi.pc )

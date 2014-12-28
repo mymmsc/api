@@ -1,5 +1,5 @@
 AUTOMAKE_OPTIONS = dist-bzip2 foreign 1.9 subdir-objects
-SUBDIRS          = base compat event samples test
+SUBDIRS          = base event samples test
 ACLOCAL_AMFLAGS  = -I build
 
 RELEASE          = -release 1.0
@@ -30,12 +30,11 @@ include include/include.am
 GENERIC_LDFLAGS = -version-info $(VERSION_INFO) $(RELEASE) $(NO_UNDEFINED)
 
 SYS_LIBS  =
-LTLIBOBJS = event/libevent.la compat/libcompat.la
+LTLIBOBJS = base/libbase.la event/libevent.la
 
 libapi_la_SOURCES = $(CORE_SRC)
 libapi_la_LIBADD = $(LTLIBOBJS) $(SYS_LIBS)
 libapi_la_LDFLAGS = $(GENERIC_LDFLAGS)
-#libapi_la_EXTRA_DIST=
 
 API1_HDRS = \
 	include/api.h
