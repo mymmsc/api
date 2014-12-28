@@ -1,5 +1,6 @@
 #include "api/trie.h"
 #include "api/memory.h"
+#include <assert.h>
 
 inline trie_t *trie_init(void) {
     return api_calloc(1, sizeof(trie_t));
