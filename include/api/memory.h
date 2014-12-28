@@ -21,7 +21,11 @@
 #  define freeAlignedMem(buff)         free(buff)
 #endif
 
-#define api_memmove     memmove
+#define api_memmove(a,b,c)     memmove((a),(b),(c))
+#define api_malloc(a)  malloc(a)
+#define api_calloc(a,b)  calloc((a),(b))
+#define api_realloc(a,b) realloc((a),(b))
+#define api_free(p)    free(p)
 
 #define api_safefree(x) do { if ((x) != NULL) {api_free(x); (x)=NULL;} } while(0)
 
@@ -47,11 +51,6 @@
 #ifndef roundup
 # define roundup(x, y)   ((((x)+((y)-1))/(y))*(y))
 #endif
-
-#define api_malloc  malloc
-#define api_calloc  calloc
-#define api_realloc realloc
-#define api_free    free
 
 /*
  * msvc and icc7 compile memset() to the inline "rep stos"

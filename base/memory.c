@@ -24,25 +24,6 @@ void api_freep(void *arg)
     *ptr = NULL;
 }
 
-#if 0
-void * api_malloc(size_t size)
-{
-	return malloc(size);
-}
-void * api_calloc(size_t n, size_t size)
-{
-	return calloc(n, size);
-}
-void * api_realloc(void *p, size_t size)
-{
-	return realloc(p, size);
-}
-void api_free(void *p)
-{
-	free(p);
-}
-#endif
-
 #define DEF_OPT_FLAG_NONE   0
 #define DEF_OPT_FLAG_NOPT   1
 
