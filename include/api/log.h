@@ -12,6 +12,17 @@
 #include <io.h>
 #endif
 
+// stdout.log ???
+#define trace_out(fmt, ...)  api_log_trace(LOG_LEVEL_VERBOSE, __FILE__, __LINE__, __FUNCTION__, fmt, ##__VA_ARGS__)
+#define trace_err(fmt, ...)  api_log_trace(LOG_LEVEL_ERROR, __FILE__, __LINE__, __FUNCTION__, fmt, ##__VA_ARGS__)
+
+// access.log
+#define do_info(fmt, ...)    api_log_message(LOG_LEVEL_INFO, fmt, ##__VA_ARGS__)
+#define do_out(fmt, ...)     api_log_message(LOG_LEVEL_VERBOSE, fmt, ##__VA_ARGS__)
+#define do_error(fmt, ...)   api_log_message(LOG_LEVEL_ERROR, fmt, ##__VA_ARGS__)
+#define do_fatal(fmt, ...)   api_log_fatal(LOG_LEVEL_FATAL, fmt, ##__VA_ARGS__)
+#define do_assert(exp)       api_log_assert(LOG_LEVEL_FATAL, (exp), #exp, __FILE__, __LINE__, __FUNCTION__) 
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -44,17 +55,6 @@ typedef enum {
 API void api_logger_init(void);
 API void api_logger_close(void);
 API void api_log_init(byte_t type, int interval, const char *prefix);
-
-// stdout.log ???
-#define trace_out(fmt, ...)  api_log_trace(LOG_LEVEL_VERBOSE, __FILE__, __LINE__, __FUNCTION__, fmt, ##__VA_ARGS__)
-#define trace_err(fmt, ...)  api_log_trace(LOG_LEVEL_ERROR, __FILE__, __LINE__, __FUNCTION__, fmt, ##__VA_ARGS__)
-
-// access.log
-#define do_info(fmt, ...)    api_log_message(LOG_LEVEL_INFO, fmt, ##__VA_ARGS__)
-#define do_out(fmt, ...)     api_log_message(LOG_LEVEL_VERBOSE, fmt, ##__VA_ARGS__)
-#define do_error(fmt, ...)   api_log_message(LOG_LEVEL_ERROR, fmt, ##__VA_ARGS__)
-#define do_fatal(fmt, ...)   api_log_fatal(LOG_LEVEL_FATAL, fmt, ##__VA_ARGS__)
-#define do_assert(exp)       api_log_assert(LOG_LEVEL_FATAL, (exp), #exp, __FILE__, __LINE__, __FUNCTION__) 
 
 API int api_log(log_level_e level, const char *fmt, va_list args);
 
