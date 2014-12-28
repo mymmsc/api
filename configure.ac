@@ -983,10 +983,7 @@ AC_CONFIG_FILES(Makefile \
                 compat/Makefile \
                 compat/conhash/Makefile \
                 compat/hiredis/Makefile \
-                compat/mtree/Makefile \
-                modules/Makefile \
                 samples/Makefile \
-                samples/google/Makefile \
                 test/Makefile \
                 libapi.pc )
 
