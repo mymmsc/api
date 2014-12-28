@@ -1,0 +1,43 @@
+# include/Makefile.am for libapi
+#
+# See LICENSE for copying information.
+
+include_apidir = $(includedir)/api
+
+API_EXPORT = \
+	include/api/platform.h \
+	include/api/darwin_config.h \
+	include/api/freebsd_config.h \
+	include/api/linux_config.h \
+	include/api/posix_config.h \
+	include/api/solaris_config.h \
+	include/api/asio.h \
+	include/api/atomic.h \
+	include/api/base64.h \
+	include/api/bitset.h \
+	include/api/buffer.h \
+	include/api/core.h \
+	include/api/errno.h \
+	include/api/hashtable.h \
+	include/api/lib.h \
+	include/api/log.h \
+	include/api/memory.h \
+	include/api/socket.h \
+	include/api/strings.h \
+	include/api/time.h \
+	include/api/version.h \
+	include/api/want.h
+	
+
+
+## Without the nobase_ prefixing, Automake would strip "include/api/" from
+## the source header filename to derive the installed header filename.
+## With nobase_ the installed path is $(includedir)/include/api/ev*.h.
+
+if INSTALL_LIBAPI
+include_api_HEADERS =	$(API_EXPORT)
+#nodist_include_api_HEADERS = include/config.h
+else
+noinst_HEADERS +=		$(API_EXPORT)
+#nodist_noinst_HEADERS =		include/config.h
+endif
