@@ -1,4 +1,9 @@
 #!/bin/sh
+
+arch=include/api/arch/unix
+if [ -d $arch ] ; then
+	mkdir -p $arch
+fi
 if [ -x "`which autoreconf 2>/dev/null`" ] ; then
    exec autoreconf -imvf
 fi
