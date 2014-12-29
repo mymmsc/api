@@ -25,6 +25,7 @@ API_EXPORT = \
 	include/api/lib.h \
 	include/api/log.h \
 	include/api/memory.h \
+	include/api/memwatch.h \
 	include/api/shmtx.h \
 	include/api/slab.h \
 	include/api/socket.h \
