@@ -282,6 +282,8 @@ typedef intptr_t        api_int_t;
 typedef uintptr_t       api_uint_t;
 typedef intptr_t        api_flag_t;
 
+#define MEMWATCH
+#include <api/memwatch.h>
 
 #ifdef __cplusplus
 }
