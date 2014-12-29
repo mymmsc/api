@@ -30,6 +30,7 @@ API_EXPORT = \
 	include/api/socket.h \
 	include/api/strings.h \
 	include/api/time.h \
+	include/api/tree.h \
 	include/api/vector.h \
 	include/api/version.h \
 	include/api/want.h
