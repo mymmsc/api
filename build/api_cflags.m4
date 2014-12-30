@@ -316,3 +316,10 @@ case $host in
         os_version=OS_VERSION_IS_NOT_SET
         ;;
 esac
+
+have_memwatch="0"
+AC_ARG_ENABLE(memwatch, [  --enable-memwatch        Enable memory leak in API.],
+	[have_memwatch="1"
+])dnl
+
+AC_SUBST(have_memwatch)

@@ -212,6 +212,8 @@ extern "C" {
  * @{
  */
 
+#define API_HAVE_MEMWATCH       @have_memwatch@
+
 /*  String Feature Macros */
 #define API_HAVE_ASPRINTF       @have_asprintf@
 #define API_HAVE_BCOPY          @have_bcopy@
