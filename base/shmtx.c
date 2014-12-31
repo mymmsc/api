@@ -3,10 +3,10 @@
 static void api_shmtx_wakeup(api_shmtx_t *mtx);
 
 api_int_t
-api_shmtx_create(api_shmtx_t *mtx, api_shmtx_sh_t *addr)
+api_shmtx_create(api_shmtx_t *mtx)
 {
-    mtx->lock = &addr->lock;
-
+    mtx->lock = 0;
+	
     if (mtx->spin == (api_uint_t) -1) {
         return API_SUCCESS;
     }
@@ -46,7 +46,7 @@ api_shmtx_lock(api_shmtx_t *mtx)
     api_uint_t         i, n;
 
     for ( ;; ) {
-		printf("api_pid: %d, %d\n", api_pid, *mtx->lock);
+		printf("api_pid: %d, %d\n", api_pid, mtx->lock);
         if (*mtx->lock == 0 && api_atomic_cmp_set(mtx->lock, 0, api_pid)) {
             return;
         }
