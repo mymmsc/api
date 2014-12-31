@@ -66,12 +66,14 @@ static void slab_init(api_slab_pool_t *pool)
     api_uint_t        i, n, pages;
     api_slab_page_t  *slots;
 	
+
     /* STUB */
     if (api_slab_max_size == 0) {
         api_slab_max_size = api_pagesize / 2;
         api_slab_exact_size = api_pagesize / (8 * sizeof(uintptr_t));
         for (n = api_slab_exact_size; n >>= 1; api_slab_exact_shift++) {
             /* void */
+            printf("%d\n", n);
         }
     }
     /**/
@@ -85,7 +87,7 @@ static void slab_init(api_slab_pool_t *pool)
 
     slots = (api_slab_page_t *) p;
     n = api_pagesize_shift - pool->min_shift;
-
+    printf("%d\n", n);
     for (i = 0; i < n; i++) {
         slots[i].slab = 0;
         slots[i].next = &slots[i];
