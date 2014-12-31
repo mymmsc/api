@@ -1,5 +1,5 @@
-#ifndef API_DARWIN_CONFIG_H
-#define API_DARWIN_CONFIG_H
+#ifndef __API_DARWIN_CONFIG_H_INCLUDED__
+#define __API_DARWIN_CONFIG_H_INCLUDED__
 
 #include <sys/types.h>
 #include <sys/time.h>
@@ -83,4 +83,4 @@
 extern char **environ;
 
 
-#endif /* ! API_DARWIN_CONFIG_H */
+#endif /* ! __API_DARWIN_CONFIG_H_INCLUDED__ */

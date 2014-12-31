@@ -1,5 +1,5 @@
-#ifndef API_LINUX_CONFIG_H
-#define API_LINUX_CONFIG_H
+#ifndef __API_LINUX_CONFIG_H_INCLUDED__
+#define __API_LINUX_CONFIG_H_INCLUDED__
 
 #ifndef _GNU_SOURCE
 #define _GNU_SOURCE             /* pread(), pwrite(), gethostname() */
@@ -110,4 +110,4 @@ typedef struct iocb  api_aiocb_t;
 
 extern char **environ;
 
-#endif /* ! API_LINUX_CONFIG_H */
+#endif /*! __API_LINUX_CONFIG_H_INCLUDED__ */

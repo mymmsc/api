@@ -1,5 +1,5 @@
-#ifndef API_TRIE_H
-#define API_TRIE_H
+#ifndef __API_TRIE_H_INCLUDED__
+#define __API_TRIE_H_INCLUDED__
 
 #include "api.h"
 
@@ -29,5 +29,5 @@ API void trie_free(trie_t *);
 }
 #endif
 
-#endif /* ! API_TRIE_H */
+#endif /* ! __API_TRIE_H_INCLUDED__ */
 

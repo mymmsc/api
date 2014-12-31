@@ -1,5 +1,5 @@
-#ifndef API_VERSION_H
-#define API_VERSION_H
+#ifndef __API_VERSION_H_INCLUDED__
+#define __API_VERSION_H_INCLUDED__
 
 /**
  * @file api_version.h
@@ -145,4 +145,4 @@ API const char * api_version_string(void);
 
 #endif /* ndef API_VERSION_ONLY */
 
-#endif /* ndef API_VERSION_H */
+#endif /* ndef API_VERSION_H_INCLUDED__ */

@@ -1,5 +1,5 @@
-#ifndef API_STRINGS_H
-#define API_STRINGS_H
+#ifndef __API_STRINGS_H_INCLUDED__
+#define __API_STRINGS_H_INCLUDED__
 //////////////////////////////////////////////////////////////////////////////////////////
 
 /**
@@ -334,4 +334,4 @@ API api_uint32_t api_str2tbl(api_hashtable_t *tbl, const char *str, const char *
 #endif
 
 //////////////////////////////////////////////////////////////////////////////////////////
-#endif  /* !API_STRINGS_H */
+#endif  /* !__API_STRINGS_H_INCLUDED__ */

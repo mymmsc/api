@@ -1,5 +1,5 @@
-#ifndef API_MEMORY_H
-#define API_MEMORY_H
+#ifndef __API_MEMORY_H_INCLUDED__
+#define __API_MEMORY_H_INCLUDED__
 
 #include "api.h"
 #include "api/lib.h"
@@ -151,4 +151,4 @@ API api_pool_cleanup_t *api_pool_cleanup_add(api_pool_t *p, size_t size);
 }
 #endif
 
-#endif /* ! API_MEMORY_H */
+#endif /* ! __API_MEMORY_H_INCLUDED__ */

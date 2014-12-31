@@ -3,8 +3,8 @@
 /// @author Dane Larsen
 /// @brief The primary header for the hashtable library. All public functions are defined here.
 
-#ifndef API_HASHTABLE_H
-#define API_HASHTABLE_H
+#ifndef __API_HASHTABLE_H_INCLUDED__
+#define __API_HASHTABLE_H_INCLUDED__
 
 #include "api.h"
 #include <stdint.h>
@@ -184,5 +184,5 @@ API void api_hashtable_set_seed(uint32_t seed);
 }
 #endif
 
-#endif /* ! API_HASHTABLE_H */
+#endif /* ! __API_HASHTABLE_H_INCLUDED__ */
 

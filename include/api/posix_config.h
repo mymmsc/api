@@ -1,6 +1,5 @@
-#ifndef API_POSIX_CONFIG_H
-#define API_POSIX_CONFIG_H
-
+#ifndef __API_POSIX_CONFIG_H_INCLUDED__
+#define __API_POSIX_CONFIG_H_INCLUDED__
 
 #if (API_HPUX)
 #define _XOPEN_SOURCE
@@ -144,4 +143,4 @@ typedef struct aiocb  api_aiocb_t;
 extern char **environ;
 
 
-#endif /* ! API_POSIX_CONFIG_H */
+#endif /* ! __API_POSIX_CONFIG_H_INCLUDED__ */

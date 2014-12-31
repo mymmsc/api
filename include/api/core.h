@@ -1,5 +1,5 @@
-#ifndef API_CORE_H
-#define API_CORE_H
+#ifndef __API_CORE_H_INCLUDED__
+#define __API_CORE_H_INCLUDED__
 
 #include <api.h>
 
@@ -29,4 +29,4 @@ API void api_init(void);
 }
 #endif
 
-#endif /* ! API_CORE_H */
+#endif /* ! __API_CORE_H_INCLUDED__ */

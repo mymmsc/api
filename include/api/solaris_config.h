@@ -1,5 +1,5 @@
-#ifndef API_SOLARIS_CONFIG_H
-#define API_SOLARIS_CONFIG_H
+#ifndef __API_SOLARIS_CONFIG_H_INCLUDED__
+#define __API_SOLARIS_CONFIG_H_INCLUDED__
 
 #ifndef _REENTRANT
 #define _REENTRANT
@@ -96,4 +96,4 @@
 extern char **environ;
 
 
-#endif /* ! API_SOLARIS_CONFIG_H */
+#endif /*! __API_SOLARIS_CONFIG_H_INCLUDED__ */

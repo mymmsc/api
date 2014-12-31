@@ -1,5 +1,5 @@
-#ifndef API_ASIO_H
-#define API_ASIO_H
+#ifndef __API_ASIO_H_INCLUDED__
+#define __API_ASIO_H_INCLUDED__
 
 #include <api.h>
 
@@ -51,4 +51,4 @@ API void io_watcher_stop(io_watcher_t *watcher, int toClose);
 }
 #endif
 
-#endif /* ! API_ASIO_H */
+#endif /* ! __API_ASIO_H_INCLUDED__ */

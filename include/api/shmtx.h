@@ -1,5 +1,5 @@
-#ifndef _API_SHMTX_H_INCLUDED_
-#define _API_SHMTX_H_INCLUDED_
+#ifndef __API_SHMTX_H_INCLUDED__
+#define __API_SHMTX_H_INCLUDED__
 
 #include "api/lib.h"
 #include "api/atomic.h"
@@ -28,4 +28,4 @@ API api_uint_t api_shmtx_force_unlock(api_shmtx_t *mtx, pid_t pid);
 }
 #endif
 
-#endif /* _API_SHMTX_H_INCLUDED_ */
+#endif /* !__API_SHMTX_H_INCLUDED__ */

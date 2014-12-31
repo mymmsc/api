@@ -1,5 +1,5 @@
-#ifndef API_H
-#define API_H
+#ifndef __API_H_INCLUDED__
+#define __API_H_INCLUDED__
 
 #include <api/platform.h>
 
@@ -291,4 +291,4 @@ typedef intptr_t        api_flag_t;
 }
 #endif
 
-#endif /* ! API_H */
+#endif /* ! __API_H_INCLUDED__ */

@@ -1,5 +1,5 @@
-#ifndef API_VECTOR_H
-#define API_VECTOR_H
+#ifndef __API_VECTOR_H_INCLUDED__
+#define __API_VECTOR_H_INCLUDED__
 
 #include "api.h"
 
@@ -23,4 +23,4 @@ API void vector_resize(vector_t *vector);
 }
 #endif
 
-#endif /* ! API_VECTOR_H */
+#endif /* ! __API_VECTOR_H_INCLUDED__ */

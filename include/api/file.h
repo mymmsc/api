@@ -1,5 +1,5 @@
-#ifndef API_FILE_H
-#define API_FILE_H
+#ifndef __API_FILE_H_INCLUDED__
+#define __API_FILE_H_INCLUDED__
 
 #include "api.h"
 
@@ -14,5 +14,5 @@ API status_t api_mkdirs(const char *pathname);
 }
 #endif
 
-#endif /* ! API_FILE_H */
+#endif /* ! __API_FILE_H_INCLUDED__ */
 

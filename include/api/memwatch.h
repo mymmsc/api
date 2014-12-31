@@ -705,6 +705,6 @@ void operator delete(void *);
 
 #endif /* 980317: disabled C++ */
 
-#endif /* API_MEMWATCH_H */
+#endif /* ! __API_MEMWATCH_H */
 
 /* EOF API_MEMWATCH.H */

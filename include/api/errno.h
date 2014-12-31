@@ -1,5 +1,5 @@
-#ifndef API_ERRNO_H
-#define API_ERRNO_H
+#ifndef __API_ERRNO_H_INCLUDED__
+#define __API_ERRNO_H_INCLUDED__
 
 /**
  * @file api_errno.h
@@ -1315,4 +1315,4 @@ API_DECLARE(char *) api_strerror(api_status_t statcode, char *buf,
 }
 #endif
 
-#endif  /* ! API_ERRNO_H */
+#endif  /* ! __API_ERRNO_H_INCLUDED__ */

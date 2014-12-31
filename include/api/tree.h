@@ -23,8 +23,8 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef	_SYS_TREE_H_
-#define	_SYS_TREE_H_
+#ifndef	_SYS_TREE_H_INCLUDED___
+#define	_SYS_TREE_H_INCLUDED___
 
 #ifndef __unused
 #define __unused
@@ -711,4 +711,4 @@ name##_RB_MINMAX(struct name *head, int val)				\
 	    (x) != NULL;						\
 	    (x) = name##_RB_NEXT(x))
 
-#endif	/* _SYS_TREE_H_ */
+#endif	/* _SYS_TREE_H_INCLUDED___ */

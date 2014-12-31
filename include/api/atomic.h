@@ -1,5 +1,5 @@
-#ifndef API_ATOMIC_H
-#define API_ATOMIC_H
+#ifndef __API_ATOMIC_H_INCLUDED__
+#define __API_ATOMIC_H_INCLUDED__
 
 #include <api.h>
 
@@ -101,4 +101,4 @@ API void api_spinlock(atomic_t *lock, atomic_int_t value, uint32_t spin);
 }
 #endif
 
-#endif /* ! API_ATOMIC_H */
+#endif /* ! __API_ATOMIC_H_INCLUDED__ */

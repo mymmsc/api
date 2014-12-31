@@ -1,5 +1,5 @@
-#ifndef API_LIB_H
-#define API_LIB_H
+#ifndef __API_LIB_H_INCLUDED__
+#define __API_LIB_H_INCLUDED__
 
 /**
  * @file api_lib.h
@@ -130,4 +130,4 @@ API_DECLARE(const char *) api_filepath_name_get(const char *pathname);
 }
 #endif
 
-#endif	/* ! API_LIB_H */
+#endif	/*! __API_LIB_H_INCLUDED__ */

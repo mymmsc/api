@@ -1,5 +1,5 @@
-#ifndef API_SOCKET_H
-#define API_SOCKET_H
+#ifndef __API_SOCKET_H_INCLUDED__
+#define __API_SOCKET_H_INCLUDED__
 
 #include <api.h>
 
@@ -13,4 +13,4 @@ typedef int socket_t;
 }
 #endif
 
-#endif /* ! API_SOCKET_H */
+#endif /*! __API_SOCKET_H_INCLUDED__ */

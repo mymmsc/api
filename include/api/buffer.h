@@ -1,5 +1,5 @@
-#ifndef API_BUFFER_H
-#define API_BUFFER_H
+#ifndef __API_BUFFER_H_INCLUDED__
+#define __API_BUFFER_H_INCLUDED__
 
 #include "api.h"
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -187,4 +187,4 @@ API api_size_t api_buffer_fix_uint64(api_buffer_t *buf, api_size_t pos, api_uint
 
 //////////////////////////////////////////////////////////////////////////////////////////
 
-#endif /* ! API_BUFFER_H */
+#endif /* ! __API_BUFFER_H_INCLUDED__ */

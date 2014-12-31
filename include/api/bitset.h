@@ -1,8 +1,8 @@
 // -*- Mode: C++; tab-width: 4; c-basic-offset: 4; indent-tabs-mode: nil -*-
 // vim:tabstop=4:shiftwidth=4:expandtab:
 
-#ifndef API_BITSET_H
-#define API_BITSET_H
+#ifndef __API_BITSET_H_INCLUDED__
+#define __API_BITSET_H_INCLUDED__
 //////////////////////////////////////////////////////////////////////////////////////////
 
 #include "api.h"
@@ -134,4 +134,4 @@ API api_status_t api_bitset_set(api_bitset_t *bitset, api_off_t offset);
 
 //////////////////////////////////////////////////////////////////////////////////////////
 
-#endif /* ! API_BITSET_H */
+#endif /* ! __API_BITSET_H_INCLUDED__ */

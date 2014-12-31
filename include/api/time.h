@@ -1,5 +1,5 @@
-#ifndef API_TIME_H
-#define API_TIME_H
+#ifndef __API_TIME_H_INCLUDED__
+#define __API_TIME_H_INCLUDED__
 
 /**
  * @file api_time.h
@@ -233,4 +233,4 @@ API api_time_t api_tickcount(void);
 }
 #endif
 
-#endif  /* ! API_TIME_H */
+#endif  /* ! __API_TIME_H_INCLUDED__ */

@@ -1,5 +1,5 @@
-#ifndef API_FREEBSD_CONFIG_H
-#define API_FREEBSD_CONFIG_H
+#ifndef __API_FREEBSD_CONFIG_H_INCLUDED__
+#define __API_FREEBSD_CONFIG_H_INCLUDED__
 
 #include <sys/types.h>
 #include <sys/time.h>
@@ -113,4 +113,4 @@ extern char **environ;
 extern char  *malloc_options;
 
 
-#endif /* API_FREEBSD_CONFIG_H */
+#endif /* ! __API_FREEBSD_CONFIG_H_INCLUDED__ */

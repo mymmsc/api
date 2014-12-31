@@ -2,8 +2,8 @@
  * @file base64.h
  * @brief API Base64 Encoding
  */
-#ifndef API_BASE64_H
-#define API_BASE64_H
+#ifndef __API_BASE64_H_INCLUDED__
+#define __API_BASE64_H_INCLUDED__
 
 #include "api.h"
 #include "api/lib.h"
@@ -124,5 +124,5 @@ API int api_base64_decode_url(uint8_t *plain_dst, const uint8_t *coded_src, int 
 }
 #endif
 
-#endif	/* !API_BASE64_H */
+#endif	/* ! __API_BASE64_H_INCLUDED__ */
 

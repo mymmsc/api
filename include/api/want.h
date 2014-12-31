@@ -1,5 +1,5 @@
-#ifndef API_WANT_H
-#define API_WANT_H
+#ifndef __API_WANT_H_INCLUDED__
+#define __API_WANT_H_INCLUDED__
 
 #include <api.h>        /* configuration data */
 
@@ -110,4 +110,4 @@ struct iovec
 #endif
 
 /* --------------------------------------------------------------------- */
-#endif /* ! API_WANT_H */
+#endif /* ! __API_WANT_H_INCLUDED__ */

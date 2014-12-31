@@ -1,5 +1,5 @@
-#ifndef API_LOG_H
-#define API_LOG_H
+#ifndef __API_LOG_H_INCLUDED__
+#define __API_LOG_H_INCLUDED__
 
 #include <api.h>
 
@@ -70,5 +70,5 @@ API void api_log_assert(log_level_e level, int exp, const char *exps, const char
 #endif
 
 
-#endif /* ! API_LOG_H */
+#endif /* ! __API_LOG_H_INCLUDED__ */
 

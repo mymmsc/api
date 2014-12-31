@@ -1,5 +1,5 @@
-#ifndef API_PLATFORM_H
-#define API_PLATFORM_H
+#ifndef __API_PLATFORM_H_INCLUDED__
+#define __API_PLATFORM_H_INCLUDED__
 
 /* GENERATED FILE WARNING!  DO NOT EDIT platform.h
  *
@@ -593,5 +593,5 @@ typedef  int         gid_t;
 }
 #endif
 
-#endif /* ! API_PLATFORM_H */
+#endif /* ! __API_PLATFORM_H */
 

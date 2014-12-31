@@ -1,5 +1,5 @@
-#ifndef API_CACHE_H
-#define API_CACHE_H
+#ifndef __API_CACHE_H_INCLUDED__
+#define __API_CACHE_H_INCLUDED__
 
 #include "api.h"
 
@@ -24,4 +24,4 @@ API status_t cache_offset(void **addr, cache_t *cache, int64_t offset);
 #endif
 
 
-#endif /* ! API_CACHE_H */
+#endif /* ! __API_CACHE_H_INCLUDED__ */

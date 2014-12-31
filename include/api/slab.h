@@ -1,5 +1,5 @@
-#ifndef _API_SLAB_H_INCLUDED_
-#define _API_SLAB_H_INCLUDED_
+#ifndef __API_SLAB_H_INCLUDED__
+#define __API_SLAB_H_INCLUDED__
 
 #include "api/lib.h"
 #include "api/atomic.h"
@@ -55,4 +55,4 @@ API void api_slab_free_locked(api_slab_pool_t *pool, void *p);
 }
 #endif
 
-#endif /* _API_SLAB_H_INCLUDED_ */
+#endif /* ! __API_SLAB_H_INCLUDED_ */
