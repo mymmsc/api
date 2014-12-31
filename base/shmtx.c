@@ -46,6 +46,7 @@ api_shmtx_lock(api_shmtx_t *mtx)
     api_uint_t         i, n;
 
     for ( ;; ) {
+		printf("api_pid: %d\n", api_pid);
         if (*mtx->lock == 0 && api_atomic_cmp_set(mtx->lock, 0, api_pid)) {
             return;
         }
