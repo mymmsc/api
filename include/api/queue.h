@@ -1,6 +1,8 @@
 #ifndef __API_QUEUE_H_INCLUDED__
 #define __API_QUEUE_H_INCLUDED__
 
+#include <api.h>
+
 typedef struct api_queue_s  api_queue_t;
 
 struct api_queue_s {
