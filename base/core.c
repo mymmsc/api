@@ -255,7 +255,7 @@ uint32_t api_cpu_getnumber(void)
 
 void api_init(void)
 {
-	if(api_ncpu < 1) {
+	if(api_ncpu > 0) {
 		return;
 	}
 	uint32_t n = 0;
