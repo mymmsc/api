@@ -5,6 +5,7 @@ static void api_shmtx_wakeup(api_shmtx_t *mtx);
 api_int_t
 api_shmtx_create(api_shmtx_t *mtx, api_shmtx_sh_t *addr)
 {
+	addr->lock = 0;
     mtx->lock = &addr->lock;
 
     if (mtx->spin == (api_uint_t) -1) {
