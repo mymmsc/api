@@ -66,14 +66,12 @@ static void slab_init(api_slab_pool_t *pool)
     api_uint_t        i, n, pages;
     api_slab_page_t  *slots;
 	
-
     /* STUB */
     if (api_slab_max_size == 0) {
         api_slab_max_size = api_pagesize / 2;
         api_slab_exact_size = api_pagesize / (8 * sizeof(uintptr_t));
         for (n = api_slab_exact_size; n >>= 1; api_slab_exact_shift++) {
             /* void */
-            printf("%d\n", n);
         }
     }
     /**/
@@ -87,7 +85,7 @@ static void slab_init(api_slab_pool_t *pool)
 
     slots = (api_slab_page_t *) p;
     n = api_pagesize_shift - pool->min_shift;
-    printf("%d\n", n);
+
     for (i = 0; i < n; i++) {
         slots[i].slab = 0;
         slots[i].next = &slots[i];
@@ -97,10 +95,9 @@ static void slab_init(api_slab_pool_t *pool)
     p += n * sizeof(api_slab_page_t);
 
     pages = (api_uint_t) (size / (api_pagesize + sizeof(api_slab_page_t)));
-    printf("pages: %d\n", pages);
+
     api_memzero(p, pages * sizeof(api_slab_page_t));
-    printf("1-1\n");
-    
+
     pool->pages = (api_slab_page_t *) p;
 
     pool->free.prev = 0;
@@ -110,11 +107,10 @@ static void slab_init(api_slab_pool_t *pool)
     pool->pages->next = &pool->free;
     pool->pages->prev = (uintptr_t) &pool->free;
 
-    printf("2-1\n");
     pool->start = (uint8_t *)
                   api_align_ptr((uintptr_t) p + pages * sizeof(api_slab_page_t),
                                  api_pagesize);
-    printf("3-1\n");
+
     m = pages - (pool->end - pool->start) / api_pagesize;
     if (m > 0) {
         pages -= m;
@@ -126,7 +122,6 @@ static void slab_init(api_slab_pool_t *pool)
     pool->log_nomem = 1;
     pool->log_ctx = &pool->zero;
     pool->zero = '\0';
-    printf("exit...\n"); 
 }
 
 api_slab_pool_t *api_slab_init(void *addr, size_t size)
