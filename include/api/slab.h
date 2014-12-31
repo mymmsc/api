@@ -55,4 +55,4 @@ API void api_slab_free_locked(api_slab_pool_t *pool, void *p);
 }
 #endif
 
-#endif /* ! __API_SLAB_H_INCLUDED_ */
+#endif /* ! __API_SLAB_H_INCLUDED__ */

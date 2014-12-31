@@ -3,6 +3,10 @@
 
 #include <api.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef struct api_queue_s  api_queue_t;
 
 struct api_queue_s {
@@ -86,5 +90,8 @@ API api_queue_t *api_queue_middle(api_queue_t *queue);
 API void api_queue_sort(api_queue_t *queue,
     api_int_t (*cmp)(const api_queue_t *, const api_queue_t *));
 
+#ifdef __cplusplus
+}
+#endif
 
-#endif /* ! __API_QUEUE_H_INCLUDED_ */
+#endif /* ! __API_QUEUE_H_INCLUDED__ */
