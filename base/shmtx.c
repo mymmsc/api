@@ -3,10 +3,10 @@
 static void api_shmtx_wakeup(api_shmtx_t *mtx);
 
 api_int_t
-api_shmtx_create(api_shmtx_t *mtx)
+api_shmtx_create(api_shmtx_t *mtx, api_shmtx_sh_t *addr)
 {
-    mtx->lock = 0;
-	
+    mtx->lock = &addr->lock;
+
     if (mtx->spin == (api_uint_t) -1) {
         return API_SUCCESS;
     }
@@ -36,7 +36,7 @@ api_shmtx_destroy(api_shmtx_t *mtx)
 api_uint_t
 api_shmtx_trylock(api_shmtx_t *mtx)
 {
-    return (mtx->lock == 0 && api_atomic_cmp_set(mtx->lock, 0, api_pid));
+    return (*mtx->lock == 0 && api_atomic_cmp_set(*mtx->lock, 0, api_pid));
 }
 
 
@@ -46,8 +46,7 @@ api_shmtx_lock(api_shmtx_t *mtx)
     api_uint_t         i, n;
 
     for ( ;; ) {
-		printf("api_pid: %d, %d\n", api_pid, mtx->lock);
-        if (mtx->lock == 0 && api_atomic_cmp_set(mtx->lock, 0, api_pid)) {
+        if (*mtx->lock == 0 && api_atomic_cmp_set(*mtx->lock, 0, api_pid)) {
             return;
         }
 
@@ -59,8 +58,8 @@ api_shmtx_lock(api_shmtx_t *mtx)
                     api_cpu_pause();
                 }
 
-                if (mtx->lock == 0
-                    && api_atomic_cmp_set(mtx->lock, 0, api_pid))
+                if (*mtx->lock == 0
+                    && api_atomic_cmp_set(*mtx->lock, 0, api_pid))
                 {
                     return;
                 }
@@ -79,7 +78,7 @@ api_shmtx_unlock(api_shmtx_t *mtx)
         //
     }
 
-    if (api_atomic_cmp_set(mtx->lock, api_pid, 0)) {
+    if (api_atomic_cmp_set(*mtx->lock, api_pid, 0)) {
         api_shmtx_wakeup(mtx);
     }
 }
@@ -88,7 +87,7 @@ api_shmtx_unlock(api_shmtx_t *mtx)
 api_uint_t
 api_shmtx_force_unlock(api_shmtx_t *mtx, pid_t pid)
 {
-    if (api_atomic_cmp_set(mtx->lock, pid, 0)) {
+    if (api_atomic_cmp_set(*mtx->lock, pid, 0)) {
         api_shmtx_wakeup(mtx);
         return 1;
     }
