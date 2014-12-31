@@ -36,7 +36,7 @@ api_shmtx_destroy(api_shmtx_t *mtx)
 api_uint_t
 api_shmtx_trylock(api_shmtx_t *mtx)
 {
-    return (*mtx->lock == 0 && api_atomic_cmp_set(mtx->lock, 0, api_pid));
+    return (mtx->lock == 0 && api_atomic_cmp_set(mtx->lock, 0, api_pid));
 }
 
 
@@ -47,7 +47,7 @@ api_shmtx_lock(api_shmtx_t *mtx)
 
     for ( ;; ) {
 		printf("api_pid: %d, %d\n", api_pid, mtx->lock);
-        if (*mtx->lock == 0 && api_atomic_cmp_set(mtx->lock, 0, api_pid)) {
+        if (mtx->lock == 0 && api_atomic_cmp_set(mtx->lock, 0, api_pid)) {
             return;
         }
 
@@ -59,7 +59,7 @@ api_shmtx_lock(api_shmtx_t *mtx)
                     api_cpu_pause();
                 }
 
-                if (*mtx->lock == 0
+                if (mtx->lock == 0
                     && api_atomic_cmp_set(mtx->lock, 0, api_pid))
                 {
                     return;
