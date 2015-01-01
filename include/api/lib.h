@@ -38,6 +38,19 @@ extern "C" {
 /** A constant representing a 'large' string. */
 #define HUGE_STRING_LEN 8192
 
+/** @see api_vformatter_buff_t */
+typedef struct api_vformatter_buff_t api_vformatter_buff_t;
+
+/**
+ * Structure used by the variable-formatter routines.
+ */
+struct api_vformatter_buff_t {
+    /** The current position */
+    char *curpos;
+    /** The end position of the format string */
+    char *endpos;
+};
+
 /**
  * return the final element of the pathname
  * @param pathname The path to get the final element of
@@ -51,7 +64,84 @@ extern "C" {
  *                 "bs\\path\\stuff" -> "stuff"
  * </PRE>
  */
-API_DECLARE(const char *) api_filepath_name_get(const char *pathname);
+API const char * api_filepath_name_get(const char *pathname);
+
+/**
+ * api_vformatter() is a generic printf-style formatting routine
+ * with some extensions.
+ * @param flush_func The function to call when the buffer is full
+ * @param c The buffer to write to
+ * @param fmt The format string
+ * @param ap The arguments to use to fill out the format string.
+ *
+ * @remark
+ * <PRE>
+ * The extensions are:
+ *
+ * - %%pA takes a struct in_addr *, and prints it as a.b.c.d
+ * - %%pI takes an api_sockaddr_t * and prints it as a.b.c.d:port or
+ * \[ipv6-address\]:port
+ * - %%pT takes an api_os_thread_t * and prints it in decimal
+ * ('0' is printed if !API_HAS_THREADS)
+ * - %%pt takes an api_os_thread_t * and prints it in hexadecimal
+ * ('0' is printed if !API_HAS_THREADS)
+ * - %%pm takes an api_status_t * and prints the appropriate error
+ * string (from apr_strerror) corresponding to that error code.
+ * - %%pp takes a void * and outputs it in hex
+ * - %%pB takes a apr_uint32_t * as bytes and outputs it's apr_strfsize
+ * - %%pF same as above, but takes a api_off_t *
+ * - %%pS same as above, but takes a api_size_t *
+ *
+ * %%pA, %%pI, %%pT, %%pp are available from API 1.0.0 onwards (and in 0.9.x).
+ * %%pt is only available from API 1.2.0 onwards.
+ * %%pm, %%pB, %%pF and %%pS are only available from API 1.3.0 onwards.
+ *
+ * The %%p hacks are to force gcc's printf warning code to skip
+ * over a pointer argument without complaining.  This does
+ * mean that the ANSI-style %%p (output a void * in hex format) won't
+ * work as expected at all, but that seems to be a fair trade-off
+ * for the increased robustness of having printf-warnings work.
+ *
+ * Additionally, apr_vformatter allows for arbitrary output methods
+ * using the api_vformatter_buff and flush_func.
+ *
+ * The apr_vformatter_buff has two elements curpos and endpos.
+ * curpos is where apr_vformatter will write the next byte of output.
+ * It proceeds writing output to curpos, and updating curpos, until
+ * either the end of output is reached, or curpos == endpos (i.e. the
+ * buffer is full).
+ *
+ * If the end of output is reached, apr_vformatter returns the
+ * number of bytes written.
+ *
+ * When the buffer is full, the flush_func is called.  The flush_func
+ * can return -1 to indicate that no further output should be attempted,
+ * and apr_vformatter will return immediately with -1.  Otherwise
+ * the flush_func should flush the buffer in whatever manner is
+ * appropriate, re api_pool_t nitialize curpos and endpos, and return 0.
+ *
+ * Note that flush_func is only invoked as a result of attempting to
+ * write another byte at curpos when curpos >= endpos.  So for
+ * example, it's possible when the output exactly matches the buffer
+ * space available that curpos == endpos will be true when
+ * api_vformatter returns.
+ *
+ * api_vformatter does not call out to any other code, it is entirely
+ * self-contained.  This allows the callers to do things which are
+ * otherwise "unsafe".  For example, apr_psprintf uses the "scratch"
+ * space at the unallocated end of a block, and doesn't actually
+ * complete the allocation until apr_vformatter returns.  apr_psprintf
+ * would be completely broken if apr_vformatter were to call anything
+ * that used this same pool.  Similarly http_bprintf() uses the "scratch"
+ * space at the end of its output buffer, and doesn't actually note
+ * that the space is in use until it either has to flush the buffer
+ * or until apr_vformatter returns.
+ * </PRE>
+ */
+API int api_vformatter(int (*flush_func)(api_vformatter_buff_t *b),
+			        api_vformatter_buff_t *c, const char *fmt,
+			        va_list ap);
+
 
 /**
  * api_killpg

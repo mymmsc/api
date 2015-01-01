@@ -915,7 +915,6 @@ int api_vformatter(int (*flush_func)(api_vformatter_buff_t *),
                     prefix_char = ' ';
                 break;
 
-
             case 'o':
                 if (var_type == IS_QUAD) {
                     ui_quad = va_arg(ap, api_uint64_t);
@@ -938,7 +937,6 @@ int api_vformatter(int (*flush_func)(api_vformatter_buff_t *),
                     s_len++;
                 }
                 break;
-
 
             case 'x':
             case 'X':
