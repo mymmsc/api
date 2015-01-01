@@ -1183,6 +1183,42 @@ api_int64_t api_atoi64(const char *buf)
     return api_strtoi64(buf, NULL, 10);
 }
 
+char * api_strfsize(api_off_t size, char *buf)
+{
+    const char ord[] = "KMGTPE";
+    const char *o = ord;
+    int remain;
+
+    if (size < 0) {
+        return strcpy(buf, "  - ");
+    }
+    if (size < 973) {
+        if (api_snprintf(buf, 5, "%3d ", (int) size) < 0)
+            return strcpy(buf, "****");
+        return buf;
+    }
+    do {
+        remain = (int)(size & 1023);
+        size >>= 10;
+        if (size >= 973) {
+            ++o;
+            continue;
+        }
+        if (size < 9 || (size == 9 && remain < 973)) {
+            if ((remain = ((remain * 5) + 256) / 512) >= 10)
+                ++size, remain = 0;
+            if (api_snprintf(buf, 5, "%d.%d%c", (int) size, remain, *o) < 0)
+                return strcpy(buf, "****");
+            return buf;
+        }
+        if (remain >= 512)
+            ++size;
+        if (api_snprintf(buf, 5, "%3d%c", (int) size, *o) < 0)
+            return strcpy(buf, "****");
+        return buf;
+    } while (1);
+}
+
 //////////////////////////////////////////////////////////////////////////////////////////
 
 char * api_strtok(char *str, const char *sep, char **last)
