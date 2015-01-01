@@ -9,11 +9,11 @@
  * @brief API general purpose library routines
  */
 
-#include "api.h"
-#include "api/core.h"
-#include "api/errno.h"
-#include "api/memory.h"
-#include "api/strings.h"
+#include <api.h>
+#include <api/core.h>
+#include <api/errno.h>
+#include <api/memory.h>
+#include <api/strings.h>
 
 #if API_HAVE_CTYPE_H
 #include <ctype.h>

@@ -12,12 +12,12 @@ typedef struct __cache_struct {
 	int fd;
 	int64_t size;
 	void *mm;
-}cache_t;
+}api_cache_t;
 
-API status_t cache_open(cache_t **cache, const char *filename, size_t size);
-API status_t cache_close(cache_t *cache);
+API status_t api_cache_open(api_cache_t **cache, const char *filename, size_t size);
+API status_t api_cache_close(api_cache_t *cache);
 
-API status_t cache_offset(void **addr, cache_t *cache, int64_t offset);
+API status_t api_cache_offset(void **addr, api_cache_t *cache, int64_t offset);
 
 #ifdef __cplusplus
 }

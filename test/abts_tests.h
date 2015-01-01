@@ -1,5 +1,5 @@
-#ifndef API_TEST_INCLUDES
-#define API_TEST_INCLUDES
+#ifndef __API_TEST_INCLUDES__
+#define __API_TEST_INCLUDES__
 
 #include "abts.h"
 #include "testutil.h"
@@ -10,4 +10,4 @@ const struct testlist {
     {test_atomic}
 };
 
-#endif /* API_TEST_INCLUDES */
+#endif /* __API_TEST_INCLUDES__ */

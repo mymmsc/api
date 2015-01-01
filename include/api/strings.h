@@ -36,6 +36,18 @@ extern "C" {
 
 /* --------------------------------------------------------------------- */
 
+typedef struct {
+    size_t   len;
+    uint8_t *data;
+} api_str_t;
+
+#define api_string(str)        { sizeof(str) - 1, (uint8_t *) str }
+#define api_null_string        { 0, NULL }
+#define api_str_set(str, text) (str)->len = sizeof(text) - 1; (str)->data = (uint8_t *) text
+#define api_str_null(str)      (str)->len = 0; (str)->data = NULL
+
+/* --------------------------------------------------------------------- */
+
 #ifndef API_HAVE_EXPLICIT_BZERO
 API void explicit_bzero(void *p, size_t n);
 #endif
@@ -157,7 +169,7 @@ API char * api_strtok(char *str, const char *sep, char **last);
  * @{
  */
 
-#if 0
+#if 1
 /**
  * snprintf routine based on api_vformatter.  This means it understands the
  * same extensions.
@@ -166,9 +178,8 @@ API char * api_strtok(char *str, const char *sep, char **last);
  * @param format The format string
  * @param ... The arguments to use to fill out the format string.
  */
-API_DECLARE_NONSTD(int) api_snprintf(char *buf, api_size_t len,
-                                     const char *format, ...)
-        __attribute__((format(printf,3,4)));
+API int api_snprintf(char *buf, api_size_t len, 
+					 const char *format, ...);
 
 /**
  * vsnprintf routine based on api_vformatter.  This means it understands the
@@ -178,7 +189,7 @@ API_DECLARE_NONSTD(int) api_snprintf(char *buf, api_size_t len,
  * @param format The format string
  * @param ap The arguments to use to fill out the format string.
  */
-API_DECLARE(int) api_vsnprintf(char *buf, api_size_t len, const char *format,
+API int api_vsnprintf(char *buf, api_size_t len, const char *format,
                                va_list ap);
 #else
 #ifdef API_WINDOWS
@@ -244,16 +255,6 @@ API api_int64_t api_atoi64(const char *buf);
 API char * api_strfsize(api_off_t size, char *buf);
 
 //////////////////////////////////////////////////////////////////////////////////////////
-
-typedef struct {
-    size_t   len;
-    uint8_t *data;
-} api_str_t;
-
-#define api_string(str)        { sizeof(str) - 1, (uint8_t *) str }
-#define api_null_string        { 0, NULL }
-#define api_str_set(str, text) (str)->len = sizeof(text) - 1; (str)->data = (uint8_t *) text
-#define api_str_null(str)      (str)->len = 0; (str)->data = NULL
 
 API char * api_str2rep(char *src, char * (*value_cb)(api_str_t *key, void *, size_t *), void *data);
 

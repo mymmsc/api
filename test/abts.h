@@ -1,3 +1,6 @@
+#ifndef __API_ABTS_H__
+#define __API_ABTS_H__
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -11,9 +14,6 @@ extern "C" {
 #else
 #include <unistd.h>
 #endif
-
-#ifndef ABTS_H
-#define ABTS_H
 
 #ifndef FALSE
 #define FALSE 0
@@ -84,9 +84,8 @@ abts_suite *run_tests(abts_suite *suite);
 abts_suite *run_tests1(abts_suite *suite);
 
 
-#endif
-
 #ifdef __cplusplus
 }
 #endif
 
+#endif /* ! __API_ABTS_H__ */

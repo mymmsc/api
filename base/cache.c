@@ -8,7 +8,7 @@
 #include <sys/types.h>
 #include <fcntl.h>
 
-status_t cache_open(cache_t **cache, const char *filename, size_t size)
+status_t api_cache_open(api_cache_t **cache, const char *filename, size_t size)
 {
 	status_t rc = API_SUCCESS;
 	(*cache) = NULL;
@@ -23,7 +23,7 @@ status_t cache_open(cache_t **cache, const char *filename, size_t size)
 		if (mm == (void *)-1) {
         	rc = errno;
     	} else {
-    		(*cache) = api_calloc(1, sizeof(cache_t));
+    		(*cache) = api_calloc(1, sizeof(api_cache_t));
 			(*cache)->fname = strdup(filename);
 			(*cache)->size = offset;
 			(*cache)->fd = fd;
@@ -34,7 +34,7 @@ status_t cache_open(cache_t **cache, const char *filename, size_t size)
 }
 
 
-status_t cache_close(cache_t *cache)
+status_t api_cache_close(api_cache_t *cache)
 {
 	status_t iRet = API_SUCCESS;
 	if(cache != NULL) {
@@ -51,7 +51,7 @@ status_t cache_close(cache_t *cache)
 	api_safefree(cache);
 }
 
-status_t cache_offset(void **addr, cache_t *cache, int64_t offset)
+status_t api_cache_offset(void **addr, api_cache_t *cache, int64_t offset)
 {
     if (offset < 0 || offset > cache->size)
     {

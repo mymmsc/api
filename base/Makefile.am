@@ -1,7 +1,7 @@
 noinst_LTLIBRARIES = libbase.la
 
 libbase_la_SOURCES = base64.c bitset.c buffer.c core.c crc64.c atomic.c \
-					 errorcodes.c strings.c \
+					 errorcodes.c strings.c snprintf.c \
 					 hashtable.c hashmur.c \
 					 socket.c time.c timestr.c \
 					 memory.c shmtx.c slab.c log.c \
