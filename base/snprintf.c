@@ -1366,7 +1366,7 @@ static int snprintf_flush(api_vformatter_buff_t *vbuff)
 }
 
 
-API_DECLARE_NONSTD(int) api_snprintf(char *buf, api_size_t len, 
+int api_snprintf(char *buf, api_size_t len, 
                                      const char *format, ...)
 {
     int cc;
@@ -1398,7 +1398,7 @@ API_DECLARE_NONSTD(int) api_snprintf(char *buf, api_size_t len,
 }
 
 
-API_DECLARE(int) api_vsnprintf(char *buf, api_size_t len, const char *format,
+int api_vsnprintf(char *buf, api_size_t len, const char *format,
                                va_list ap)
 {
     int cc;
