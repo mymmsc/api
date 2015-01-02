@@ -1401,7 +1401,7 @@ int api_vsnprintf(char *buf, api_size_t len, const char *format,
 {
     int cc;
     api_vformatter_buff_t vbuff;
-
+	
     if (len == 0) {
         /* See above note */
         vbuff.curpos = NULL;

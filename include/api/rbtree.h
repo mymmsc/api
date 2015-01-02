@@ -3,6 +3,10 @@
 
 #include <api.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef api_uint_t  api_rbtree_key_t;
 typedef api_int_t   api_rbtree_key_int_t;
 
@@ -68,5 +72,8 @@ api_rbtree_min(api_rbtree_node_t *node, api_rbtree_node_t *sentinel)
     return node;
 }
 
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* ! __API_RBTREE_H_INCLUDED__ */

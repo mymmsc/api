@@ -309,17 +309,17 @@ api_conhash_add_replicas(api_conhash_t *conhash, api_conhash_node_t *hnode)
 
 done:
 
-    if (rc != API_OK && i < conhash->vnodecnt) {
+    if (rc != API_SUCCESS && i < conhash->vnodecnt) {
         
         rc = api_conhash_del_replicas(conhash, hnode, i);
-        if (rc != API_OK) {
+        if (rc != API_SUCCESS) {
             return rc;
         }
         
-        return API_AGAIN;
+        return API_EAGAIN;
     }
     
-    return API_OK;
+    return API_SUCCESS;
 }
 
 static api_int_t 
@@ -329,7 +329,7 @@ api_conhash_del_replicas(api_conhash_t *conhash, api_conhash_node_t *hnode, api_
     api_int_t            rc;
     api_rbtree_key_t     key;
     api_str_t            vnode_name;
-    u_char               name[1024];
+    api_uint8_t          name[1024];
     api_conhash_vnode_t *vnode;
     api_rbtree_node_t   *node;
     
@@ -360,15 +360,14 @@ api_conhash_del_replicas(api_conhash_t *conhash, api_conhash_node_t *hnode, api_
         conhash->sh->vnodes--;
     }
     
-    return API_OK;
+    return API_SUCCESS;
 }
 
 static api_int_t 
 api_conhash_make_vnode_name(api_conhash_t *conhash, api_str_t *name,
     api_conhash_node_t *hnode, api_uint_t index)
 {
-    u_char      *p;
-    
+    uint8_t      *p;
     name->len = hnode->name.len + 5;
     
     if (name->data == NULL) {
@@ -379,10 +378,10 @@ api_conhash_make_vnode_name(api_conhash_t *conhash, api_str_t *name,
     }
     
     p = name->data;
-    p = api_sprintf(p, "%V-%04ui", &hnode->name, index);
+    p = api_snprintf(name->len, 0, "%V-%04ui", &hnode->name, index);
     *p++ = '\0';
-
-    return API_OK;
+	
+    return API_SUCCESS;
 }
 
 static void

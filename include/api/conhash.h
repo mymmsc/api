@@ -6,6 +6,12 @@
 #define __API_CONSISTENT_HASH_H_INCLUDED__
 
 #include <api/slab.h>
+#include <api/queue.h>
+#include <api/rbtree.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #define API_CONHASH_NAME_SIZE   64
 
@@ -53,5 +59,9 @@ api_int_t api_conhash_lookup_node(api_conhash_t *conhash, u_char *name, size_t l
     api_conhash_oper_pt func, void *data);
 char *api_conhash_shm_set_slot(api_conf_t *cf, api_command_t *cmd, void *conf);
 void api_conhash_clear(api_conhash_t *conhash);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* ! __API_CONSISTENT_HASH_H_INCLUDED__ */
