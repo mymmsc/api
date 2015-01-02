@@ -1,7 +1,3 @@
-/*
- * Copyright (C) agile6v
- */
-
 #include <api/conhash.h>
 
 static api_int_t api_conhash_shm_init(api_shm_zone_t *shm_zone, void *data);

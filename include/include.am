@@ -29,6 +29,7 @@ API_EXPORT = \
 	include/api/memwatch.h \
 	include/api/queue.h \
 	include/api/rbtree.h \
+	include/api/shmem.h \
 	include/api/shmtx.h \
 	include/api/slab.h \
 	include/api/socket.h \
