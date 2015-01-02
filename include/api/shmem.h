@@ -22,7 +22,7 @@ struct shm_zone_s {
     void                     *tag;
 };
 
-API api_int_t api_shm_zone_init(api_shm_zone_t *shm_zone);
+API api_int_t api_shm_zone_init(api_shm_zone_t *shm_zone, size_t size, void *tag);
 API api_int_t api_shm_alloc(api_shm_t *shm);
 API void api_shm_free(api_shm_t *shm);
 
