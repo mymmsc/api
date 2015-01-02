@@ -3,23 +3,12 @@
 
 #include "api/lib.h"
 #include "api/atomic.h"
-#include "api/shmem.h"
+//#include "api/shmem.h"
 #include "api/shmtx.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-typedef struct shm_zone_s  api_shm_zone_t;
-
-typedef api_int_t (*api_shm_zone_init_pt) (api_shm_zone_t *zone, void *data);
-
-struct shm_zone_s {
-    void                     *data;
-    ngx_shm_t                 shm;
-    api_shm_zone_init_pt      init;
-    void                     *tag;
-};
 
 typedef struct api_slab_page_s  api_slab_page_t;
 
