@@ -522,7 +522,7 @@ api_conhash_shm_init(api_shm_zone_t *shm_zone, void *data)
         return API_ERROR;
     }
 
-    api_sprintf(conhash->shpool->log_ctx, " in conhash zone \"%V\"%Z",
+    api_snprintf(conhash->shpool->log_ctx, len, " in conhash zone \"%V\"",
                 &shm_zone->shm.name);
     
     return API_SUCCESS;
