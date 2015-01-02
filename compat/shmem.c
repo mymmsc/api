@@ -4,6 +4,25 @@
 #include <sys/types.h>
 #include <fcntl.h>
 
+
+api_int_t
+api_shm_zone_init(api_shm_zone_t *shm_zone, size_t size, void *tag)
+{
+	if (shm_zone == NULL) {
+        return NULL;
+    }
+
+    shm_zone->data = NULL;
+    //shm_zone->shm.log = cf->cycle->log;
+    shm_zone->shm.size = size;
+    //shm_zone->shm.name = *name;
+    shm_zone->shm.exists = 0;
+    shm_zone->init = NULL;
+    shm_zone->tag = tag;
+
+    return shm_zone;
+}
+
 #if (API_HAVE_SHMEM_MMAP_ANON)
 
 api_int_t

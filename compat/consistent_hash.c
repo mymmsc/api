@@ -418,16 +418,17 @@ api_conhash_rbtree_insert_value(api_rbtree_node_t *temp, api_rbtree_node_t *node
     api_rbt_red(node);
 }
 
-char *
-api_conhash_shm_set_slot(api_conf_t *cf, api_command_t *cmd, void *conf)
+api_conhash_t *
+api_conhash_init(api_pool_t *pool, size_t size, api_int_t vnode_cnt)
 {
-    char  *p = conf;
+	api_conhash_t     *conhash = NULL;
+    api_conhash_ctx_t *conhash_ctx = NULL;
+	
+	char  *p = conf;
     
     ssize_t                 size;
     api_str_t               name, *value, s;
-    api_conhash_t          *conhash, **conhash_p;
-    api_conhash_ctx_t      *conhash_ctx;
-    api_int_t               vnode_cnt;
+    api_conhash_t          **conhash_p;
     u_char                 *ptr;
     
     conhash_p = (api_conhash_t **) (p + cmd->offset);
@@ -504,21 +505,19 @@ api_conhash_shm_set_slot(api_conf_t *cf, api_command_t *cmd, void *conf)
     
     conhash->shm_zone = api_shared_memory_add(cf, &name, size, conhash_ctx->data);
     if (conhash->shm_zone == NULL) {
-        return API_CONF_ERROR;
+        return API_ERROR;
     }
 
     if (conhash->shm_zone->data) {
-        api_conf_log_error(API_LOG_EMERG, cf, 0, "duplicate zone \"%V\"", &name);
-        return API_CONF_ERROR;
+        //api_conf_log_error(API_LOG_EMERG, cf, 0, "duplicate zone \"%V\"", &name);
+        return API_ERROR;
     }
     
     conhash->shm_zone->init = api_conhash_shm_init;
     conhash->shm_zone->data = conhash;
     conhash->vnodecnt = vnode_cnt;
-    
-    *conhash_p = conhash;
-    
-    return API_CONF_OK;
+	
+	return conhash;
 }
 
 
@@ -529,13 +528,13 @@ api_conhash_shm_init(api_shm_zone_t *shm_zone, void *data)
     
     api_conhash_t   *conhash;
     size_t           len;
-
+	
     conhash = shm_zone->data;
     
     if (o_conhash) {
         conhash->sh = o_conhash->sh;
         conhash->shpool = o_conhash->shpool;
-        return API_OK;
+        return API_SUCCESS;
     }
     
     conhash->shpool = (api_slab_pool_t *) shm_zone->shm.addr;
@@ -562,7 +561,7 @@ api_conhash_shm_init(api_shm_zone_t *shm_zone, void *data)
     api_sprintf(conhash->shpool->log_ctx, " in conhash zone \"%V\"%Z",
                 &shm_zone->shm.name);
     
-    return API_OK;
+    return API_SUCCESS;
 }
 
 api_int_t
@@ -571,7 +570,7 @@ api_conhash_node_traverse(api_conhash_t *conhash, api_conhash_oper_pt func, void
     api_rbtree_node_t    *node, *sentinel;
     api_int_t             rc;
 
-    rc = API_OK;
+    rc = API_SUCCESS;
     
     api_shmtx_lock(&conhash->shpool->mutex);
 
@@ -579,7 +578,7 @@ api_conhash_node_traverse(api_conhash_t *conhash, api_conhash_oper_pt func, void
     sentinel = conhash->sh->vnode_tree.sentinel;
     
     if (node == sentinel) {
-        rc = API_DECLINED;
+        rc = API_ERROR;
         goto done;
     }
     

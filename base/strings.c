@@ -20,6 +20,68 @@
 #include <iconv.h>
 #endif
 
+/* --------------------------------------------------------------------- */
+ssize_t
+api_atosz(u_char *line, size_t n)
+{
+    ssize_t  value;
+
+    if (n == 0) {
+        return API_ERROR;
+    }
+
+    for (value = 0; n--; line++) {
+        if (*line < '0' || *line > '9') {
+            return API_ERROR;
+        }
+
+        value = value * 10 + (*line - '0');
+    }
+
+    if (value < 0) {
+        return API_ERROR;
+    } else {
+        return value;
+    }
+}
+
+ssize_t
+api_parse_size(api_str_t *line)
+{
+    uint8_t    unit;
+    size_t     len;
+    ssize_t    size;
+    api_int_t  scale;
+
+    len = line->len;
+    unit = line->data[len - 1];
+
+    switch (unit) {
+    case 'K':
+    case 'k':
+        len--;
+        scale = 1024;
+        break;
+
+    case 'M':
+    case 'm':
+        len--;
+        scale = 1024 * 1024;
+        break;
+
+    default:
+        scale = 1;
+    }
+
+    size = api_atosz(line->data, len);
+    if (size == API_ERROR) {
+        return API_ERROR;
+    }
+
+    size *= scale;
+
+    return size;
+}
 
 /* --------------------------------------------------------------------- */
 api_int_t

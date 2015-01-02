@@ -22,8 +22,9 @@ struct shm_zone_s {
     void                     *tag;
 };
 
-api_int_t api_shm_alloc(api_shm_t *shm);
-void api_shm_free(api_shm_t *shm);
+API api_int_t api_shm_zone_init(api_shm_zone_t *shm_zone);
+API api_int_t api_shm_alloc(api_shm_t *shm);
+API void api_shm_free(api_shm_t *shm);
 
 
-#endif /* _API_SHMEM_H_INCLUDED_ */
+#endif /* ! __API_SHMEM_H_INCLUDED__ */

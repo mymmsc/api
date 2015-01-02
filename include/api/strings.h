@@ -35,6 +35,10 @@ extern "C" {
 #endif /* __cplusplus */
 
 /* --------------------------------------------------------------------- */
+API ssize_t api_atosz(u_char *line, size_t n);
+API ssize_t api_parse_size(api_str_t *line);
+
+/* --------------------------------------------------------------------- */
 
 typedef struct {
     size_t   len;

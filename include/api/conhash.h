@@ -51,13 +51,14 @@ struct conhash_vnode_s {
     api_str_t               name;
 };
 
-api_int_t api_conhash_node_traverse(api_conhash_t *conhash, api_conhash_oper_pt func, void *data);
-api_int_t api_conhash_add_node(api_conhash_t *conhash, u_char *name, size_t len, void *data);
-api_int_t api_conhash_del_node(api_conhash_t *conhash, u_char *name, size_t len);
-api_int_t api_conhash_lookup_node(api_conhash_t *conhash, u_char *name, size_t len,
+API api_status_t api_conhash_init(api_conhash_t *conhash);
+API void api_conhash_clear(api_conhash_t *conhash);
+API api_int_t api_conhash_node_traverse(api_conhash_t *conhash, api_conhash_oper_pt func, void *data);
+API api_int_t api_conhash_add_node(api_conhash_t *conhash, u_char *name, size_t len, void *data);
+API api_int_t api_conhash_del_node(api_conhash_t *conhash, u_char *name, size_t len);
+API api_int_t api_conhash_lookup_node(api_conhash_t *conhash, u_char *name, size_t len,
     api_conhash_oper_pt func, void *data);
 //char *api_conhash_shm_set_slot(api_conf_t *cf, api_command_t *cmd, void *conf);
-void api_conhash_clear(api_conhash_t *conhash);
 
 #ifdef __cplusplus
 }
