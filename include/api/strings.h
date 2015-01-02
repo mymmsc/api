@@ -35,10 +35,6 @@ extern "C" {
 #endif /* __cplusplus */
 
 /* --------------------------------------------------------------------- */
-API ssize_t api_atosz(u_char *line, size_t n);
-API ssize_t api_parse_size(api_str_t *line);
-
-/* --------------------------------------------------------------------- */
 
 typedef struct {
     size_t   len;
@@ -49,6 +45,12 @@ typedef struct {
 #define api_null_string        { 0, NULL }
 #define api_str_set(str, text) (str)->len = sizeof(text) - 1; (str)->data = (uint8_t *) text
 #define api_str_null(str)      (str)->len = 0; (str)->data = NULL
+
+/* --------------------------------------------------------------------- */
+API ssize_t api_atosz(uint8_t *line, size_t n);
+API ssize_t api_parse_size(api_str_t *line);
+
+/* --------------------------------------------------------------------- */
 
 /* msvc and icc7 compile memcmp() to the inline loop */
 #define api_memcmp(s1, s2, n)  memcmp((const char *) s1, (const char *) s2, n)
