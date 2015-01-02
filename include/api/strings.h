@@ -11,7 +11,7 @@
 #include <api/lib.h>
 
 #define API_WANT_IOVEC
-#include "api/want.h"
+#include <api/want.h>
 
 #if API_HAVE_STDARG_H
 #include <stdarg.h>
@@ -49,15 +49,15 @@ typedef struct {
 /* msvc and icc7 compile memcmp() to the inline loop */
 #define api_memcmp(s1, s2, n)  memcmp((const char *) s1, (const char *) s2, n)
 
-API api_int_t ngx_memn2cmp(uint8_t *s1, uint8_t *s2, size_t n1, size_t n2);
+API api_int_t api_memn2cmp(uint8_t *s1, uint8_t *s2, size_t n1, size_t n2);
 
 /* --------------------------------------------------------------------- */
 
 #ifndef API_HAVE_EXPLICIT_BZERO
 API void explicit_bzero(void *p, size_t n);
 #endif
-/* --------------------------------------------------------------------- */
 
+/* --------------------------------------------------------------------- */
 
 /* A couple of prototypes for functions in case some platform doesn't 
  * have it
