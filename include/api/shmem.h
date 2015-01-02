@@ -3,6 +3,10 @@
 
 #include <api/lib.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef struct shm_zone_s  api_shm_zone_t;
 
 typedef api_int_t (*api_shm_zone_init_pt) (api_shm_zone_t *zone, void *data);
@@ -26,5 +30,8 @@ API api_int_t api_shm_zone_init(api_shm_zone_t *shm_zone, size_t size, void *tag
 API api_int_t api_shm_alloc(api_shm_t *shm);
 API void api_shm_free(api_shm_t *shm);
 
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* ! __API_SHMEM_H_INCLUDED__ */
