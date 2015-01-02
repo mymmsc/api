@@ -1,11 +1,15 @@
 noinst_LTLIBRARIES = libbase.la
 
-libbase_la_SOURCES = base64.c bitset.c buffer.c core.c crc64.c atomic.c \
-					 errorcodes.c strings.c snprintf.c \
+libbase_la_SOURCES = core.c atomic.c buffer.c daemon.c \
+					 errorcodes.c \
+					 file.c cache.c log.c \
+					 socket.c \
+					 strings.c snprintf.c \
+					 time.c timestr.c \
 					 hashtable.c hashmur.c \
-					 socket.c time.c timestr.c \
-					 memory.c shmtx.c slab.c log.c \
-					 file.c cache.c vector.c trie.c queue.c
+					 memory.c shmtx.c slab.c \
+					 base64.c bitset.c crc64.c \
+					 vector.c trie.c queue.c 
 
 libbase_la_CFLAGS  = -I$(top_srcdir)/include
 
