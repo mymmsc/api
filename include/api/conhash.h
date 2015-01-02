@@ -6,6 +6,8 @@
 #define __API_CONSISTENT_HASH_H_INCLUDED__
 
 #include <api/slab.h>
+#include <api/queue.h>
+#include <api/rbtree.h>
 
 #define API_CONHASH_NAME_SIZE   64
 
