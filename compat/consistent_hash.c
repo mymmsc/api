@@ -363,7 +363,6 @@ static api_int_t
 api_conhash_make_vnode_name(api_conhash_t *conhash, api_str_t *name,
     api_conhash_node_t *hnode, api_uint_t index)
 {
-    uint8_t      *p;
     name->len = hnode->name.len + 5;
     
     if (name->data == NULL) {
@@ -373,9 +372,8 @@ api_conhash_make_vnode_name(api_conhash_t *conhash, api_str_t *name,
         }
     }
     
-    p = name->data;
-    p = api_snprintf((char *)p, name->len, "%V-%04ui", &(hnode->name), index);
-    *p++ = '\0';
+    int len = api_snprintf(name->data, name->len, "%V-%04ui", &(hnode->name), index);
+    name->data[len] = 0x00;
 	
     return API_SUCCESS;
 }
