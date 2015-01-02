@@ -18,6 +18,7 @@ API_EXPORT = \
 	include/api/buffer.h \
 	include/api/cache.h \
 	include/api/core.h \
+	include/api/conhash.h \
 	include/api/crc64.h \
 	include/api/errno.h \
 	include/api/file.h \
@@ -27,6 +28,7 @@ API_EXPORT = \
 	include/api/memory.h \
 	include/api/memwatch.h \
 	include/api/queue.h \
+	include/api/rbtree.h \
 	include/api/shmtx.h \
 	include/api/slab.h \
 	include/api/socket.h \

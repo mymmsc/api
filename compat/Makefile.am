@@ -2,7 +2,7 @@ SUBDIRS          =
 
 noinst_LTLIBRARIES = libcompat.la
 
-private_srcs = memwatch.c
+private_srcs = memwatch.c rbtree.c consistent_hash.c
 SYS_LIBS  = 
 LTLIBOBJS = 
 
