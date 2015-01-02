@@ -8,10 +8,13 @@
 #include <api/slab.h>
 #include <api/queue.h>
 #include <api/rbtree.h>
+<<<<<<< HEAD
 
 #ifdef __cplusplus
 extern "C" {
 #endif
+=======
+>>>>>>> ce2f8a2b214e607aed0df226a408f99d1fb7005c
 
 #define API_CONHASH_NAME_SIZE   64
 
