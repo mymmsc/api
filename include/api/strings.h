@@ -48,6 +48,7 @@ typedef struct {
 
 /* msvc and icc7 compile memcmp() to the inline loop */
 #define api_memcmp(s1, s2, n)  memcmp((const char *) s1, (const char *) s2, n)
+#define api_memcpy(dst, src, n)   (void) memcpy(dst, src, n)
 
 API api_int_t api_memn2cmp(uint8_t *s1, uint8_t *s2, size_t n1, size_t n2);
 
