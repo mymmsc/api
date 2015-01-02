@@ -11,7 +11,7 @@ typedef struct {
     uint8_t     *addr;
     size_t       size;
     api_str_t    name;
-    api_log_t   *log;
+    //api_log_t   *log;
     api_uint_t   exists;   /* unsigned  exists:1;  */
 } api_shm_t;
 
