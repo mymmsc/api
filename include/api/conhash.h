@@ -1,14 +1,9 @@
-/*
- * Copyright (C) agile6v
- */
-
 #ifndef __API_CONSISTENT_HASH_H_INCLUDED__
 #define __API_CONSISTENT_HASH_H_INCLUDED__
 
 #include <api/slab.h>
 #include <api/queue.h>
 #include <api/rbtree.h>
-<<<<<<< HEAD
 
 #ifdef __cplusplus
 extern "C" {
