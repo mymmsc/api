@@ -20,7 +20,7 @@ api_conhash_clear(api_conhash_t *conhash)
     api_conhash_node_t   *hnode;
     api_queue_t          *q;
     
-    if (conhash == NULL || conhash == API_CONF_UNSET_PTR) {
+    if (conhash == NULL/* || conhash == API_CONF_UNSET_PTR*/) {
         return;
     }
     
@@ -69,7 +69,7 @@ api_conhash_add_node(api_conhash_t *conhash, u_char *name, size_t len, void *dat
     size_t                  size;
     
     if (conhash == NULL
-        || conhash == API_CONF_UNSET_PTR
+        /*|| conhash == API_CONF_UNSET_PTR */
         || conhash->shpool == NULL 
         || conhash->sh == NULL)
     {
@@ -86,7 +86,7 @@ api_conhash_add_node(api_conhash_t *conhash, u_char *name, size_t len, void *dat
         if (hnode) {
             rc = api_memn2cmp(hnode->name.data, name, hnode->name.len, len);
             if (rc == 0) {
-                rc = API_DECLINED;
+                rc = API_ERROR;
                 goto done;
             }
         }
@@ -113,7 +113,7 @@ api_conhash_add_node(api_conhash_t *conhash, u_char *name, size_t len, void *dat
     hnode->data = data;
     
     rc = api_conhash_add_replicas(conhash, hnode);
-    if (rc != API_OK) {
+    if (rc != API_SUCCESS) {
         api_slab_free_locked(conhash->shpool, hnode->name.data);
         api_slab_free_locked(conhash->shpool, hnode);
         goto done;
@@ -135,14 +135,14 @@ api_conhash_del_node(api_conhash_t *conhash, u_char *name, size_t len)
     api_conhash_node_t     *hnode;
     
     if (conhash == NULL
-        || conhash == API_CONF_UNSET_PTR
+        /*|| conhash == API_CONF_UNSET_PTR */
         || conhash->shpool == NULL
         || conhash->sh == NULL)
     {
         return API_ERROR;
     }
     
-    rc = API_DECLINED;
+    rc = API_ERROR;
     
     api_shmtx_lock(&conhash->shpool->mutex);
     
@@ -157,7 +157,7 @@ api_conhash_del_node(api_conhash_t *conhash, u_char *name, size_t len)
         if (ret == 0) {
         
             rc = api_conhash_del_replicas(conhash, hnode, conhash->vnodecnt);
-            if (rc != API_OK) {
+            if (rc != API_SUCCESS) {
                 goto done;
             }
             
@@ -192,7 +192,7 @@ api_conhash_lookup_node(api_conhash_t *conhash, u_char *name, size_t len,
     sentinel = conhash->sh->vnode_tree.sentinel;
     
     if (node == sentinel) {
-        rc = API_DECLINED;
+        rc = API_ERROR;
         goto done;
     }
     
@@ -217,7 +217,7 @@ api_conhash_lookup_node(api_conhash_t *conhash, u_char *name, size_t len,
     
     func(vnode, data);
     
-    rc = API_OK;
+    rc = API_SUCCESS;
 
 done:
     api_shmtx_unlock(&conhash->shpool->mutex);

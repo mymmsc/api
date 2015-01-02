@@ -20,6 +20,34 @@
 #include <iconv.h>
 #endif
 
+
+/* --------------------------------------------------------------------- */
+api_int_t
+api_memn2cmp(uint8_t *s1, uint8_t *s2, size_t n1, size_t n2)
+{
+    size_t     n;
+    api_int_t  m, z;
+
+    if (n1 <= n2) {
+        n = n1;
+        z = -1;
+
+    } else {
+        n = n2;
+        z = 1;
+    }
+
+    m = api_memcmp(s1, s2, n);
+
+    if (m || n1 == n2) {
+        return m;
+    }
+
+    return z;
+}
+
+/* --------------------------------------------------------------------- */
+
 #ifndef API_HAVE_EXPLICIT_BZERO
 
 /*

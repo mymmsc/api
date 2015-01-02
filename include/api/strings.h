@@ -46,6 +46,11 @@ typedef struct {
 #define api_str_set(str, text) (str)->len = sizeof(text) - 1; (str)->data = (uint8_t *) text
 #define api_str_null(str)      (str)->len = 0; (str)->data = NULL
 
+/* msvc and icc7 compile memcmp() to the inline loop */
+#define api_memcmp(s1, s2, n)  memcmp((const char *) s1, (const char *) s2, n)
+
+API api_int_t ngx_memn2cmp(uint8_t *s1, uint8_t *s2, size_t n1, size_t n2);
+
 /* --------------------------------------------------------------------- */
 
 #ifndef API_HAVE_EXPLICIT_BZERO
