@@ -115,7 +115,6 @@ struct api_pool_large_s {
     void                 *alloc;
 };
 
-
 typedef struct {
     uint8_t    *last;
     uint8_t    *end;
