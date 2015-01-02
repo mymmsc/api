@@ -268,7 +268,7 @@ api_conhash_add_replicas(api_conhash_t *conhash, api_conhash_node_t *hnode)
     api_str_t                vnode_name;
     api_conhash_vnode_t     *vnode;
     api_rbtree_node_t       *node;
-    api_int_t                rc = API_OK;
+    api_int_t                rc = API_SUCCESS;
     
     for (i = 0; i < conhash->vnodecnt; i++) {
         

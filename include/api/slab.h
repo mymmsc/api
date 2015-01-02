@@ -1,10 +1,10 @@
 #ifndef __API_SLAB_H_INCLUDED__
 #define __API_SLAB_H_INCLUDED__
 
-#include "api/lib.h"
-#include "api/atomic.h"
+#include <api/lib.h>
+#include <api/atomic.h>
 //#include "api/shmem.h"
-#include "api/shmtx.h"
+#include <api/shmtx.h>
 
 #ifdef __cplusplus
 extern "C" {

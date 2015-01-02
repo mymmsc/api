@@ -1,11 +1,7 @@
 #ifndef _API_SHMEM_H_INCLUDED_
 #define _API_SHMEM_H_INCLUDED_
 
-#include <api.h>
-
-#include <sys/mman.h>
-#include <sys/types.h>
-#include <fcntl.h>
+#include <api/lib.h>
 
 typedef struct shm_zone_s  api_shm_zone_t;
 
