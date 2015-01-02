@@ -457,12 +457,8 @@ api_conhash_init(api_pool_t *pool, size_t size, api_int_t vnode_cnt)
 	api_conhash_t     *conhash = NULL;
     api_conhash_ctx_t *conhash_ctx = NULL;
 	
-	char  *p = conf;
-    
-    ssize_t                 size;
-    api_str_t               name, *value, s;
+	api_str_t          name, *value, s;
     api_conhash_t          **conhash_p;
-    u_char                 *ptr;
     
     conhash = (api_conhash_t *) api_pcalloc(pool, sizeof(api_conhash_t));
     if (conhash == NULL) {
@@ -520,7 +516,7 @@ api_conhash_shm_init(api_shm_zone_t *shm_zone, void *data)
     api_queue_init(&conhash->sh->hnode_queue);
     
     len = sizeof(" in conhash zone \"\"") + shm_zone->shm.name.len;
-
+	
     conhash->shpool->log_ctx = api_slab_alloc(conhash->shpool, len);
     if (conhash->shpool->log_ctx == NULL) {
         return API_ERROR;
