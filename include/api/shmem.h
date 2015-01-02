@@ -3,6 +3,10 @@
 
 #include <api.h>
 
+#include <sys/mman.h>
+#include <sys/types.h>
+#include <fcntl.h>
+
 typedef struct {
     uint8_t     *addr;
     size_t       size;

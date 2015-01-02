@@ -3,6 +3,7 @@
 
 #include "api/lib.h"
 #include "api/atomic.h"
+#include "api/shmem.h"
 #include "api/shmtx.h"
 
 #ifdef __cplusplus

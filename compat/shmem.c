@@ -1,22 +1,25 @@
 #include <api/shmem.h>
 
+#include <sys/mman.h>
+#include <sys/types.h>
+#include <fcntl.h>
 
-#if (API_HAVE_MAP_ANON)
+#if (API_HAVE_SHMEM_MMAP_ANON)
 
 api_int_t
 api_shm_alloc(api_shm_t *shm)
 {
-    shm->addr = (u_char *) mmap(NULL, shm->size,
+    shm->addr = (uint8_t *) mmap(NULL, shm->size,
                                 PROT_READ|PROT_WRITE,
                                 MAP_ANON|MAP_SHARED, -1, 0);
 
     if (shm->addr == MAP_FAILED) {
-        api_log_error(API_LOG_ALERT, shm->log, api_errno,
-                      "mmap(MAP_ANON|MAP_SHARED, %uz) failed", shm->size);
+        //api_log_error(API_LOG_ALERT, shm->log, api_errno,
+        //              "mmap(MAP_ANON|MAP_SHARED, %uz) failed", shm->size);
         return API_ERROR;
     }
 
-    return API_OK;
+    return API_SUCCESS;
 }
 
 
@@ -24,23 +27,23 @@ void
 api_shm_free(api_shm_t *shm)
 {
     if (munmap((void *) shm->addr, shm->size) == -1) {
-        api_log_error(API_LOG_ALERT, shm->log, api_errno,
-                      "munmap(%p, %uz) failed", shm->addr, shm->size);
+        //api_log_error(API_LOG_ALERT, shm->log, api_errno,
+        //              "munmap(%p, %uz) failed", shm->addr, shm->size);
     }
 }
 
-#elif (API_HAVE_MAP_DEVZERO)
+#elif (API_HAVE_SHMEM_MMAP_ZERO)
 
 api_int_t
 api_shm_alloc(api_shm_t *shm)
 {
     api_fd_t  fd;
-
+	
     fd = open("/dev/zero", O_RDWR);
 
     if (fd == -1) {
-        api_log_error(API_LOG_ALERT, shm->log, api_errno,
-                      "open(\"/dev/zero\") failed");
+        //api_log_error(API_LOG_ALERT, shm->log, api_errno,
+        //              "open(\"/dev/zero\") failed");
         return API_ERROR;
     }
 
@@ -48,16 +51,16 @@ api_shm_alloc(api_shm_t *shm)
                                 MAP_SHARED, fd, 0);
 
     if (shm->addr == MAP_FAILED) {
-        api_log_error(API_LOG_ALERT, shm->log, api_errno,
-                      "mmap(/dev/zero, MAP_SHARED, %uz) failed", shm->size);
+        //api_log_error(API_LOG_ALERT, shm->log, api_errno,
+        //              "mmap(/dev/zero, MAP_SHARED, %uz) failed", shm->size);
     }
 
     if (close(fd) == -1) {
-        api_log_error(API_LOG_ALERT, shm->log, api_errno,
-                      "close(\"/dev/zero\") failed");
+        //api_log_error(API_LOG_ALERT, shm->log, api_errno,
+        //              "close(\"/dev/zero\") failed");
     }
 
-    return (shm->addr == MAP_FAILED) ? API_ERROR : API_OK;
+    return (shm->addr == MAP_FAILED) ? API_ERROR : API_SUCCESS;
 }
 
 
@@ -65,12 +68,12 @@ void
 api_shm_free(api_shm_t *shm)
 {
     if (munmap((void *) shm->addr, shm->size) == -1) {
-        api_log_error(API_LOG_ALERT, shm->log, api_errno,
-                      "munmap(%p, %uz) failed", shm->addr, shm->size);
+        //api_log_error(API_LOG_ALERT, shm->log, api_errno,
+        //              "munmap(%p, %uz) failed", shm->addr, shm->size);
     }
 }
 
-#elif (API_HAVE_SYSVSHM)
+#elif (API_HAVE_SHMEM_SHMGET)
 
 #include <sys/ipc.h>
 #include <sys/shm.h>
@@ -84,25 +87,25 @@ api_shm_alloc(api_shm_t *shm)
     id = shmget(IPC_PRIVATE, shm->size, (SHM_R|SHM_W|IPC_CREAT));
 
     if (id == -1) {
-        api_log_error(API_LOG_ALERT, shm->log, api_errno,
+        //api_log_error(API_LOG_ALERT, shm->log, api_errno,
                       "shmget(%uz) failed", shm->size);
         return API_ERROR;
     }
 
-    api_log_debug1(API_LOG_DEBUG_CORE, shm->log, 0, "shmget id: %d", id);
+    //api_log_debug1(API_LOG_DEBUG_CORE, shm->log, 0, "shmget id: %d", id);
 
     shm->addr = shmat(id, NULL, 0);
-
+	
     if (shm->addr == (void *) -1) {
-        api_log_error(API_LOG_ALERT, shm->log, api_errno, "shmat() failed");
+        //api_log_error(API_LOG_ALERT, shm->log, api_errno, "shmat() failed");
     }
 
     if (shmctl(id, IPC_RMID, NULL) == -1) {
-        api_log_error(API_LOG_ALERT, shm->log, api_errno,
-                      "shmctl(IPC_RMID) failed");
+        //api_log_error(API_LOG_ALERT, shm->log, api_errno,
+        //              "shmctl(IPC_RMID) failed");
     }
 
-    return (shm->addr == (void *) -1) ? API_ERROR : API_OK;
+    return (shm->addr == (void *) -1) ? API_ERROR : API_SUCCESS;
 }
 
 
@@ -110,8 +113,8 @@ void
 api_shm_free(api_shm_t *shm)
 {
     if (shmdt(shm->addr) == -1) {
-        api_log_error(API_LOG_ALERT, shm->log, api_errno,
-                      "shmdt(%p) failed", shm->addr);
+        //api_log_error(API_LOG_ALERT, shm->log, api_errno,
+        //              "shmdt(%p) failed", shm->addr);
     }
 }
 
