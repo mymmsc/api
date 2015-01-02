@@ -12,6 +12,47 @@ static api_rbtree_node_t* api_conhash_rbtree_lookup(api_conhash_t *conhash, api_
 static void api_conhash_tree_mid_traverse(api_rbtree_node_t *node, api_rbtree_node_t *sentinel,
     api_conhash_oper_pt func, void *data);
 
+static uint32_t
+api_murmur_hash2(uint8_t *data, size_t len)
+{
+    uint32_t  h, k;
+
+    h = 0 ^ len;
+
+    while (len >= 4) {
+        k  = data[0];
+        k |= data[1] << 8;
+        k |= data[2] << 16;
+        k |= data[3] << 24;
+
+        k *= 0x5bd1e995;
+        k ^= k >> 24;
+        k *= 0x5bd1e995;
+
+        h *= 0x5bd1e995;
+        h ^= k;
+
+        data += 4;
+        len -= 4;
+    }
+
+    switch (len) {
+    case 3:
+        h ^= data[2] << 16;
+    case 2:
+        h ^= data[1] << 8;
+    case 1:
+        h ^= data[0];
+        h *= 0x5bd1e995;
+    }
+
+    h ^= h >> 13;
+    h *= 0x5bd1e995;
+    h ^= h >> 15;
+
+    return h;
+}
+
 void
 api_conhash_clear(api_conhash_t *conhash)
 {
@@ -386,28 +427,20 @@ api_conhash_rbtree_insert_value(api_rbtree_node_t *temp, api_rbtree_node_t *node
     api_conhash_vnode_t   *vnode, *vnode_temp;
 
     for ( ;; ) {
-
         if (node->key < temp->key) {
-
             p = &temp->left;
-
         } else if (node->key > temp->key) {
-
             p = &temp->right;
-
         } else {
-
             vnode = (api_conhash_vnode_t *) node;
             vnode_temp = (api_conhash_vnode_t *) temp;
 
             p = (api_memn2cmp(vnode->name.data, vnode_temp->name.data, vnode->name.len, 
                               vnode_temp->name.len) < 0) ? &temp->left : &temp->right;
         }
-
         if (*p == sentinel) {
             break;
         }
-
         temp = *p;
     }
 
@@ -431,77 +464,12 @@ api_conhash_init(api_pool_t *pool, size_t size, api_int_t vnode_cnt)
     api_conhash_t          **conhash_p;
     u_char                 *ptr;
     
-    conhash_p = (api_conhash_t **) (p + cmd->offset);
-    
-    if (*conhash_p != API_CONF_UNSET_PTR) {
-        return "is duplicate";
-    }
-    
-    vnode_cnt = 100;
-    value = cf->args->elts;
-    
-    if (api_strncmp(value[1].data, "keys_zone=", 10) != 0) {
-        api_conf_log_error(API_LOG_EMERG, cf, 0,
-                           "invalid parameter \"%V\"", &value[1]);
-        return API_CONF_ERROR;
-    }
-    
-    name.data = value[1].data + 10;
-    
-    ptr = (u_char *) api_strchr(name.data, ':');
-    if (!ptr) {
-        api_conf_log_error(API_LOG_EMERG, cf, 0,
-                           "invalid parameter \"%V\"", &value[1]);
-        return API_CONF_ERROR;
-    }
-    
-    name.len = ptr - name.data;
-    ptr++;
-    
-    s.len = value[1].data + value[1].len - ptr;
-    s.data = ptr;
-
-    size = api_parse_size(&s);
-
-    if (size < (api_int_t) (2 * api_pagesize)) {
-        api_conf_log_error(API_LOG_EMERG, cf, 0,
-                            "invalid keys zone size \"%V\"", &value[1]);
-        return API_CONF_ERROR;
-    }
-    
-    if (cf->args->nelts > 2) {
-        if (api_strncmp(value[2].data, "vnodecnt=", 9) != 0) {
-            api_conf_log_error(API_LOG_EMERG, cf, 0,
-                           "invalid parameter \"%V\"", &value[2]);
-            return API_CONF_ERROR;
-        }
-        
-        s.len = value[2].len - 9;
-        s.data = value[2].data + 9;
-        
-        vnode_cnt = api_atoi(s.data, s.len);
-        if (vnode_cnt == API_ERROR || vnode_cnt > 10000) {
-            api_conf_log_error(API_LOG_EMERG, cf, 0,
-                    "invalid vnode count \"%V\", is not greater than 10000", &value[2]);
-            return API_CONF_ERROR;
-        }
-    }
-    
-    conhash = (api_conhash_t *) api_pcalloc(cf->pool, sizeof(api_conhash_t));
+    conhash = (api_conhash_t *) api_pcalloc(pool, sizeof(api_conhash_t));
     if (conhash == NULL) {
-        return API_CONF_ERROR;
+        return API_ERROR;
     }
     
-    conhash_ctx = (api_conhash_ctx_t *) cmd->post;
-    if (conhash_ctx == NULL) {
-        return API_CONF_ERROR;
-    }
-    
-    if (conhash_ctx->hash_func != NULL) {
-        conhash->hash_func = conhash_ctx->hash_func;
-    } else {
-        conhash->hash_func = api_murmur_hash2;
-    }
+    conhash->hash_func = api_murmur_hash2;
     
     conhash->shm_zone = api_shared_memory_add(cf, &name, size, conhash_ctx->data);
     if (conhash->shm_zone == NULL) {
