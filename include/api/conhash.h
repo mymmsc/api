@@ -56,7 +56,7 @@ api_int_t api_conhash_add_node(api_conhash_t *conhash, u_char *name, size_t len,
 api_int_t api_conhash_del_node(api_conhash_t *conhash, u_char *name, size_t len);
 api_int_t api_conhash_lookup_node(api_conhash_t *conhash, u_char *name, size_t len,
     api_conhash_oper_pt func, void *data);
-char *api_conhash_shm_set_slot(api_conf_t *cf, api_command_t *cmd, void *conf);
+//char *api_conhash_shm_set_slot(api_conf_t *cf, api_command_t *cmd, void *conf);
 void api_conhash_clear(api_conhash_t *conhash);
 
 #ifdef __cplusplus
