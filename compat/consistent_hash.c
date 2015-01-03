@@ -460,7 +460,7 @@ api_conhash_make_vnode_name(api_conhash_t *conhash, api_str_t *name,
         }
     }
     
-    int len = api_snprintf(name->data, name->len, "%V-%04ui", &(hnode->name), index);
+    int len = api_snprintf(name->data, name->len + 1, "%V-%04ui", &(hnode->name), index);
 	printf("vnode-name=[%d:%s]\n", index, name->data);
     name->data[len] = 0x00;
 	
