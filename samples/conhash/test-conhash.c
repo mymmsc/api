@@ -3,6 +3,7 @@
 
 #define MAX_LINE	1024
 #include "api/conhash.h"
+#include "api/log.h"
 
 static void server_get (api_conhash_vnode_t *vnode, void *data)
 {
