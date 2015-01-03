@@ -13,7 +13,7 @@ static void api_conhash_tree_mid_traverse(api_rbtree_node_t *node, api_rbtree_no
     api_conhash_oper_pt func, void *data);
 
 static uint32_t
-api_murmur_hash2(uint8_t *data, size_t len)
+api_murmur_hash2_OLD(uint8_t *data, size_t len)
 {
     uint32_t hash;
 	uint32_t k;
@@ -21,7 +21,51 @@ api_murmur_hash2(uint8_t *data, size_t len)
 	static uint32_t m = 0x5bd1e995;
 	static int r1 = 13, r2 = 15;
     hash = seed ^ len;
+	//printf("s=[%s], hash=%ld\n", data, hash);
+    while (len >= 4) {
+        k  = data[0];
+        k |= data[1] << 8;
+        k |= data[2] << 16;
+        k |= data[3] << 24;
+
+        k *= m;
+        k ^= k >> 24;
+        k *= m;
+
+        hash *= m;
+        hash ^= k;
+
+        data += 4;
+        len -= 4;
+    }
+
+    switch (len) {
+    case 3:
+        hash ^= data[2] << 16;
+    case 2:
+        hash ^= data[1] << 8;
+    case 1:
+        hash ^= data[0];
+        hash *= m;
+    }
+
+    hash ^= hash >> r1;
+    hash *= m;
+    hash ^= hash >> r2;
 	printf("s=[%s], hash=%ld\n", data, hash);
+    return hash;
+}
+
+static int32_t
+api_murmur_hash2(uint8_t *data, size_t len)
+{
+    int32_t hash;
+	int32_t k;
+	int32_t seed = 0;
+	static int32_t m = 0x5bd1e995;
+	static int r1 = 13, r2 = 15;
+    hash = seed ^ len;
+	//printf("s=[%s], hash=%ld\n", data, hash);
     while (len >= 4) {
         k  = data[0];
         k |= data[1] << 8;

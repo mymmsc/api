@@ -7,8 +7,11 @@
 extern "C" {
 #endif
 
-typedef api_uint_t  api_rbtree_key_t;
-typedef api_int_t   api_rbtree_key_int_t;
+//typedef api_uint_t  api_rbtree_key_t;
+typedef int32_t  api_rbtree_key_t;
+
+//typedef api_int_t   api_rbtree_key_int_t;
+typedef int32_t   api_rbtree_key_int_t;
 
 
 typedef struct api_rbtree_node_s  api_rbtree_node_t;
