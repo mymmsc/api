@@ -361,7 +361,7 @@ api_conhash_add_replicas(api_conhash_t *conhash, api_conhash_node_t *hnode)
     for (i = 0; i < conhash->vnodecnt; i++) {
         
         vnode_name.data = NULL;
-        
+        printf("%s: [%d]\n", __func__, i);
         rc = api_conhash_make_vnode_name(conhash, &vnode_name, hnode, i);
         if (rc == API_ERROR) {
             goto done;
@@ -420,7 +420,7 @@ api_conhash_del_replicas(api_conhash_t *conhash, api_conhash_node_t *hnode, api_
     for (i = 0; i < replicas; i++) {
         
         api_memzero(name, sizeof(name));
-        printf("vnode-name=[%d]\n", i);
+        printf("%s: [%d]\n", __func__, i);
         vnode_name.data = name;
         
         rc = api_conhash_make_vnode_name(conhash, &vnode_name, hnode, i);
