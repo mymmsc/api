@@ -58,7 +58,7 @@ int main(int argc, char* argv[])
 	{
 		memset(serverId, 0x00, sizeof(serverId));
 		snprintf(serverId, sizeof(serverId), "10.1.15.1%d", index);
-		api_conhash_add_node(conhash, serverId, api_strlen(serverId), NULL);
+		api_conhash_del_node(conhash, serverId, api_strlen(serverId), NULL);
 	}
 	for(index = 0; index < 10; index++)
 	{
