@@ -22,7 +22,7 @@
 
 #include "defs.h"
 #include "liblog.h"
-#include "libdaemon.h"
+#include <api/daemon.h>
 #include "socks5.h"
 
 static INT32 g_state = SOCKS5_STATE_PREPARE;
