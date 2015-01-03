@@ -2,12 +2,15 @@
 #include <stdio.h>
 
 #define MAX_LINE	1024
-#include "conhash/conhash.h"
+#include "api/conhash.h"
 
 int main(int argc, char* argv[])
 {
-	struct conhash_s* conhashp = conhash_init(NULL);
-
+	api_init();
+	int ec = 0
+	api_conhash_t *conhash = calloc(1, sizeof(api_conhash_t));
+	rc = api_conhash_init(conhash, API_SIZE_FROM_MB(32), 100);
+	do_assert(rc == API_SUCCESS);
 	int index = 0;
 	for(index = 0; index < 6; index++)
 	{

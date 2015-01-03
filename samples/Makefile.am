@@ -1,1 +1,1 @@
-SUBDIRS          = socks5
+SUBDIRS          = conhash socks5
