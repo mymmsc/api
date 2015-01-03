@@ -71,6 +71,7 @@ int main(int argc, char* argv[])
 		api_conhash_lookup_node(conhash, serverId, api_strlen(serverId), server_get, NULL);
 	}
 	printf("----------------------------------------------------------------\n");
+	api_safefree(conhash);
 	return 0;
 }
 

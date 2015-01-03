@@ -22,7 +22,7 @@
 
 /* --------------------------------------------------------------------- */
 ssize_t
-api_atosz(u_char *line, size_t n)
+api_atosz(uint8_t *line, size_t n)
 {
     ssize_t  value;
 

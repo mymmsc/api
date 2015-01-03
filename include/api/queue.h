@@ -83,7 +83,7 @@ struct api_queue_s {
 
 
 #define api_queue_data(q, type, link)                                         \
-    (type *) ((u_char *) q - offsetof(type, link))
+    (type *) ((uint8_t *) q - offsetof(type, link))
 
 
 API api_queue_t *api_queue_middle(api_queue_t *queue);

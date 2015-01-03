@@ -135,7 +135,7 @@ typedef struct aiocb  api_aiocb_t;
 #define CMSG_LEN(l)         (ALIGN(sizeof(struct cmsghdr)) + (l))
 
 #undef  CMSG_DATA
-#define CMSG_DATA(cmsg)     ((u_char *)(cmsg) + ALIGN(sizeof(struct cmsghdr)))
+#define CMSG_DATA(cmsg)     ((uint8_t *)(cmsg) + ALIGN(sizeof(struct cmsghdr)))
 
 #endif
 

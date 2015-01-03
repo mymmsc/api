@@ -23,8 +23,8 @@ struct api_rbtree_node_s {
     api_rbtree_node_t     *left;
     api_rbtree_node_t     *right;
     api_rbtree_node_t     *parent;
-    u_char                 color;
-    u_char                 data;
+    uint8_t                color;
+    uint8_t                data;
 };
 
 

@@ -218,7 +218,7 @@ int api_base64_encode_internal(uint8_t *dst, const uint8_t *src, int src_len, co
 int api_base64_encode(uint8_t *coded_dst, const uint8_t *plain_src, 
                                    int len_plain_src)
 {
-    static u_char   basis64[] =
+    static uint8_t   basis64[] =
             "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 
     return api_base64_encode_internal(coded_dst, plain_src, len_plain_src, basis64, 1);
@@ -229,7 +229,7 @@ int
 api_base64_encode_url(uint8_t *coded_dst, const uint8_t *plain_src, 
                                    int len_plain_src)
 {
-    static u_char   basis64[] =
+    static uint8_t   basis64[] =
             "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_";
 
     return api_base64_encode_internal(coded_dst, plain_src, len_plain_src, basis64, 0);
@@ -237,7 +237,7 @@ api_base64_encode_url(uint8_t *coded_dst, const uint8_t *plain_src,
 
 int api_base64_decode(uint8_t *plain_dst, const uint8_t *coded_src, int len_coded_src)
 {
-    static u_char   basis64[] = {
+    static uint8_t   basis64[] = {
         77, 77, 77, 77, 77, 77, 77, 77, 77, 77, 77, 77, 77, 77, 77, 77,
         77, 77, 77, 77, 77, 77, 77, 77, 77, 77, 77, 77, 77, 77, 77, 77,
         77, 77, 77, 77, 77, 77, 77, 77, 77, 77, 77, 62, 77, 77, 77, 63,

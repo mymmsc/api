@@ -72,7 +72,7 @@ api_shm_alloc(api_shm_t *shm)
         return API_ERROR;
     }
 
-    shm->addr = (u_char *) mmap(NULL, shm->size, PROT_READ|PROT_WRITE,
+    shm->addr = (uint8_t *) mmap(NULL, shm->size, PROT_READ|PROT_WRITE,
                                 MAP_SHARED, fd, 0);
 
     if (shm->addr == MAP_FAILED) {
