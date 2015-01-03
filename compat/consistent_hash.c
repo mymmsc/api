@@ -21,7 +21,7 @@ api_murmur_hash2(uint8_t *data, size_t len)
 	static uint32_t m = 0x5bd1e995;
 	static int r1 = 13, r2 = 15;
     hash = seed ^ len;
-	
+	printf("s=[%s], hash=%ld\n", data, hash);
     while (len >= 4) {
         k  = data[0];
         k |= data[1] << 8;
