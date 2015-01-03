@@ -7,7 +7,7 @@
 extern "C" {
 #endif
 
-#if API_CONHASH_NOT_COMPAT_JAVA_INT32
+#if 1
 typedef api_uint_t  api_rbtree_key_t;
 typedef api_int_t   api_rbtree_key_int_t;
 #else
