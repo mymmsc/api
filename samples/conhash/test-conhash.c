@@ -4,6 +4,14 @@
 #define MAX_LINE	1024
 #include "api/conhash.h"
 
+static void server_get (api_conhash_vnode_t *vnode, void *data)
+{
+	char name[vnode->hnode->name.len + 1];
+	memset(name, sizeof(name));
+	api_snprintf(name, "%V", vnode->hnode->name);
+	printf("node = [%s]\n", name);
+}
+
 int main(int argc, char* argv[])
 {
 	api_init();
@@ -37,24 +45,13 @@ int main(int argc, char* argv[])
     fprintf(stdout, "find [%d][%s] by %s\n", findp->index, findp->iden, uri);
 #endif
 	
-	char buf[MAX_LINE];
-	FILE *fp;
-	int len;
-	if((fp = fopen("./ts.list","r")) == NULL)
-    {
-        perror("fail to read");
-        exit(1);
-    }
-	
-    while(fgets(buf,MAX_LINE,fp) != NULL)
-    {
-        len = strlen(buf);
-        buf[len-1] = '\0'; 
-		struct node_s* findp = conhash_lookup(conhashp, buf, len-1);
-        fprintf(stdout, "%s,%s\n", buf, findp->iden);
-    }
-	
-	fclose(fp);
+	char serverId[100];
+	for(index = 0; index < 60; index++)
+	{
+		memset(serverId, 0x00, sizeof(serverId));
+		snprintf(serverId, sizeof(serverId), "10.1.15.1%d", index);
+		api_conhash_lookup_node(conhash, serverId, api_strlen(serverId), server_get, NULL);
+	}
     
 	return 0;
 }
