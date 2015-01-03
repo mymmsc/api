@@ -35,6 +35,7 @@ typedef struct {
     api_conhash_sh_t           *sh;
     api_slab_pool_t            *shpool;
     api_conhash_hashfunc_pt     hash_func;
+	api_shm_t                   shm;
     //api_shm_zone_t             *shm_zone;
     api_uint_t                  vnodecnt;
 } api_conhash_t;
@@ -51,7 +52,7 @@ struct conhash_vnode_s {
     api_str_t               name;
 };
 
-API api_conhash_t *api_conhash_init(api_pool_t *pool, size_t size, api_int_t vnode_cnt);
+API api_status_t api_conhash_init(api_conhash_t *conhash, size_t size, api_int_t vnode_cnt);
 API void api_conhash_clear(api_conhash_t *conhash);
 API api_int_t api_conhash_node_traverse(api_conhash_t *conhash, api_conhash_oper_pt func, void *data);
 API api_int_t api_conhash_add_node(api_conhash_t *conhash, u_char *name, size_t len, void *data);

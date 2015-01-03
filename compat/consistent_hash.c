@@ -1,6 +1,6 @@
 #include <api/conhash.h>
 
-static api_int_t api_conhash_shm_init(api_shm_zone_t *shm_zone, void *data);
+//static api_int_t api_conhash_shm_init(api_shm_zone_t *shm_zone, void *data);
 static api_int_t api_conhash_add_replicas(api_conhash_t *conhash, api_conhash_node_t *hnode);
 static api_int_t api_conhash_del_replicas(api_conhash_t *conhash, api_conhash_node_t *hnode, api_uint_t replicas);
 static api_int_t api_conhash_make_vnode_name(api_conhash_t *conhash, api_str_t *name,
@@ -99,6 +99,50 @@ api_conhash_clear(api_conhash_t *conhash)
     }
     
     api_shmtx_unlock(&conhash->shpool->mutex);
+}
+
+api_status_t 
+api_conhash_init(api_conhash_t *conhash, size_t size, api_int_t vnode_cnt)
+{
+	api_conhash_ctx_t *conhash_ctx = NULL;
+	
+	api_str_t          name, *value, s;
+    api_conhash_t          **conhash_p;
+    
+    if (conhash == NULL) {
+        return API_ERROR;
+    }
+    
+    conhash->hash_func = api_murmur_hash2;
+	conhash->vnodecnt = vnode_cnt;
+	
+	conhash->shm.size = size;
+	api_shm_alloc(&conhash->shm);
+    conhash->shpool = api_slab_init(conhash->shm.addr, conhash->shm.size);
+	conhash->sh = api_slab_alloc(conhash->shpool, sizeof(api_conhash_sh_t));
+    if (conhash->sh == NULL) {
+        return API_ERROR;
+    }
+    
+    conhash->shpool->data = conhash->sh;
+
+    api_rbtree_init(&conhash->sh->vnode_tree, &conhash->sh->vnode_sentinel,
+                    api_conhash_rbtree_insert_value);
+                    
+    api_queue_init(&conhash->sh->hnode_queue);
+    
+    len = sizeof(" in conhash zone \"\"") + shm_zone->shm.name.len;
+	
+    conhash->shpool->log_ctx = api_slab_alloc(conhash->shpool, len);
+    if (conhash->shpool->log_ctx == NULL) {
+        return API_ERROR;
+    }
+
+    api_snprintf(conhash->shpool->log_ctx, len, " in conhash zone \"%V\"",
+                &shm_zone->shm.name);
+    
+    
+	return API_SUCCESS;
 }
 
 api_int_t
@@ -449,85 +493,6 @@ api_conhash_rbtree_insert_value(api_rbtree_node_t *temp, api_rbtree_node_t *node
     node->left = sentinel;
     node->right = sentinel;
     api_rbt_red(node);
-}
-
-api_conhash_t *
-api_conhash_init(api_pool_t *pool, size_t size, api_int_t vnode_cnt)
-{
-	api_conhash_t     *conhash = NULL;
-    api_conhash_ctx_t *conhash_ctx = NULL;
-	
-	api_str_t          name, *value, s;
-    api_conhash_t          **conhash_p;
-    
-    conhash = (api_conhash_t *) api_pcalloc(pool, sizeof(api_conhash_t));
-    if (conhash == NULL) {
-        return API_ERROR;
-    }
-    
-    conhash->hash_func = api_murmur_hash2;
-    
-    conhash->shm_zone = api_pcalloc(pool, sizeof(api_shm_zone_t));
-    if (conhash->shm_zone == NULL) {
-        return API_ERROR;
-    }
-	
-    if (conhash->shm_zone->data) {
-        //api_conf_log_error(API_LOG_EMERG, cf, 0, "duplicate zone \"%V\"", &name);
-        return API_ERROR;
-    }
-    
-    conhash->shm_zone->init = api_conhash_shm_init;
-    conhash->shm_zone->data = conhash;
-    conhash->vnodecnt = vnode_cnt;
-
-	api_conhash_shm_init(conhash->shm_zone, NULL);
-	
-	return conhash;
-}
-
-
-static api_int_t
-api_conhash_shm_init(api_shm_zone_t *shm_zone, void *data)
-{
-    api_conhash_t   *o_conhash = data;
-    
-    api_conhash_t   *conhash;
-    size_t           len;
-	
-    conhash = shm_zone->data;
-    
-    if (o_conhash) {
-        conhash->sh = o_conhash->sh;
-        conhash->shpool = o_conhash->shpool;
-        return API_SUCCESS;
-    }
-    
-    conhash->shpool = (api_slab_pool_t *) shm_zone->shm.addr;
-    
-    conhash->sh = api_slab_alloc(conhash->shpool, sizeof(api_conhash_sh_t));
-    if (conhash->sh == NULL) {
-        return API_ERROR;
-    }
-    
-    conhash->shpool->data = conhash->sh;
-
-    api_rbtree_init(&conhash->sh->vnode_tree, &conhash->sh->vnode_sentinel,
-                    api_conhash_rbtree_insert_value);
-                    
-    api_queue_init(&conhash->sh->hnode_queue);
-    
-    len = sizeof(" in conhash zone \"\"") + shm_zone->shm.name.len;
-	
-    conhash->shpool->log_ctx = api_slab_alloc(conhash->shpool, len);
-    if (conhash->shpool->log_ctx == NULL) {
-        return API_ERROR;
-    }
-
-    api_snprintf(conhash->shpool->log_ctx, len, " in conhash zone \"%V\"",
-                &shm_zone->shm.name);
-    
-    return API_SUCCESS;
 }
 
 api_int_t
