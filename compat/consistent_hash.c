@@ -131,7 +131,7 @@ api_conhash_init(api_conhash_t *conhash, size_t size, api_int_t vnode_cnt)
                     
     api_queue_init(&conhash->sh->hnode_queue);
     
-    size_t len = sizeof(" in conhash zone \"\"") + shm_zone->shm.name.len;
+    size_t len = sizeof(" in conhash zone \"\"") + conhash->shm.name.len;
 	
     conhash->shpool->log_ctx = api_slab_alloc(conhash->shpool, len);
     if (conhash->shpool->log_ctx == NULL) {
@@ -139,7 +139,7 @@ api_conhash_init(api_conhash_t *conhash, size_t size, api_int_t vnode_cnt)
     }
 
     api_snprintf(conhash->shpool->log_ctx, len, " in conhash zone \"%V\"",
-                &shm_zone->shm.name);
+                &conhash->shm.name);
     
     
 	return API_SUCCESS;
