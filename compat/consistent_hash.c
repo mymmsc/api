@@ -164,7 +164,13 @@ api_conhash_init(api_conhash_t *conhash, size_t size, api_int_t vnode_cnt)
     }
     
     conhash->hash_func = api_murmur_hash2;
-	conhash->vnodecnt = vnode_cnt;
+	if(vnode_cnt > 4096) {
+		conhash->vnodecnt = 4096;
+	} else if(vnode_cnt < 1) {
+		conhash->vnodecnt = 1;
+	} else {
+		conhash->vnodecnt = vnode_cnt;
+	}
 	
 	conhash->shm.size = size;
 	api_shm_alloc(&conhash->shm);
