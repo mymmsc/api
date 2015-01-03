@@ -22,7 +22,7 @@ int main(int argc, char* argv[])
 	do_assert(rc == API_SUCCESS);
 	int index = 0;
 	char serverId[100];
-	for(index = 0; index < 6; index++)
+	for(index = 0; index < 3; index++)
 	{
 		memset(serverId, 0x00, sizeof(serverId));
 		snprintf(serverId, sizeof(serverId), "10.1.15.1%d", index);
@@ -47,13 +47,26 @@ int main(int argc, char* argv[])
 #endif
 	
 	//char serverId[100];
-	for(index = 0; index < 60; index++)
+	for(index = 0; index < 10; index++)
+	{
+		memset(serverId, 0x00, sizeof(serverId));
+		snprintf(serverId, sizeof(serverId), "cookie:%d", index);
+		printf("cookie: [%s]\t", serverId);
+		api_conhash_lookup_node(conhash, serverId, api_strlen(serverId), server_get, NULL);
+	}
+	for(index = 0; index < 2; index++)
 	{
 		memset(serverId, 0x00, sizeof(serverId));
 		snprintf(serverId, sizeof(serverId), "10.1.15.1%d", index);
+		api_conhash_add_node(conhash, serverId, api_strlen(serverId), NULL);
+	}
+	for(index = 0; index < 10; index++)
+	{
+		memset(serverId, 0x00, sizeof(serverId));
+		snprintf(serverId, sizeof(serverId), "cookie:%d", index);
+		printf("cookie: [%s]\t", serverId);
 		api_conhash_lookup_node(conhash, serverId, api_strlen(serverId), server_get, NULL);
 	}
-    
 	return 0;
 }
 
