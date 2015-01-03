@@ -3,7 +3,7 @@
 
 #include <api/lib.h>
 
-#define API_CONHASH_NOT_COMPAT_JAVA_INT32 1
+#define API_CONHASH_NOT_COMPAT_JAVA_INT32 0
 
 #include <api/slab.h>
 #include <api/queue.h>
