@@ -7,7 +7,7 @@
 int main(int argc, char* argv[])
 {
 	api_init();
-	int ec = 0
+	int rc = 0
 	api_conhash_t *conhash = calloc(1, sizeof(api_conhash_t));
 	rc = api_conhash_init(conhash, API_SIZE_FROM_MB(32), 100);
 	do_assert(rc == API_SUCCESS);
