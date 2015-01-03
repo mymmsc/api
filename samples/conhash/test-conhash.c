@@ -45,7 +45,7 @@ int main(int argc, char* argv[])
     fprintf(stdout, "find [%d][%s] by %s\n", findp->index, findp->iden, uri);
 #endif
 	
-	char serverId[100];
+	//char serverId[100];
 	for(index = 0; index < 60; index++)
 	{
 		memset(serverId, 0x00, sizeof(serverId));
