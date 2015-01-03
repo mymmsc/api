@@ -174,7 +174,7 @@ api_conhash_add_node(api_conhash_t *conhash, uint8_t *name, size_t len, void *da
         if (hnode) {
             rc = api_memn2cmp(hnode->name.data, name, hnode->name.len, len);
             if (rc == 0) {
-                rc = API_ERROR;
+                rc = API_DECLINED;
                 goto done;
             }
         }
@@ -230,7 +230,7 @@ api_conhash_del_node(api_conhash_t *conhash, uint8_t *name, size_t len)
         return API_ERROR;
     }
     
-    rc = API_ERROR;
+    rc = API_DECLINED;
     
     api_shmtx_lock(&conhash->shpool->mutex);
     
@@ -400,7 +400,7 @@ done:
             return rc;
         }
         
-        return API_EAGAIN;
+        return API_AGAIN;
     }
     
     return API_SUCCESS;
@@ -461,6 +461,7 @@ api_conhash_make_vnode_name(api_conhash_t *conhash, api_str_t *name,
     }
     
     int len = api_snprintf(name->data, name->len, "%V-%04ui", &(hnode->name), index);
+	printf("vnode-name=[%s]\n", name->data);
     name->data[len] = 0x00;
 	
     return API_SUCCESS;
@@ -512,7 +513,7 @@ api_conhash_node_traverse(api_conhash_t *conhash, api_conhash_oper_pt func, void
     sentinel = conhash->sh->vnode_tree.sentinel;
     
     if (node == sentinel) {
-        rc = API_ERROR;
+        rc = API_DECLINED;
         goto done;
     }
     

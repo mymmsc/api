@@ -28,7 +28,12 @@ extern "C" {
 typedef int api_status_t;
 #define api_errno  errno
 
-#define API_ERROR  -1
+#define API_ERROR     -1
+#define API_AGAIN     -2
+#define API_BUSY      -3
+#define API_DONE      -4
+#define API_DECLINED  -5
+#define API_ABORT     -6
 
 /**
  * Return a human readable string describing the specified error.
