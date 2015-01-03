@@ -12,16 +12,12 @@ int main(int argc, char* argv[])
 	rc = api_conhash_init(conhash, API_SIZE_FROM_MB(32), 100);
 	do_assert(rc == API_SUCCESS);
 	int index = 0;
+	char serverId[100];
 	for(index = 0; index < 6; index++)
 	{
-		struct node_s* nodep = (struct node_s*)malloc(sizeof(struct node_s));
-		memset(nodep, 0, sizeof(struct node_s));
-		nodep->index = 0;
-		nodep->replicas = 500;
-		nodep->flag = NODE_FLAG_INIT;
-		snprintf(nodep->iden, 64, "10.1.15.1%d", index);
-		nodep->iden[63] = '\0';
-		conhash_add_node(conhashp, nodep);
+		memset(serverId, 0x00, sizeof(serverId));
+		snprintf(serverId, sizeof(serverId), "10.1.15.1%d", index);
+		api_conhash_add_node(conhash, serverId, api_strlen(serverId), NULL);
 	}
 
 #if 0
