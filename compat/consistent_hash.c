@@ -15,22 +15,25 @@ static void api_conhash_tree_mid_traverse(api_rbtree_node_t *node, api_rbtree_no
 static uint32_t
 api_murmur_hash2(uint8_t *data, size_t len)
 {
-    uint32_t  h, k;
-
-    h = 0 ^ len;
-
+    uint32_t hash;
+	uint32_t k;
+	uint32_t seed = 0;
+	static uint32_t m = 0x5bd1e995;
+	static int r1 = 13, r2 = 15;
+    hash = seed ^ len;
+	
     while (len >= 4) {
         k  = data[0];
         k |= data[1] << 8;
         k |= data[2] << 16;
         k |= data[3] << 24;
 
-        k *= 0x5bd1e995;
+        k *= m;
         k ^= k >> 24;
-        k *= 0x5bd1e995;
+        k *= m;
 
-        h *= 0x5bd1e995;
-        h ^= k;
+        hash *= m;
+        hash ^= k;
 
         data += 4;
         len -= 4;
@@ -38,19 +41,19 @@ api_murmur_hash2(uint8_t *data, size_t len)
 
     switch (len) {
     case 3:
-        h ^= data[2] << 16;
+        hash ^= data[2] << 16;
     case 2:
-        h ^= data[1] << 8;
+        hash ^= data[1] << 8;
     case 1:
-        h ^= data[0];
-        h *= 0x5bd1e995;
+        hash ^= data[0];
+        hash *= m;
     }
 
-    h ^= h >> 13;
-    h *= 0x5bd1e995;
-    h ^= h >> 15;
+    hash ^= hash >> r1;
+    hash *= m;
+    hash ^= hash >> r2;
 
-    return h;
+    return hash;
 }
 
 void
