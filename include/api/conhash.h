@@ -3,6 +3,8 @@
 
 #include <api/lib.h>
 
+#define API_CONHASH_NOT_COMPAT_JAVA_INT32 1
+
 #include <api/slab.h>
 #include <api/queue.h>
 #include <api/rbtree.h>
@@ -16,8 +18,11 @@ extern "C" {
 
 typedef struct conhash_vnode_s api_conhash_vnode_t;
 
-//typedef uint32_t (*api_conhash_hashfunc_pt) (uint8_t *data, size_t len);
+#if API_CONHASH_NOT_COMPAT_JAVA_INT32
+typedef uint32_t (*api_conhash_hashfunc_pt) (uint8_t *data, size_t len);
+#else
 typedef int32_t (*api_conhash_hashfunc_pt) (uint8_t *data, size_t len);
+#endif
 
 typedef void (*api_conhash_oper_pt) (api_conhash_vnode_t *, void *);
 

@@ -12,8 +12,10 @@ static api_rbtree_node_t* api_conhash_rbtree_lookup(api_conhash_t *conhash, api_
 static void api_conhash_tree_mid_traverse(api_rbtree_node_t *node, api_rbtree_node_t *sentinel,
     api_conhash_oper_pt func, void *data);
 
+#if API_CONHASH_NOT_COMPAT_JAVA_INT32
+
 static uint32_t
-api_murmur_hash2_OLD(uint8_t *data, size_t len)
+api_murmur_hash2(uint8_t *data, size_t len)
 {
     uint32_t hash;
 	uint32_t k;
@@ -55,7 +57,7 @@ api_murmur_hash2_OLD(uint8_t *data, size_t len)
 	//printf("s=[%s], hash=%ld\n", data, hash);
     return hash;
 }
-
+#else
 static int32_t
 api_murmur_hash2(uint8_t *data, size_t len)
 {
@@ -99,6 +101,7 @@ api_murmur_hash2(uint8_t *data, size_t len)
 	//printf("s=[%s], hash=%ld\n", data, hash);
     return hash;
 }
+#endif
 
 void
 api_conhash_clear(api_conhash_t *conhash)

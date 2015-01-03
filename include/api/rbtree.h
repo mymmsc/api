@@ -7,11 +7,13 @@
 extern "C" {
 #endif
 
-//typedef api_uint_t  api_rbtree_key_t;
+#if API_CONHASH_NOT_COMPAT_JAVA_INT32
+typedef api_uint_t  api_rbtree_key_t;
+typedef api_int_t   api_rbtree_key_int_t;
+#else
 typedef int32_t  api_rbtree_key_t;
-
-//typedef api_int_t   api_rbtree_key_int_t;
 typedef int32_t   api_rbtree_key_int_t;
+#endif
 
 
 typedef struct api_rbtree_node_s  api_rbtree_node_t;
