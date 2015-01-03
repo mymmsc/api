@@ -420,7 +420,7 @@ api_conhash_del_replicas(api_conhash_t *conhash, api_conhash_node_t *hnode, api_
     for (i = 0; i < replicas; i++) {
         
         api_memzero(name, sizeof(name));
-        
+        printf("vnode-name=[%d]\n", i);
         vnode_name.data = name;
         
         rc = api_conhash_make_vnode_name(conhash, &vnode_name, hnode, i);
@@ -461,7 +461,7 @@ api_conhash_make_vnode_name(api_conhash_t *conhash, api_str_t *name,
     }
     
     int len = api_snprintf(name->data, name->len, "%V-%04ui", &(hnode->name), index);
-	printf("vnode-name=[%s]\n", name->data);
+	printf("vnode-name=[%d:%s]\n", index, name->data);
     name->data[len] = 0x00;
 	
     return API_SUCCESS;
