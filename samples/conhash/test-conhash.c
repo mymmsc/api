@@ -26,6 +26,7 @@ int main(int argc, char* argv[])
 	{
 		memset(serverId, 0x00, sizeof(serverId));
 		snprintf(serverId, sizeof(serverId), "10.1.15.1%d", index);
+		printf(">>>>>>>>>>>>>>>>>>>>>>>>>>> %s\n", serverId);
 		api_conhash_add_node(conhash, serverId, api_strlen(serverId), NULL);
 	}
 
