@@ -29,14 +29,14 @@ api_murmur_hash2(uint8_t *data, size_t len)
         k |= data[1] << 8;
         k |= data[2] << 16;
         k |= data[3] << 24;
-
+		
         k *= m;
         k ^= k >> 24;
         k *= m;
-
+		
         hash *= m;
         hash ^= k;
-
+		
         data += 4;
         len -= 4;
     }
@@ -73,14 +73,14 @@ api_murmur_hash2(uint8_t *data, size_t len)
         k |= data[1] << 8;
         k |= data[2] << 16;
         k |= data[3] << 24;
-
+		
         k *= m;
         k ^= k >> 24;
         k *= m;
-
+		
         hash *= m;
         hash ^= k;
-
+		
         data += 4;
         len -= 4;
     }
