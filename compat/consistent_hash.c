@@ -199,7 +199,7 @@ api_conhash_add_node(api_conhash_t *conhash, uint8_t *name, size_t len, void *da
     api_memcpy(hnode->name.data, name, size);
     hnode->name.data[size] = '\0';
     hnode->data = data;
-    
+    printf("hnode-name=[%s]\n", hnode->name.data);
     rc = api_conhash_add_replicas(conhash, hnode);
     if (rc != API_SUCCESS) {
         api_slab_free_locked(conhash->shpool, hnode->name.data);
