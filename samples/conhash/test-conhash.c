@@ -9,7 +9,7 @@ static void server_get (api_conhash_vnode_t *vnode, void *data)
 {
 	char name[vnode->hnode->name.len + 1];
 	memset(name, 0x00, sizeof(name));
-	api_snprintf(name, sizeof(name), "%V", vnode->hnode->name);
+	api_snprintf(name, sizeof(name), "%V", &vnode->hnode->name);
 	printf("node = [%s]\n", name);
 }
 
