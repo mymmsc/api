@@ -52,7 +52,7 @@ api_murmur_hash2_OLD(uint8_t *data, size_t len)
     hash ^= hash >> r1;
     hash *= m;
     hash ^= hash >> r2;
-	printf("s=[%s], hash=%ld\n", data, hash);
+	//printf("s=[%s], hash=%ld\n", data, hash);
     return hash;
 }
 
@@ -96,7 +96,7 @@ api_murmur_hash2(uint8_t *data, size_t len)
     hash ^= hash >> r1;
     hash *= m;
     hash ^= hash >> r2;
-	printf("s=[%s], hash=%ld\n", data, hash);
+	//printf("s=[%s], hash=%ld\n", data, hash);
     return hash;
 }
 
