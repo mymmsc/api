@@ -146,7 +146,7 @@ api_conhash_init(api_conhash_t *conhash, size_t size, api_int_t vnode_cnt)
 }
 
 api_int_t
-api_conhash_add_node(api_conhash_t *conhash, u_char *name, size_t len, void *data)
+api_conhash_add_node(api_conhash_t *conhash, uint8_t *name, size_t len, void *data)
 {
     api_int_t               rc;
     api_queue_t            *q;
@@ -213,7 +213,7 @@ done:
 }
 
 api_int_t
-api_conhash_del_node(api_conhash_t *conhash, u_char *name, size_t len)
+api_conhash_del_node(api_conhash_t *conhash, uint8_t *name, size_t len)
 {
     api_int_t               rc, ret;
     api_queue_t            *q;
@@ -260,7 +260,7 @@ done:
 }
 
 api_int_t
-api_conhash_lookup_node(api_conhash_t *conhash, u_char *name, size_t len, 
+api_conhash_lookup_node(api_conhash_t *conhash, uint8_t *name, size_t len, 
     api_conhash_oper_pt func, void *data)
 {
     api_rbtree_key_t      node_key;

@@ -16,7 +16,7 @@ extern "C" {
 
 typedef struct conhash_vnode_s api_conhash_vnode_t;
 
-typedef uint32_t (*api_conhash_hashfunc_pt) (u_char *data, size_t len);
+typedef uint32_t (*api_conhash_hashfunc_pt) (uint8_t *data, size_t len);
 typedef void (*api_conhash_oper_pt) (api_conhash_vnode_t *, void *);
 
 typedef struct {
@@ -55,9 +55,9 @@ struct conhash_vnode_s {
 API api_status_t api_conhash_init(api_conhash_t *conhash, size_t size, api_int_t vnode_cnt);
 API void api_conhash_clear(api_conhash_t *conhash);
 API api_int_t api_conhash_node_traverse(api_conhash_t *conhash, api_conhash_oper_pt func, void *data);
-API api_int_t api_conhash_add_node(api_conhash_t *conhash, u_char *name, size_t len, void *data);
-API api_int_t api_conhash_del_node(api_conhash_t *conhash, u_char *name, size_t len);
-API api_int_t api_conhash_lookup_node(api_conhash_t *conhash, u_char *name, size_t len,
+API api_int_t api_conhash_add_node(api_conhash_t *conhash, uint8_t *name, size_t len, void *data);
+API api_int_t api_conhash_del_node(api_conhash_t *conhash, uint8_t *name, size_t len);
+API api_int_t api_conhash_lookup_node(api_conhash_t *conhash, uint8_t *name, size_t len,
     api_conhash_oper_pt func, void *data);
 //char *api_conhash_shm_set_slot(api_conf_t *cf, api_command_t *cmd, void *conf);
 
