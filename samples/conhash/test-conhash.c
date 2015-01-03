@@ -54,12 +54,14 @@ int main(int argc, char* argv[])
 		printf("cookie: [%s]\t", serverId);
 		api_conhash_lookup_node(conhash, serverId, api_strlen(serverId), server_get, NULL);
 	}
-	for(index = 0; index < 2; index++)
+	printf("----------------------------------------------------------------\n");
+	for(index = 0; index < 1; index++)
 	{
 		memset(serverId, 0x00, sizeof(serverId));
-		snprintf(serverId, sizeof(serverId), "10.1.15.1%d", index);
+		snprintf(serverId, sizeof(serverId), "10.1.15.1%d", index + 2);
 		api_conhash_del_node(conhash, serverId, api_strlen(serverId), NULL);
 	}
+	printf("----------------------------------------------------------------\n");
 	for(index = 0; index < 10; index++)
 	{
 		memset(serverId, 0x00, sizeof(serverId));
@@ -67,6 +69,7 @@ int main(int argc, char* argv[])
 		printf("cookie: [%s]\t", serverId);
 		api_conhash_lookup_node(conhash, serverId, api_strlen(serverId), server_get, NULL);
 	}
+	printf("----------------------------------------------------------------\n");
 	return 0;
 }
 
