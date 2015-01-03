@@ -4,14 +4,19 @@
 #include <sys/types.h>
 #include <fcntl.h>
 
-
+#if 0
 api_int_t
 api_shm_zone_init(api_shm_zone_t *shm_zone, size_t size, void *tag)
 {
+	api_shm_zone_t *shm_zone = NULL;
 	if (shm_zone == NULL) {
         return NULL;
     }
-
+	
+	api_shm_t shm;
+	shm.size = size;
+	api_shm_alloc(&shm);
+	shm_zone->shm.addr = api_shm_alloc(api_shm_t * shm)
     shm_zone->data = NULL;
     //shm_zone->shm.log = cf->cycle->log;
     shm_zone->shm.size = size;
@@ -22,6 +27,7 @@ api_shm_zone_init(api_shm_zone_t *shm_zone, size_t size, void *tag)
 
     return shm_zone;
 }
+#endif
 
 #if (API_HAVE_SHMEM_MMAP_ANON)
 

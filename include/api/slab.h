@@ -19,7 +19,7 @@ struct api_slab_page_s {
 };
 
 
-typedef struct {
+typedef struct slab_pool_s {
     api_shmtx_sh_t    lock;
 
     size_t            min_size;

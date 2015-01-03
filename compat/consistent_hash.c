@@ -467,11 +467,11 @@ api_conhash_init(api_pool_t *pool, size_t size, api_int_t vnode_cnt)
     
     conhash->hash_func = api_murmur_hash2;
     
-    conhash->shm_zone = api_shared_memory_add(cf, &name, size, conhash_ctx->data);
+    conhash->shm_zone = api_pcalloc(pool, sizeof(api_shm_zone_t));
     if (conhash->shm_zone == NULL) {
         return API_ERROR;
     }
-
+	
     if (conhash->shm_zone->data) {
         //api_conf_log_error(API_LOG_EMERG, cf, 0, "duplicate zone \"%V\"", &name);
         return API_ERROR;
@@ -480,6 +480,8 @@ api_conhash_init(api_pool_t *pool, size_t size, api_int_t vnode_cnt)
     conhash->shm_zone->init = api_conhash_shm_init;
     conhash->shm_zone->data = conhash;
     conhash->vnodecnt = vnode_cnt;
+
+	api_conhash_shm_init(conhash->shm_zone, NULL);
 	
 	return conhash;
 }

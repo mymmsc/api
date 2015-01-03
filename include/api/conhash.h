@@ -35,7 +35,7 @@ typedef struct {
     api_conhash_sh_t           *sh;
     api_slab_pool_t            *shpool;
     api_conhash_hashfunc_pt     hash_func;
-    api_shm_zone_t             *shm_zone;
+    //api_shm_zone_t             *shm_zone;
     api_uint_t                  vnodecnt;
 } api_conhash_t;
 
