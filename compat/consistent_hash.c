@@ -199,7 +199,7 @@ api_conhash_add_node(api_conhash_t *conhash, uint8_t *name, size_t len, void *da
     api_memcpy(hnode->name.data, name, size);
     hnode->name.data[size] = '\0';
     hnode->data = data;
-    printf("hnode-name=[%s]\n", hnode->name.data);
+    //printf("hnode-name=[%s]\n", hnode->name.data);
     rc = api_conhash_add_replicas(conhash, hnode);
     if (rc != API_SUCCESS) {
         api_slab_free_locked(conhash->shpool, hnode->name.data);
@@ -361,7 +361,7 @@ api_conhash_add_replicas(api_conhash_t *conhash, api_conhash_node_t *hnode)
     for (i = 0; i < conhash->vnodecnt; i++) {
         
         vnode_name.data = NULL;
-        printf("%s: [%d]\n", __func__, i);
+        //printf("%s: [%d]\n", __func__, i);
         rc = api_conhash_make_vnode_name(conhash, &vnode_name, hnode, i);
         if (rc == API_ERROR) {
             goto done;
@@ -420,7 +420,7 @@ api_conhash_del_replicas(api_conhash_t *conhash, api_conhash_node_t *hnode, api_
     for (i = 0; i < replicas; i++) {
         
         api_memzero(name, sizeof(name));
-        printf("%s: [%d]\n", __func__, i);
+        //printf("%s: [%d]\n", __func__, i);
         vnode_name.data = name;
         
         rc = api_conhash_make_vnode_name(conhash, &vnode_name, hnode, i);
@@ -461,7 +461,7 @@ api_conhash_make_vnode_name(api_conhash_t *conhash, api_str_t *name,
     }
     
     int len = api_snprintf(name->data, name->len + 1, "%V-%04ui", &(hnode->name), index);
-	printf("vnode-name=[%d:%s]\n", index, name->data);
+	//printf("vnode-name=[%d:%s]\n", index, name->data);
     name->data[len] = 0x00;
 	
     return API_SUCCESS;
