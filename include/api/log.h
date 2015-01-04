@@ -34,6 +34,7 @@ typedef enum level_enum {
 	API_LOG_DEBUG   = 0x03,
 	API_LOG_ALERT   = 0x04,
 	API_LOG_VERBOSE = 0x05,
+	API_LOG_INFO    = 0x06,
 	API_LOG_STDERR  = 0x08, // output stderr
 	API_LOG_STDOUT  = 0x10, // output stdout
 	API_LOG_FILE    = 0x20, // write log files
@@ -56,7 +57,7 @@ typedef enum level_enum {
 	API_LOG_NOT_SET = -1
 } log_level_e;
 
-API void api_logger_init(void);
+API void api_logger_init(const char *path);
 API void api_logger_close(void);
 API void api_log_init(byte_t type, int interval, const char *prefix);
 

@@ -34,15 +34,13 @@ typedef struct __log_struct{
 }api_log_t;
 
 static api_log_t g_logger[16];
+static char      g_log_path[1024];
 
 #ifdef _WIN32
-static const char *log_path = "/runtime/logs/bid/";
+static const char *log_path_default = "/runtime/logs/bid/";
 #else
-static const char *log_path = "/home/runtime/logs/bid/";
+static const char *log_path_default = "/home/runtime/logs/bid/";
 #endif
-static const char *log_access = "access.log";
-//static const char *log_stdout = "stdout.log";
-//static int log_fd_stdout = -1;
 
 static const char *fmt_trace = "%s(%d) : %s: ";
 
@@ -91,7 +89,7 @@ static int current_timestring(int hires, char *buf, size_t len)
 }
 
 
-void api_logger_init(void)
+void api_logger_init(const char *path)
 {
 	int i = 0;
 	int num = ARRAY_SIZE(g_logger);
@@ -99,6 +97,11 @@ void api_logger_init(void)
 	for(i = 0; i < num; i++) {
 		api_log_t *log = g_logger + i;
 		log->fd = -1;
+	}
+	if(api_strlen(path) == 0) {
+		api_cpystrn(g_log_path, path, sizeof(g_log_path));
+	} else {
+		api_cpystrn(g_log_path, log_path_default, sizeof(g_log_path));
 	}
 	api_log_init(API_LOG_FACCESS, 3600, "access");
 	api_log_init(API_LOG_FERROR, 3600, "error");
@@ -208,7 +211,7 @@ int api_log_core(log_level_e level, const char *fmt, va_list args)
 	    }
 	}
 	iRet = fprintf(out, "%s\r\n", msgbuf);
-	if(level & API_LOG_INFO)
+	if(level & API_LOG_FILE)
 	{
 		api_log_t *log = api_log_get(level);
 		api_time_t t0 = api_time_now();
