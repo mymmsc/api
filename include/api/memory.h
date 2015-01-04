@@ -4,6 +4,8 @@
 #include "api.h"
 #include "api/lib.h"
 
+//------------------------------< memory align >------------------------------
+
 #ifndef API_BSD
 #  ifndef API_WIN32 // Linux
 #    include <malloc.h>		// for memalign
@@ -93,7 +95,7 @@ API void *mmx_memcpy_32(void *to, const void *from, size_t len);
 API void *mmx_memcpy_64(void *to, const void *from, size_t len);
 
 
-//----------------< Memory Pool >----------------
+//------------------------------< memory pool >------------------------------
 typedef struct pool_struct        api_pool_t;
 //typedef struct api_chain_s       api_chain_t;
 
