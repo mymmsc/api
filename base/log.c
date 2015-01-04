@@ -98,7 +98,7 @@ void api_logger_init(const char *path)
 		api_log_t *log = g_logger + i;
 		log->fd = -1;
 	}
-	if(api_strlen(path) == 0) {
+	if(api_strlen(path) > 0) {
 		api_cpystrn(g_log_path, path, sizeof(g_log_path));
 	} else {
 		api_cpystrn(g_log_path, log_path_default, sizeof(g_log_path));
