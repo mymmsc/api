@@ -94,23 +94,23 @@ API void *mmx_memcpy_64(void *to, const void *from, size_t len);
 
 
 //----------------< Memory Pool >----------------
-typedef struct api_pool_s        api_pool_t;
+typedef struct pool_struct        api_pool_t;
 //typedef struct api_chain_s       api_chain_t;
 
 typedef void (*api_pool_cleanup_pt)(void *data);
 
-typedef struct api_pool_cleanup_s  api_pool_cleanup_t;
+typedef struct pool_cleanup_struct  api_pool_cleanup_t;
 
-struct api_pool_cleanup_s {
+struct pool_cleanup_struct {
     api_pool_cleanup_pt   handler;
     void                 *data;
     api_pool_cleanup_t   *next;
 };
 
 
-typedef struct api_pool_large_s  api_pool_large_t;
+typedef struct pool_large_struct  api_pool_large_t;
 
-struct api_pool_large_s {
+struct pool_large_struct {
     api_pool_large_t     *next;
     void                 *alloc;
 };
@@ -123,7 +123,7 @@ typedef struct {
 } api_pool_data_t;
 
 
-struct api_pool_s {
+struct pool_struct {
     api_pool_data_t       d;
     size_t                max;
     api_pool_t           *current;
