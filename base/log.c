@@ -197,7 +197,7 @@ int api_log_core(log_level_e level, const char *fmt, va_list args)
 	} else {
 		snprintf(fmtbuf, sizeof(fmtbuf), "%s: %s", prefix, fmt);
 	}
-	len = vsnprintf(msgbuf, sizeof(msgbuf) - 2, fmtbuf, args);
+	len = api_vsnprintf(msgbuf, sizeof(msgbuf) - 2, fmtbuf, args);
 	if(len > 0) {
 		char *p = msgbuf;
 		while(len > 0)
