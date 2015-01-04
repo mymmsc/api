@@ -225,10 +225,10 @@ int api_log_core(log_level_e level, const char *fmt, va_list args)
 				log->fd = -1;
 				log->size = 0;
 			}
-			if(access(log_path, F_OK) != 0) {
-				trace_out("create path %s.", log_path);
-				if(api_mkdirs(log_path) != 0) {
-					trace_err("mkdir error: %s", log_path);
+			if(access(g_log_path, F_OK) != 0) {
+				trace_out("create path %s.", g_log_path);
+				if(api_mkdirs(g_log_path) != 0) {
+					trace_err("mkdir error: %s", g_log_path);
 				}
 			}
 
@@ -238,17 +238,17 @@ int api_log_core(log_level_e level, const char *fmt, va_list args)
 			
 			memset(logfile, 0x00, sizeof(logfile));
 			if(log->interval == 60) {
-				snprintf(logfile, sizeof(logfile) - 1, "%s/%s.%4i%.2i%.2i%.2i%.2i.log", log_path, 
+				snprintf(logfile, sizeof(logfile) - 1, "%s/%s.%4i%.2i%.2i%.2i%.2i.log", g_log_path, 
 					log->prefix,
 					dt->tm_year + 1900, dt->tm_mon + 1,	dt->tm_mday,
 					dt->tm_hour, dt->tm_min);
 			} else if(log->interval == 3600) {
-				snprintf(logfile, sizeof(logfile) - 1, "%s/%s.%4i%.2i%.2i%.2i.log", log_path, 
+				snprintf(logfile, sizeof(logfile) - 1, "%s/%s.%4i%.2i%.2i%.2i.log", g_log_path, 
 					log->prefix,
 					dt->tm_year + 1900, dt->tm_mon + 1,	dt->tm_mday,
 					dt->tm_hour);
 			} else {
-				snprintf(logfile, sizeof(logfile) - 1, "%s/%s.%4i%.2i%.2i.log", log_path, 
+				snprintf(logfile, sizeof(logfile) - 1, "%s/%s.%4i%.2i%.2i.log", g_log_path, 
 					log->prefix,
 					dt->tm_year + 1900, dt->tm_mon + 1,	dt->tm_mday);
 			}
