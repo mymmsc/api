@@ -100,8 +100,10 @@ void api_logger_init(void)
 		api_log_t *log = g_logger + i;
 		log->fd = -1;
 	}
-	api_log_init(LOG_LEVEL_INFO, 3600, "access");
-	api_log_init(LOG_LEVEL_FERROR, 3600, "error");
+	api_log_init(API_LOG_FACCESS, 3600, "access");
+	api_log_init(API_LOG_FERROR, 3600, "error");
+	api_log_init(API_LOG_FDEBUG, 3600, "debug");
+	api_log_init(API_LOG_FFATAL, 3600, "fatal");
 }
 
 void api_logger_close(void)
@@ -145,7 +147,7 @@ void api_log_init(byte_t type, int interval, const char *prefix)
 	}
 }
 
-int api_log(log_level_e level, const char *fmt, va_list args)
+int api_log_core(log_level_e level, const char *fmt, va_list args)
 {
 	int iRet = -1;
 	int len = 0;
@@ -157,24 +159,24 @@ int api_log(log_level_e level, const char *fmt, va_list args)
 	char *prefix = NULL;
 	
 	switch (level) {
-		case LOG_LEVEL_FATAL:
-			prefix = "fatal";
-			out = fError;
-			break;
-		case LOG_LEVEL_ERROR:
+		case API_LOG_ERROR:
 			prefix = "error";
 			out = fError;
 			break;
-		case LOG_LEVEL_INFO:
-			prefix = "info";
-			out = fInfo;
+		case API_LOG_FATAL:
+			prefix = "fatal";
+			out = fError;
 			break;
-		case LOG_LEVEL_VERBOSE:
-			prefix = "info";
-			out = fInfo;
-			break;
-		case LOG_LEVEL_DEBUG:
+		case API_LOG_DEBUG:
 			prefix = "debug";
+			out = fInfo;
+			break;
+		case API_LOG_INFO:
+			prefix = "info";
+			out = fInfo;
+			break;
+		case API_LOG_VERBOSE:
+			prefix = "info";
 			out = fInfo;
 			break;
 		default:
@@ -184,7 +186,7 @@ int api_log(log_level_e level, const char *fmt, va_list args)
 	}
 	memset(fmtbuf, 0x00, sizeof(fmtbuf));
 	memset(msgbuf, 0x00, sizeof(msgbuf));
-	if(level & LOG_LEVEL_INFO) {
+	if(level & API_LOG_FILE) {
 		char ts[100];
 		memset(ts, 0x00, sizeof(ts));
 		current_timestring(1, ts, sizeof(ts));
@@ -206,7 +208,7 @@ int api_log(log_level_e level, const char *fmt, va_list args)
 	    }
 	}
 	iRet = fprintf(out, "%s\r\n", msgbuf);
-	if(level & LOG_LEVEL_INFO)
+	if(level & API_LOG_INFO)
 	{
 		api_log_t *log = api_log_get(level);
 		api_time_t t0 = api_time_now();
@@ -248,9 +250,9 @@ int api_log(log_level_e level, const char *fmt, va_list args)
 					dt->tm_year + 1900, dt->tm_mon + 1,	dt->tm_mday);
 			}
 			if((log->fd = open(logfile, O_RDWR|O_CREAT|O_APPEND
-#ifndef _WIN32
+			#ifndef _WIN32
 				, S_IRUSR|S_IWUSR
-#endif
+			#endif
 				)) == -1) {
 				log->fd = -1;
 				trace_out("can not open file: %s", logfile);
@@ -271,7 +273,7 @@ int api_log_message(log_level_e level, const char *format, ...)
 	int iRet = -1;
 	va_list args;
 	va_start(args, format);
-	iRet = api_log(level, format, args);
+	iRet = api_log_core(level, format, args);
 	va_end(args);
 	return iRet;
 }
@@ -292,7 +294,7 @@ int api_log_trace(log_level_e level, const char *filename, int line, const char 
 	if(iRet > 0) {
 		fmtbuf[iRet] = 0x00;
 	}
-	iRet = api_log(level, fmtbuf, args);
+	iRet = api_log_core(level, fmtbuf, args);
 	va_end(args);
 	
 	return iRet;
@@ -302,7 +304,7 @@ void api_log_fatal(log_level_e level, const char *fmt,...)
 {
 	va_list args;
 	va_start(args, fmt);
-	api_log(level, fmt, args);
+	api_log_core(level, fmt, args);
 	va_end(args);
 	exit(255);
 }

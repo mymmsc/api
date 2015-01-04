@@ -704,35 +704,29 @@ char * api_strtrim(char *pstr)
     api_int32_t  len;
     char        *pRet = pstr;
     
-    if(api_strlen(pRet) == 0)
-    {
+    if(api_strlen(pRet) == 0) {
         return "";
     }
     
-    while(strchr(" \t\r\n", *pRet))
-    {
+    while(strchr(" \t\r\n", *pRet)) {
         pRet++;
     }
     
     len = api_strlen(pRet);
-    if(len == 0)
-    {
+    if(len == 0) {
         return "";
     }
     while(len > 0)
     {
-        if(strchr(" \t\r\n", *(pRet + len - 1)))
-        {
+        if(strchr(" \t\r\n", *(pRet + len - 1))) {
             *(pRet + len - 1) = 0x00;
             len--;
-        }
-        else
-        {
+        } else {
             break;
         }
     }
     *(pRet + len) = 0x00;
-    api_cpystrn(pstr, pRet, len+1);
+    api_cpystrn(pstr, pRet, len + 1);
     *(pstr + len) = 0x00;
     return (pstr);
 }
