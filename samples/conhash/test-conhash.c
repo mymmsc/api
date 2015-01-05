@@ -16,7 +16,7 @@ static void server_get (api_conhash_vnode_t *vnode, void *data)
 }
 static int str_sort(const char *s1, const char *s2)
 {
-	return api_memn2cmp((uint8_t *)s1, (uint8_t *)s2, api_strlen(s1), api_strlen(s2))
+	return api_memn2cmp((uint8_t *)s1, (uint8_t *)s2, api_strlen(s1), api_strlen(s2));
 }
 
 int main(int argc, char* argv[])
