@@ -58,13 +58,13 @@ void api_vector_remove(api_vector_t *vector, int index)
 		if(index + 1 < vector->population) {
 			memmove(vector->storage + index, vector->storage + index + 1, sizeof(void *) * (vector->population - index - 1));
 		}
-		vector_pop(vector);
+		api_vector_pop(vector);
 	}
 }
 
 void api_vector_push(api_vector_t *vector, void * elem) {
 	vector->storage[vector->population++] = elem;
-	vector_resize(vector);
+	api_vector_resize(vector);
 }
 
 void * api_vector_pop(api_vector_t *vector) {
@@ -73,7 +73,7 @@ void * api_vector_pop(api_vector_t *vector) {
 	}
 	
 	void * elem = vector->storage[--vector->population];
-	vector_resize(vector);
+	api_vector_resize(vector);
 	return elem;
 }
 
@@ -95,7 +95,7 @@ void api_vector_resize(api_vector_t *vector) {
 	 memory to give. On the other, such a trivial error should not bring down
 	 the program. Comments? */
 	if (new_storage == NULL) {
-		vector_destroy(vector);
+		api_vector_destroy(vector);
 		//fprintf(stderr, "could not allocate more memory for vector. Sorry\n");
 		do_assert(new_storage != NULL);
 	} else {
