@@ -5,6 +5,8 @@
 #include "api/conhash.h"
 #include "api/log.h"
 
+#include "api/vector.h"
+
 static void server_get (api_conhash_vnode_t *vnode, void *data)
 {
 	char name[vnode->hnode->name.len + 1];
@@ -48,12 +50,22 @@ int main(int argc, char* argv[])
 #endif
 	
 	//char serverId[100];
+	api_vector_t *slist = api_vector_new(1);
+	char *str = NULL;
 	for(index = 0; index < 10; index++)
 	{
 		memset(serverId, 0x00, sizeof(serverId));
-		snprintf(serverId, sizeof(serverId), "cookie:%d", index);
+		snprintf(serverId, sizeof(serverId), "cookie:%d", /*9 - */index);
+		str = strdup(serverId);
+		api_vector_push(slist, str);
 		printf("cookie: [%s]\t", serverId);
 		api_conhash_lookup_node(conhash, serverId, api_strlen(serverId), server_get, NULL);
+	}
+	api_vector_remove(slist, 0);
+	for(index = 0; index < api_vector_size(slist); index++)
+	{
+		str = api_vector_get(slist, index);
+		printf("cookie: [%s]\n", str);
 	}
 	printf("----------------------------------------------------------------\n");
 	for(index = 0; index < 1; index++)
