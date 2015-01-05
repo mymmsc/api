@@ -19,7 +19,7 @@ API void api_vector_remove(api_vector_t *vector, int index);
 API void   api_vector_push(api_vector_t *vector, void *elem);
 API void * api_vector_pop(api_vector_t *vector);
 API void api_vector_resize(api_vector_t *vector);
-API void api_vector_sort(api_vector_t *vector, api_int_t (*cmp)(const void *, const void *));
+API void api_vector_sort(api_vector_t *vector, int (*cmp)(const void *, const void *));
 
 #ifdef __cplusplus
 }

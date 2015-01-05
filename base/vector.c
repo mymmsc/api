@@ -104,7 +104,7 @@ void api_vector_resize(api_vector_t *vector) {
 	}
 }
 
-void api_vector_sort(api_vector_t *vector, api_int_t (*cmp)(const void *, const void *))
+void api_vector_sort(api_vector_t *vector, int (*cmp)(const void *, const void *))
 {
 	qsort(vector->storage, vector->population, sizeof(void *), cmp);
 }
