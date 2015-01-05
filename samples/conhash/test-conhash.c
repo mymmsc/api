@@ -14,6 +14,10 @@ static void server_get (api_conhash_vnode_t *vnode, void *data)
 	api_snprintf(name, sizeof(name), "%V", &vnode->hnode->name);
 	printf("node = [%s]\n", name);
 }
+static int str_sort(const char *s1, const char *s2)
+{
+	return api_memn2cmp(s1, s2, api_strlen(s1), api_strlen(s2))
+}
 
 int main(int argc, char* argv[])
 {
@@ -55,12 +59,14 @@ int main(int argc, char* argv[])
 	for(index = 0; index < 10; index++)
 	{
 		memset(serverId, 0x00, sizeof(serverId));
-		snprintf(serverId, sizeof(serverId), "cookie:%d", /*9 - */index);
+		snprintf(serverId, sizeof(serverId), "cookie:%d", 9 - index);
 		str = strdup(serverId);
 		api_vector_push(slist, str);
 		printf("cookie: [%s]\t", serverId);
 		api_conhash_lookup_node(conhash, serverId, api_strlen(serverId), server_get, NULL);
 	}
+	printf("----------------------------------------------------------------\n");
+	api_vector_sort(slist, str_sort);
 	api_vector_remove(slist, 0);
 	for(index = 0; index < api_vector_size(slist); index++)
 	{
