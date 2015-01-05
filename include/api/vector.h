@@ -7,17 +7,17 @@
 extern "C" {
 #endif
 
-typedef struct __vector_struct vector_t;
+typedef struct __vector_struct api_vector_t;
 
-API vector_t * vector_new(int size);
-API void vector_destroy(vector_t *vector);
-API int vector_size(vector_t *vector);
-API int vector_length(vector_t *vector);
-API void * vector_get(vector_t *vector, int index);
-API void * vector_set(vector_t *vector, int index, void *elem);
-API void   vector_push(vector_t *vector, void *elem);
-API void * vector_pop(vector_t *vector);
-API void vector_resize(vector_t *vector);
+API api_vector_t * api_vector_new(int size);
+API void api_vector_destroy(vector_t *vector);
+API int api_vector_size(vector_t *vector);
+API int api_vector_length(vector_t *vector);
+API void * api_vector_get(vector_t *vector, int index);
+API void * api_vector_set(vector_t *vector, int index, void *elem);
+API void   api_vector_push(vector_t *vector, void *elem);
+API void * api_vector_pop(vector_t *vector);
+API void api_vector_resize(vector_t *vector);
 
 #ifdef __cplusplus
 }
