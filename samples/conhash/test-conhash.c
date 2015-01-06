@@ -14,9 +14,10 @@ static void server_get (api_conhash_vnode_t *vnode, void *data)
 	api_snprintf(name, sizeof(name), "%V", &vnode->hnode->name);
 	printf("node = [%s]\n", name);
 }
-static int str_sort(const char *s1, const char *s2)
+
+static int str_sort(const void *s1, const void *s2)
 {
-	return strcmp(s1, s2);
+	return strcmp(*(char **)s1, *(char **)s2);
 }
 
 int main(int argc, char* argv[])
@@ -36,22 +37,6 @@ int main(int argc, char* argv[])
 		api_conhash_add_node(conhash, serverId, api_strlen(serverId), NULL);
 	}
 
-#if 0
-	char* uri = "/videos/v/20110926/205763500/205763500/1/f3a89defde4e580e4058149e9059d1d4.ts";
-	int len = strlen(uri);
-	struct node_s* findp = conhash_lookup(conhashp, uri, len);
-	fprintf(stdout, "find [%d][%s] by %s\n", findp->index, findp->iden, uri);
-
-	uri = "/videos/v/20110926/205763500/205763500/2/c59965f441f474c6b0dfbe36232bd614.ts";
-	len = strlen(uri);
-    findp = conhash_lookup(conhashp, uri, len);       
-    fprintf(stdout, "find [%d][%s] by %s\n", findp->index, findp->iden, uri);  
-
-	uri = "abcdefsdfgdsaklj";
-	len = strlen(uri);
-    findp = conhash_lookup(conhashp, uri, len);       
-    fprintf(stdout, "find [%d][%s] by %s\n", findp->index, findp->iden, uri);
-#endif
 	
 	//char serverId[100];
 	api_vector_t *slist = api_vector_new(1);
