@@ -58,6 +58,7 @@ void api_vector_remove(api_vector_t *vector, int index)
 		if(index + 1 < vector->population) {
 			memmove(vector->storage + index, vector->storage + index + 1, sizeof(void *) * (vector->population - index - 1));
 		}
+		// step 2
 		api_vector_pop(vector);
 	}
 }
