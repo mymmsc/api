@@ -43,7 +43,7 @@ extern "C" {
     typedef LONG            atomic_int_t;
 #elif defined(API_OS_WIN64)
     typedef LONG64          atomic_int_t;
-#elif define(API_OS_APPLE)
+#elif defined(API_OS_APPLE)
 	typedef int64_t         atomic_int_t;
 #else
     typedef long            atomic_int_t;
