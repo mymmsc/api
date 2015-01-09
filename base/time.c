@@ -5,7 +5,6 @@
 static atomic_t have_realtime = -1;
 static atomic_t have_monotonic = -1;
 
-
 /// @brief A wrapper for getting the current time.
 /// @returns The current time.
 static struct timespec snap_time(void)
@@ -33,11 +32,11 @@ static double get_elapsed(struct timespec t1, struct timespec t2)
 #define ORWL_NANO (+1.0E-9)
 #define ORWL_GIGA UINT64_C(1000000000)
 
-static double orwl_timebase = 0.0;
-static uint64_t orwl_timestart = 0;
-
-struct timespec orwl_gettime(void) {
+struct timespec clock_gettime(void) {
 	// be more careful in a multithreaded environement
+	static double orwl_timebase = 0.0;
+	static uint64_t orwl_timestart = 0;
+	
 	if (!orwl_timestart) {
 		mach_timebase_info_data_t tb = { 0 };
 		mach_timebase_info(&tb);
@@ -45,6 +44,7 @@ struct timespec orwl_gettime(void) {
 		orwl_timebase /= tb.denom;
 		orwl_timestart = mach_absolute_time();
 	}
+	
 	struct timespec t;
 	double diff = (mach_absolute_time() - orwl_timestart) * orwl_timebase;
 	t.tv_sec = diff * ORWL_NANO;
