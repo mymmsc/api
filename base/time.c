@@ -251,6 +251,7 @@ api_status_t api_time_exp_gmt_get(api_time_t *t,
         *t -= (api_time_t) xt->tm_gmtoff * API_USEC_PER_SEC;
     return status;
 }
+
 void api_sleep(api_interval_time_t t)
 {
 #ifdef OS2
