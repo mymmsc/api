@@ -55,12 +55,14 @@
 
 
 #if (API_HAVE_POLL)
+#error "Mac OS X use POLL ???"
 #include <poll.h>
 #endif
 
 
 #if (API_HAVE_KQUEUE)
 #include <sys/event.h>
+#error "Mac OS X use KQUEUE ???"
 #endif
 
 

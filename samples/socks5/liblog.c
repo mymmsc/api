@@ -26,7 +26,11 @@ static const UINT8 g_debug_str[8][8] = {
     "UNDEF",
 };
 
+#ifdef PTHREAD_MUTEX_RECURSIVE_NP
 static CS_T g_log_cs = PTHREAD_RECURSIVE_MUTEX_INITIALIZER_NP;
+#else
+static CS_T g_log_cs;
+#endif
 static FILE *g_logfile = NULL;
 static UINT64 g_dlevel = LEVEL_INFORM;
 static UINT32 g_range_srart = 0;
@@ -172,7 +176,7 @@ INT32 liblog_log(UINT64 mode, char *format, ...)
         time_t t = time(NULL);
 
         localtime_r(&t, &ptm);
-        strftime(cur_time, 128, "[%H:%M:%S %Y-%m-%d] ",&ptm);
+        strftime((char *)cur_time, 128, "[%H:%M:%S %Y-%m-%d] ",&ptm);
         fprintf(stdout, "%s", cur_time);
         fprintf(g_logfile, "%s", cur_time);
     

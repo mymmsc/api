@@ -899,6 +899,7 @@ char * api_ultoa(char *buf, const api_uint32_t val, const api_int32_t base, cons
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////
+#if 0
 #if API_HAVE_ICONV
 
 int api_iconv(const char* from_code, const char* from, const char* to_code, char* to, size_t iLength)
@@ -1009,7 +1010,7 @@ int U2A(char *strDestination, const char *strSource, int nLength)
 	nLength = api_iconv("ucs-2be", (char*)strSource, "gb2312", strDestination, nLength);
 	return nLength;
 }
-
+#endif
 //////////////////////////////////////////////////////////////////////////////////////////
 
 static char * api_os_locale_encoding (void)

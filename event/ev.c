@@ -480,7 +480,7 @@ struct signalfd_siginfo
  * This value is good at least till the year 4000.
  */
 #define MIN_INTERVAL  0.0001220703125 /* 1/2**13, good till 4000 */
-/*#define MIN_INTERVAL  0.00000095367431640625 /* 1/2**20, good till 2200 */
+//#define MIN_INTERVAL  0.00000095367431640625 /* 1/2**20, good till 2200 */
 
 #define MIN_TIMEJUMP  1. /* minimum timejump that gets detected (if monotonic clock available) */
 #define MAX_BLOCKTIME 59.743 /* never wait longer than this time (to detect time jumps) */
@@ -1135,7 +1135,7 @@ fd_kill (EV_P_ int fd)
   while ((w = (ev_io *)anfds [fd].head))
     {
       ev_io_stop (EV_A_ w);
-      ev_feed_event (EV_A_ (W)w, EV_ERROR | EV_READ | EV_WRITE);
+      ev_feed_event (EV_A_ (W)w, EV_kERROR | EV_READ | EV_WRITE);
     }
 }
 
@@ -3943,7 +3943,7 @@ ev_once (EV_P_ int fd, int events, ev_tstamp timeout, void (*cb)(int revents, vo
 
   if (expect_false (!once))
     {
-      cb (EV_ERROR | EV_READ | EV_WRITE | EV_TIMER, arg);
+      cb (EV_kERROR | EV_READ | EV_WRITE | EV_TIMER, arg);
       return;
     }
 

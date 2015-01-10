@@ -4,7 +4,11 @@ INT32 CS_INIT(CS_T *cs)
 {
 	pthread_mutexattr_t attr;
 	pthread_mutexattr_init(&attr);
+	#ifdef PTHREAD_MUTEX_RECURSIVE_NP
 	pthread_mutexattr_settype(&attr,PTHREAD_MUTEX_RECURSIVE_NP);
+	#else
+	pthread_mutexattr_settype(&attr,PTHREAD_MUTEX_RECURSIVE);
+	#endif
 	return pthread_mutex_init(cs,&attr);
 }
 

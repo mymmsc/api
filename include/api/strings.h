@@ -304,12 +304,13 @@ API int api_url_decode(char *buf, const char *str);
 
 API char * api_ultoa(char *buf, const api_uint32_t val, const api_int32_t base, const api_int32_t bitlen);
 
+#if 0
 API int api_iconv(const char *from_code, const char *from, const char *to_code, char *to, size_t iLength);
 
 API int A2U(char *strDestination, const char *strSource, int nLength);
 
 API int U2A(char *strDestination, const char *strSource, int nLength);
-
+#endif
 API const char * api_locale_encoding(void);
 
 API const char * api_filename_path_get(char *path, size_t size, const char *filename);

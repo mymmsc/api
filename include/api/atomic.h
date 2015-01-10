@@ -108,7 +108,10 @@ API void api_spinlock(atomic_t *lock, atomic_int_t value, uint32_t spin);
 
 #if API_HAVE_PTHREAD_YIELD
 #define api_sched_yield()  sched_yield()
+#elif API_HAVE_NANOSLEEP
+#define api_sched_yield()  {struct timespec slptm = {0, 100}; nanosleep(&slptm, NULL);}
 #else
+#include <unistd.h> // for usleep
 #define api_sched_yield()  uleep(1)
 #endif
 

@@ -57,6 +57,7 @@ void * fun2(void * arg)
         return 0;
 }
 
+#if 0
 pthread_spinlock_t splock;
 
 void * fun3(void * arg)
@@ -76,7 +77,7 @@ void * fun3(void * arg)
         printf("thread:%d over, lock:%d\n",id, lock);
         return 0;
 }
-
+#endif
 int N = 20;
 int main(int c, char * s[])
 {
@@ -103,8 +104,12 @@ int main(int c, char * s[])
         pthread_t id[N];
         int args[N];
         int i = 0;
+#if 0
         void * (*fun[])(void*) = { fun1,fun2,fun3};
         pthread_spin_init(&splock,0);
+#else
+        void * (*fun[])(void*) = { fun1,fun2};
+#endif
         NR = TOTAL / N;
 
         for(;i<N;++i){

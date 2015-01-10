@@ -218,7 +218,7 @@ static INT32 socks5_srv_init(UINT16 port, INT32 backlog)
         return R_ERROR;
     }
     #ifdef SO_NOSIGPIPE 
-    if (-1 == setsockopt(listen_sock, SOL_SOCKET, SO_NOSIGPIPE, &opt, sizeof(opt)))
+    if (-1 == setsockopt(sockfd, SOL_SOCKET, SO_NOSIGPIPE, &opt, sizeof(opt)))
     {
         PRINTF(LEVEL_ERROR, "setsockopt SO_NOSIGPIPE fail.\n");
         return R_ERROR;
