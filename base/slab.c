@@ -34,20 +34,6 @@
 #endif
 
 
-#if (API_DEBUG_MALLOC)
-
-#define api_slab_junk(p, size)     api_memset(p, 0xA5, size)
-
-#elif (API_HAVE_DEBUG_MALLOC)
-
-#define api_slab_junk(p, size)     if (api_debug_malloc)  api_memset(p, 0xA5, size)
-
-#else
-
-#define api_slab_junk(p, size)
-
-#endif
-
 static api_slab_page_t *api_slab_alloc_pages(api_slab_pool_t *pool,
     api_uint_t pages);
 static void api_slab_free_pages(api_slab_pool_t *pool, api_slab_page_t *page,
@@ -80,8 +66,6 @@ static void slab_init(api_slab_pool_t *pool)
 
     p = (uint8_t *) pool + sizeof(api_slab_pool_t);
     size = pool->end - p;
-
-    api_slab_junk(p, size);
 
     slots = (api_slab_page_t *) p;
     n = api_pagesize_shift - pool->min_shift;

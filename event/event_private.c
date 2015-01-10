@@ -44,7 +44,7 @@
 #ifdef EV_EVENT_H
 # include EV_EVENT_H
 #else
-# include "event_private.h"
+# include "event.h"
 #endif
 
 #if EV_MULTIPLICITY

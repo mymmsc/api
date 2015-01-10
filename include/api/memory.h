@@ -5,6 +5,7 @@
 #include "api/lib.h"
 
 //------------------------------< memory align >------------------------------
+#if 0
 
 #ifndef API_BSD
 #  ifndef API_WIN32 // Linux
@@ -21,6 +22,8 @@
 #  include <stdlib.h>		// for malloc
 #  define allocAlignedMem(bytes)       malloc(bytes)
 #  define freeAlignedMem(buff)         free(buff)
+#endif
+
 #endif
 
 #define api_memmove(a,b,c)     memmove((a),(b),(c))

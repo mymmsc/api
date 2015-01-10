@@ -66,7 +66,6 @@
 #endif
 
 #include <string.h>
-#include <assert.h>
 
 static void
 select_modify (EV_P_ int fd, int oev, int nev)

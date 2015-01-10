@@ -274,6 +274,8 @@ typedef int status_t;
 /** 64位网络字节需转换 */
 #ifndef HTONLL_DEFINED
 #define HTONLL_DEFINED
+#undef htonll
+#undef ntohll
 #define htonll(num) ((api_uint64_t)(htonl((api_uint32_t)(num))) << 32) + htonl((api_uint32_t)((num) >> 32))
 #define ntohll(num) ((api_uint64_t)(ntohl((api_uint32_t)(num))) << 32) + ntohl((api_uint32_t)((num) >> 32))
 #endif

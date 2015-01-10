@@ -982,7 +982,7 @@ AC_CONFIG_FILES(Makefile \
                 event/Makefile \
                 compat/Makefile \
                 samples/Makefile \
-				samples/conhash/Makefile \
+                samples/conhash/Makefile \
                 samples/socks5/Makefile \
                 test/Makefile \
                 libapi.pc )

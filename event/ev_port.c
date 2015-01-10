@@ -54,7 +54,6 @@
 #include <port.h>
 #include <string.h>
 #include <errno.h>
-#include <assert.h>
 
 void inline_speed
 port_associate_and_check (EV_P_ int fd, int ev)

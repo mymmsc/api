@@ -38,7 +38,6 @@
  */
 
 #include <poll.h>
-#include <assert.h>
 
 void inline_size
 pollidx_init (int *base, int count)

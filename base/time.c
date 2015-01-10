@@ -5,15 +5,6 @@
 static atomic_t have_realtime = -1;
 static atomic_t have_monotonic = -1;
 
-/// @brief A wrapper for getting the current time.
-/// @returns The current time.
-static struct timespec snap_time(void)
-{
-    struct timespec t;
-    clock_gettime(CLOCK_REALTIME, &t);
-    return t;
-}
-
 /// @brief Calculates the time difference between two struct timespecs
 /// @param t1 The first time.
 /// @param t2 The second time.
@@ -32,7 +23,7 @@ static double get_elapsed(struct timespec t1, struct timespec t2)
 #define ORWL_NANO (+1.0E-9)
 #define ORWL_GIGA UINT64_C(1000000000)
 
-struct timespec clock_gettime(void) {
+static api_status_t clock_gettime2(struct timespec *ts) {
 	// be more careful in a multithreaded environement
 	static double orwl_timebase = 0.0;
 	static uint64_t orwl_timestart = 0;
@@ -45,11 +36,10 @@ struct timespec clock_gettime(void) {
 		orwl_timestart = mach_absolute_time();
 	}
 	
-	struct timespec t;
 	double diff = (mach_absolute_time() - orwl_timestart) * orwl_timebase;
-	t.tv_sec = diff * ORWL_NANO;
-	t.tv_nsec = diff - (t.tv_sec * ORWL_GIGA);
-	return t;
+	ts->tv_sec = diff * ORWL_NANO;
+	ts->tv_nsec = diff - (ts->tv_sec * ORWL_GIGA);
+	return API_SUCCESS;
 }
 
 #endif
@@ -70,12 +60,14 @@ api_time_t api_tickcount(void)
     {
         curTime = (api_time_t)((curTime * 1000000.0F) / (freq * 1.0F));
     }
- else
-#endif
-	{
-		status_t rc = 0;
-		struct timespec ts;
-		
+#else
+    {
+        status_t rc = 0;
+        struct timespec ts;    
+    #ifdef API_APPLE
+        rc = clock_gettime2(&ts);
+        curTime = ts.tv_sec * API_USEC_PER_SEC + ts.tv_nsec / 1000;
+    #else //API_LINUX
 		if(have_realtime != 0) {
 			rc = 1;
 		}
@@ -89,10 +81,12 @@ api_time_t api_tickcount(void)
 				rc = 1;
 			}
 		}
+    #endif
 		if(rc) {
 			curTime = api_time_now();
 		}
 	}
+#endif
  	
     return curTime;
 }
