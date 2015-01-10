@@ -585,8 +585,6 @@ api_slab_free_locked(api_slab_pool_t *pool, void *p)
 
         api_slab_free_pages(pool, &pool->pages[n], size);
 
-        api_slab_junk(p, size << api_pagesize_shift);
-
         return;
     }
 
@@ -595,8 +593,6 @@ api_slab_free_locked(api_slab_pool_t *pool, void *p)
     return;
 
 done:
-
-    api_slab_junk(p, size);
 
     return;
 
