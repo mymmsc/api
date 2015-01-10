@@ -490,6 +490,7 @@ struct signalfd_siginfo
 
 /* the following is ecb.h embedded into libev - use update_ev_c to update from an external copy */
 /* ECB.H BEGIN */
+#include "ecb.h"
 /* ECB.H END */
 
 #if ECB_MEMORY_FENCE_NEEDS_PTHREADS
