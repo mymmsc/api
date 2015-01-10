@@ -2,7 +2,7 @@
 
 noinst_LTLIBRARIES  = libevent.la
 
-libevent_la_SOURCES = ev.c event.c \
+libevent_la_SOURCES = ev.c \
 					  asio.c
 
 
