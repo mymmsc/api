@@ -24,6 +24,13 @@ int main(int argc, char* argv[])
 {
 	api_init();
 	int rc = 0;
+	{
+		char s1[1024];
+		memset(s1, 0x00, sizeof(s1));
+		strcpy(s1, "log path is <${MSF_LOGS}>-<${MSF_LOGS}>${MSF_RUNTIME}");
+		api_strfilter(s1, NULL, NULL);
+		printf("s1 = [%s]\n", s1);
+	}
 	api_conhash_t *conhash = calloc(1, sizeof(api_conhash_t));
 	rc = api_conhash_init(conhash, API_SIZE_FROM_MB(32), 100);
 	do_assert(rc == API_SUCCESS);
@@ -34,7 +41,7 @@ int main(int argc, char* argv[])
 		memset(serverId, 0x00, sizeof(serverId));
 		snprintf(serverId, sizeof(serverId), "10.1.15.1%d", index);
 		printf(">>>>>>>>>>>>>>>>>>>>>>>>>>> %s\n", serverId);
-		api_conhash_add_node(conhash, serverId, api_strlen(serverId), NULL);
+		api_conhash_add_node(conhash, (uint8_t *)serverId, api_strlen(serverId), NULL);
 	}
 
 	
@@ -48,7 +55,7 @@ int main(int argc, char* argv[])
 		str = strdup(serverId);
 		api_vector_push(slist, str);
 		printf("cookie: [%s]\t", serverId);
-		api_conhash_lookup_node(conhash, serverId, api_strlen(serverId), server_get, NULL);
+		api_conhash_lookup_node(conhash, (uint8_t *)serverId, api_strlen(serverId), server_get, NULL);
 	}
 	printf("----------------------------------------------------------------\n");
 	api_vector_sort(slist, (int (*) (const void *, const void *)) str_sort);
@@ -63,7 +70,7 @@ int main(int argc, char* argv[])
 	{
 		memset(serverId, 0x00, sizeof(serverId));
 		snprintf(serverId, sizeof(serverId), "10.1.15.1%d", index + 2);
-		api_conhash_del_node(conhash, serverId, api_strlen(serverId));
+		api_conhash_del_node(conhash, (uint8_t *)serverId, api_strlen(serverId));
 	}
 	printf("----------------------------------------------------------------\n");
 	for(index = 0; index < 10; index++)
@@ -71,7 +78,7 @@ int main(int argc, char* argv[])
 		memset(serverId, 0x00, sizeof(serverId));
 		snprintf(serverId, sizeof(serverId), "cookie:%d", index);
 		printf("cookie: [%s]\t", serverId);
-		api_conhash_lookup_node(conhash, serverId, api_strlen(serverId), server_get, NULL);
+		api_conhash_lookup_node(conhash, (uint8_t *)serverId, api_strlen(serverId), server_get, NULL);
 	}
 	printf("----------------------------------------------------------------\n");
 	api_safefree(conhash);

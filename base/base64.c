@@ -131,7 +131,7 @@ int api_base64_encode_length(int len)
 
 int api_base64_encode(char *encoded, const char *string, int len)
 {
-    return api_base64_encode_internal((uint8_t *)encoded, (const uint8_t *) string, len, kBase64EncodeChars, 1);
+    return api_base64_encode_internal((uint8_t *)encoded, (const uint8_t *) string, len, (const uint8_t *) kBase64EncodeChars, 1);
 }
 
 /* This is the same as api_base64_encode() except on EBCDIC machines, where

@@ -194,7 +194,7 @@ api_conhash_init(api_conhash_t *conhash, size_t size, api_int_t vnode_cnt)
         return API_ERROR;
     }
 
-    api_snprintf(conhash->shpool->log_ctx, len, " in conhash zone \"%V\"",
+    api_snprintf((char *)conhash->shpool->log_ctx, len, " in conhash zone \"%V\"",
                 &conhash->shm.name);
     
     
@@ -513,9 +513,8 @@ api_conhash_make_vnode_name(api_conhash_t *conhash, api_str_t *name,
         }
     }
     
-    int len = api_snprintf(name->data, name->len + 1, "%V-%04ui", &(hnode->name), index);
-	//printf("vnode-name=[%d:%s]\n", index, name->data);
-    name->data[len] = 0x00;
+    int len = api_snprintf((char *)name->data, name->len + 1, "%V-%04ui", &(hnode->name), index);
+	name->data[len] = 0x00;
 	
     return API_SUCCESS;
 }
