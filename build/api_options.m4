@@ -22,7 +22,7 @@ if test "$GCC" = "yes" || test "$GCC" = "egcs"; then
 	API_CHECK_CFLAG_COMPILE([-Wformat-security])
 	API_CHECK_CFLAG_COMPILE([-Wsizeof-pointer-memaccess])
 	API_CHECK_CFLAG_COMPILE([-Wpointer-sign],     [-Wno-pointer-sign])
-	API_CHECK_CFLAG_COMPILE([-Wunused-parameter], [-Wno-unused-parameter])
+	#API_CHECK_CFLAG_COMPILE([-Wunused-parameter], [-Wno-unused-parameter])
 	API_CHECK_CFLAG_COMPILE([-Wunused-result],    [-Wno-unused-result])
 	API_CHECK_CFLAG_COMPILE([-fno-strict-aliasing])
 	API_CHECK_CFLAG_COMPILE([-D_FORTIFY_SOURCE=2])
