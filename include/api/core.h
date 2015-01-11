@@ -24,6 +24,7 @@ API void api_init(void);
 
 #define api_getpid   getpid
 
+API status_t api_exec_path_get(char *path, size_t size);
 
 #ifdef __cplusplus
 }

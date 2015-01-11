@@ -274,3 +274,25 @@ void api_init(void)
 	fprintf(stdout, "cpu number:%d pagesize:%d pagezie_shift:%d cacheline_size:%d\n", 
 		api_ncpu, api_pagesize, api_pagesize_shift, api_cacheline_size);
 }
+
+#ifdef API_APPLE
+#include  <mach-o/dyld.h>
+#elif defined(API_WINDOWS)
+#else
+#include <unistd.h>
+#endif
+
+status_t api_exec_path_get(char *path, size_t size)
+{
+    status_t iRet = API_EBADPATH;
+#ifdef API_APPLE
+    _NSGetExecutablePath(path, &size);
+    *(path + size) = 0x00;
+#elif defined(API_WINDOWS)
+#else // *nix
+    int size = readlink("/proc/self/exe", path, size);
+    *(path + size) = 0x00;
+#endif
+    iRet = API_SUCCESS;
+    return iRet;
+}
