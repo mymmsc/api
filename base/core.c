@@ -66,7 +66,7 @@ api_cpuid(uint32_t i, uint32_t *buf)
 void
 api_cpuinfo(void)
 {
-    uint8_t *vendor;
+    uint8_t *vendor = NULL;
     uint32_t vbuf[5], cpu[4], model;
 	
     vbuf[0] = 0;
@@ -85,7 +85,7 @@ api_cpuinfo(void)
 	
     api_cpuid(1, cpu);
 	
-    if (strcmp(vendor, "GenuineIntel") == 0) {
+    if (api_strcmp(vendor, "GenuineIntel") == 0) {
         switch ((cpu[0] & 0xf00) >> 8) {
         /* Pentium */
         case 5:
@@ -108,7 +108,7 @@ api_cpuinfo(void)
             api_cacheline_size = 128;
             break;
         }
-    } else if (strcmp(vendor, "AuthenticAMD") == 0) {
+    } else if (api_strcmp((const char *)vendor, "AuthenticAMD") == 0) {
         api_cacheline_size = 64;
     }
 }
@@ -286,7 +286,7 @@ status_t api_realpath_get(char *path, size_t size)
 {
     status_t iRet = API_EBADPATH;
 #ifdef API_APPLE
-    if(_NSGetExecutablePath(path, &size) == 0) {
+    if(_NSGetExecutablePath(path, (uint32_t *)&size) == 0) {
         iRet = API_SUCCESS;
     }
 #elif defined(API_WINDOWS)

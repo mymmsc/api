@@ -92,6 +92,9 @@ int strncasecmp(const char *a, const char *b, size_t n);
 
 #define api_strlen(s) ((s) == NULL ? 0 : strlen(s))
 
+#define api_strcmp(s1, s2)        strcmp((const char *)s1, (const char *)s2)
+#define api_strncmp(s1, s2, size) strncmp((const char *)s1, (const char *)s2, size)
+
 /**
  * Do a natural order comparison of two strings.
  * @param a The first string to compare
@@ -268,7 +271,15 @@ API char * api_strfsize(api_off_t size, char *buf);
 
 //////////////////////////////////////////////////////////////////////////////////////////
 
+/**
+ * %%needle%%
+ */
 API char * api_str2rep(char *src, char * (*value_cb)(api_str_t *key, void *, size_t *), void *data);
+
+/**
+ * ${needle}
+ */
+API char * api_strfilter(char *src, char * (*value_cb)(api_str_t *key, void *, size_t *), void *data);
 
 API char * api_strtolc(char *str);
 

@@ -492,7 +492,100 @@ char * api_str2rep(char *haystack, char * (*value_cb)(api_str_t *key, void *, si
 			}	
 		}
 	}
-	return haystack;	
+	return haystack;
+}
+
+
+static char *filter_env(api_str_t *key, void *data, size_t *size)
+{
+    char *sRet = NULL;
+    char env_key[128];
+    size_t len = sizeof(env_key);
+    memset(env_key, 0x00, len);
+    api_snprintf(env_key, len, "%V", key);
+    sRet = getenv(env_key);
+    *size = api_strlen(sRet);
+    return sRet;
+}
+
+char * api_strfilter(char *haystack, char * (*value_cb)(api_str_t *key, void *, size_t *), void *data)
+{
+    int i = 0, j = 0;
+    size_t len = api_strlen(haystack);
+    
+    if(value_cb == NULL) {
+        value_cb = filter_env;
+    }
+
+    if(len <= 4) {
+        return haystack;
+    } else {
+        const char *str = haystack;
+        char *p = NULL;
+        int flag = 0;
+        int fp = 0; // prefix
+        int fs = 0; // suffix
+        byte_t ch;
+        p = haystack;
+        api_str_t key = api_null_string;
+        for(i = 0; i < len; i++) {
+            //printf("%d: %c\n", i, ch);
+            ch = haystack[i];
+            if(ch == '$') {
+                flag = 1;
+                fp = 1;
+                continue;
+            }
+            //printf("%d: %c\n", i, ch);
+            switch(ch) {
+            case '{':
+                if(flag != 1) {
+                    flag = 0;
+                    fp = 0;
+                    continue;
+                }
+                fp = 2;
+                flag = 2;
+                key.data = (uint8_t *)haystack + i + 1;
+                key.len = 0;
+                break;
+            case '}':
+                if(flag != 2) {
+                    flag = 0;
+                    fp = 0;
+                    continue;
+                }
+                fs = 1;
+                flag = 0;
+                {
+                    //printf("----------------------------------------------\n");
+                    size_t vlen = 0;
+                    //printf("key = [%s]\n", key.data);
+                    char *value = value_cb(&key, data, &vlen);
+                    if(value != NULL && vlen > 0) {
+                        int nPoint = p - haystack;
+                        int nNeedle = key.len + 3;
+                        //printf("find: pos=%d, needle=%d, vlen=%d\n", nPoint, nNeedle, vlen);
+                        memmove(haystack + (nPoint + vlen), p + nNeedle, len - nPoint - 1);
+                        memcpy(haystack + nPoint, value, vlen);
+                        *(haystack + len + (vlen - nNeedle)) = 0x00;
+                        p += vlen;
+                        i += vlen - nNeedle;
+                        len += vlen - nNeedle;
+                    }
+                }
+                break;
+            default:
+                if(flag == 2) {
+                    key.len++;
+                } else {
+                    *p++ = ch;
+                }
+                break;
+            }
+        }
+    }
+    return haystack;
 }
 
 char * api_strtolc(char *str)
