@@ -1471,7 +1471,7 @@ char * api_distill(char *buf, const char *str, const char *prefix, const char *s
  */
 api_uint32_t api_split(char ***buf, const char *str, const char *spliter)
 {
-    const char *src = str;
+    char *src = (char *)str;
     char *q = NULL;
     char *s = NULL;
     int argc = 0;

@@ -1010,7 +1010,7 @@ int api_vformatter(int (*flush_func)(api_vformatter_buff_t *),
                 api_str_t *vs = NULL;
                 vs = va_arg(ap, api_str_t *);
                 if (vs != NULL) {
-                    s = vs->data;
+                    s = (char *)vs->data;
 					s_len = vs->len;
                     if (adjust_precision && precision < s_len) {
                         s_len = precision;
