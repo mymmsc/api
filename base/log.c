@@ -39,7 +39,7 @@ static char      g_log_path[1024];
 #ifdef _WIN32
 static const char *log_path_default = "/runtime/logs/";
 #elif defined(API_APPLE)
-static const char *log_path_default = "/Users/wangfeng/runtime/logs/"
+static const char *log_path_default = "/Users/wangfeng/runtime/logs/";
 #else
 static const char *log_path_default = "/home/runtime/logs/";
 #endif
