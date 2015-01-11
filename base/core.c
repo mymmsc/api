@@ -282,7 +282,7 @@ void api_init(void)
 #include <unistd.h>
 #endif
 
-status_t api_exec_path_get(char *path, size_t size)
+status_t api_realpath_get(char *path, size_t size)
 {
     status_t iRet = API_EBADPATH;
 #ifdef API_APPLE
