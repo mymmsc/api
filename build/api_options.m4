@@ -27,7 +27,7 @@ if test "$GCC" = "yes" || test "$GCC" = "egcs"; then
 	API_CHECK_CFLAG_COMPILE([-D_FORTIFY_SOURCE=2])
 	API_CHECK_CFLAG_COMPILE([-Wmissing-prototypes])
 	API_CHECK_CFLAG_COMPILE([-Wstrict-prototypes])
-	API_CHECK_CFLAG_COMPILE([-Wmissing-declarations])
+	#API_CHECK_CFLAG_COMPILE([-Wmissing-declarations])
     if test "x$use_toolchain_hardening" = "x1"; then
 	API_CHECK_LDFLAG_LINK([-Wl,-z,relro])
 	API_CHECK_LDFLAG_LINK([-Wl,-z,now])
