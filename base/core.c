@@ -286,13 +286,19 @@ status_t api_exec_path_get(char *path, size_t size)
 {
     status_t iRet = API_EBADPATH;
 #ifdef API_APPLE
-    _NSGetExecutablePath(path, &size);
-    *(path + size) = 0x00;
+    if(_NSGetExecutablePath(path, &size) == 0) {
+        iRet = API_SUCCESS;
+    }
 #elif defined(API_WINDOWS)
 #else // *nix
-    int size = readlink("/proc/self/exe", path, size);
-    *(path + size) = 0x00;
+    int len = readlink("/proc/self/exe", path, size);
+    if(len > 0) {
+        iRet = API_SUCCESS;
+        size = len;
+    }
 #endif
-    iRet = API_SUCCESS;
+    if(iRet == API_SUCCESS) {
+        path[size] = 0x00;
+    }
     return iRet;
 }
