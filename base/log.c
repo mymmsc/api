@@ -267,7 +267,7 @@ int api_log_core(log_level_e level, const char *fmt, va_list args)
 			strcat(msgbuf, "\r\n");
 			size_t ms = api_strlen(msgbuf);
 			iRet = write(log->fd, msgbuf, ms);
-			log->size + ms;
+			log->size += ms;
 		}
 	}
 	return iRet;

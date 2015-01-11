@@ -49,6 +49,7 @@ status_t api_cache_close(api_cache_t *cache)
 		}
 	}
 	api_safefree(cache);
+	return iRet;
 }
 
 status_t api_cache_offset(void **addr, api_cache_t *cache, int64_t offset)
