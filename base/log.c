@@ -37,9 +37,11 @@ static api_log_t g_logger[16];
 static char      g_log_path[1024];
 
 #ifdef _WIN32
-static const char *log_path_default = "/runtime/logs/bid/";
+static const char *log_path_default = "/runtime/logs/";
+#elif defined(API_APPLE)
+static const char *log_path_default = "/Users/wangfeng/runtime/logs/"
 #else
-static const char *log_path_default = "/home/runtime/logs/bid/";
+static const char *log_path_default = "/home/runtime/logs/";
 #endif
 
 static const char *fmt_trace = "%s(%d) : %s: ";
