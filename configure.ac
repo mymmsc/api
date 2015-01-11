@@ -162,6 +162,7 @@ nl='
 '
 API_CONFIGURE_PART([Check for compiler flags...])
 sinclude(build/api_cflags.m4)
+sinclude(build/api_options.m4)
 
 dnl ----------------------------- Check event options
 API_CONFIGURE_PART([Checking event options])
