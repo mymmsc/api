@@ -15,7 +15,7 @@ if test "$GCC" = "yes" || test "$GCC" = "egcs"; then
     #API_CHECK_CFLAG_COMPILE([-pipe])
 	#API_CHECK_CFLAG_COMPILE([-W])
 	API_CHECK_CFLAG_COMPILE([-Wall])
-	API_CHECK_CFLAG_COMPILE([-Werror])
+	#API_CHECK_CFLAG_COMPILE([-Werror])
 	API_CHECK_CFLAG_COMPILE([-Qunused-arguments])
 	API_CHECK_CFLAG_COMPILE([-Wunknown-warning-option])
 	API_CHECK_CFLAG_COMPILE([-Wpointer-arith])
@@ -29,24 +29,24 @@ if test "$GCC" = "yes" || test "$GCC" = "egcs"; then
 	API_CHECK_CFLAG_COMPILE([-D_FORTIFY_SOURCE=2])
 
 	API_CHECK_CFLAG_COMPILE([-Wdisable-optimization])
-	#API_CHECK_CFLAG_COMPILE([-Wunused-parameter], [-Wno-unused-parameter])
+	API_CHECK_CFLAG_COMPILE([-Wunused-parameter], [-Wno-unused-parameter])
 	#API_CHECK_CFLAG_COMPILE([-Wno-unused-parameter])
 	# 当函数在使用前没有函数原型时
-	#API_CHECK_CFLAG_COMPILE([-Wmissing-prototypes])
+	API_CHECK_CFLAG_COMPILE([-Wmissing-prototypes])
 	# 如果函数的声明或定义没有指出参数类型，编译器就发出警告。很有用的警告。
-	#API_CHECK_CFLAG_COMPILE([-Wstrict-prototypes])
-	#API_CHECK_CFLAG_COMPILE([-Wmissing-declarations])
+	API_CHECK_CFLAG_COMPILE([-Wstrict-prototypes])
+	API_CHECK_CFLAG_COMPILE([-Wmissing-declarations])
 	
-    if test "x$use_toolchain_hardening" = "x1"; then
-	API_CHECK_LDFLAG_LINK([-Wl,-z,relro])
-	API_CHECK_LDFLAG_LINK([-Wl,-z,now])
-	API_CHECK_LDFLAG_LINK([-Wl,-z,noexecstack])
-	# NB. -ftrapv expects certain support functions to be present in
-	# the compiler library (libgcc or similar) to detect integer operations
-	# that can overflow. We must check that the result of enabling it
-	# actually links. The test program compiled/linked includes a number
-	# of integer operations that should exercise this.
-	API_CHECK_CFLAG_LINK([-ftrapv])
+	if test "x$use_toolchain_hardening" = "x1"; then
+		API_CHECK_LDFLAG_LINK([-Wl,-z,relro])
+		API_CHECK_LDFLAG_LINK([-Wl,-z,now])
+		API_CHECK_LDFLAG_LINK([-Wl,-z,noexecstack])
+		# NB. -ftrapv expects certain support functions to be present in
+		# the compiler library (libgcc or similar) to detect integer operations
+		# that can overflow. We must check that the result of enabling it
+		# actually links. The test program compiled/linked includes a number
+		# of integer operations that should exercise this.
+		API_CHECK_CFLAG_LINK([-ftrapv])
     fi
 	AC_MSG_CHECKING([gcc version])
 	GCC_VER=`$CC -v 2>&1 | $AWK '/gcc version /{print $3}'`
