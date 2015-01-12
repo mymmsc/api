@@ -28,6 +28,7 @@ status_t api_cache_open(api_cache_t **cache, const char *filename, size_t size)
 			(*cache)->size = offset;
 			(*cache)->fd = fd;
 			(*cache)->mm = mm;
+			rc = API_SUCCESS;
     	}
 	}
 	return rc;
