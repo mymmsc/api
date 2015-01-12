@@ -18,7 +18,7 @@ status_t api_cache_open(api_cache_t **cache, const char *filename, size_t size)
 	} else {
 		int64_t offset = size;
 		//offset = API_ALIGN(size, API_SIZE_FROM_KB(4))
-		ftruncate(fd, offset);
+		(void)ftruncate(fd, offset);
 		void *mm = mmap(NULL, offset, PROT_READ|PROT_WRITE, MAP_SHARED, fd, 0);
 		if (mm == (void *)-1) {
         	rc = errno;
