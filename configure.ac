@@ -158,11 +158,8 @@ AC_ARG_ENABLE([libapi-install],
 AM_CONDITIONAL([INSTALL_LIBAPI], [test "$enable_libapi_install" = "yes"])
 
 dnl ----------------------------- Checks for compiler flags
-nl='
-'
 API_CONFIGURE_PART([Check for compiler flags...])
 sinclude(build/api_cflags.m4)
-sinclude(build/api_options.m4)
 
 dnl ----------------------------- Check event options
 API_CONFIGURE_PART([Checking event options])
@@ -963,6 +960,9 @@ API_ADDTO(LIBS, [$API_LIBS])
 
 AC_SUBST(LDFLAGS)
 
+dnl ----------------------------- Checks for compiler flags expansion
+API_CONFIGURE_PART([Check for compiler flags expansion...])
+sinclude(build/api_options.m4)
 
 dnl ----------------------------- Configure options
 API_CONFIGURE_PART([Configure options])
