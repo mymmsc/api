@@ -30,7 +30,7 @@ static INT32 g_state = SOCKS5_STATE_PREPARE;
 static int g_sockfd = 0;
 static socks5_cfg_t g_cfg = {0};
 
-static asio_t *g_asio = NULL; 
+static api_asio_t *g_asio = NULL; 
 static io_watcher_t *g_iw_accept = NULL;
 
 static void help();
@@ -69,7 +69,7 @@ int main(int argc, char **argv)
 
     g_state = SOCKS5_STATE_RUNNING;
 
-    g_asio = asio_init();
+    g_asio = api_asio_init();
     // 初始化,这里监听了io事件,写法参考官方文档的
 	g_iw_accept = io_watcher_new(g_asio);
 	io_watcher_add(g_iw_accept, g_sockfd, accept_cb, AE_READ, NULL);
@@ -178,7 +178,7 @@ static void signal_func(int sig)
         case SIGINT:
         case SIGTERM:
             io_watcher_stop(g_iw_accept, 1);
-			asio_destory(g_asio);
+			api_asio_destory(g_asio);
             g_state = SOCKS5_STATE_STOP;
             PRINTF(LEVEL_INFORM, "signal [%d], exit.\n", sig);
             exit(0);
