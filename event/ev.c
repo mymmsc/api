@@ -1477,7 +1477,7 @@ pipecb (EV_P_ ev_io *iow, int revents)
       if (evpipe [0] < 0)
         {
           uint64_t counter;
-          read (evpipe [1], &counter, sizeof (uint64_t));
+          unused_result = read (evpipe [1], &counter, sizeof (uint64_t));
         }
       else
 #endif
@@ -1489,9 +1489,9 @@ pipecb (EV_P_ ev_io *iow, int revents)
           DWORD flags = 0;
           buf.buf = dummy;
           buf.len = sizeof (dummy);
-          WSARecv (EV_FD_TO_WIN32_HANDLE (evpipe [0]), &buf, 1, &recvd, &flags, 0, 0);
+          unused_result = WSARecv (EV_FD_TO_WIN32_HANDLE (evpipe [0]), &buf, 1, &recvd, &flags, 0, 0);
 #else
-          read (evpipe [0], &dummy, sizeof (dummy));
+          unused_result = read (evpipe [0], &dummy, sizeof (dummy));
 #endif
         }
     }

@@ -107,8 +107,8 @@ epoll_modify (EV_P_ int fd, int oev, int nev)
     }
   else if (expect_true (errno == EEXIST))
     {
-      /* EEXIST means we ignored a previous DEL, but the fd is still active */
-      /* if the kernel mask is the same as the new mask, we assume it hasn't changed */
+      /* EEXIST means we ignored a previous DEL, but the fd is still active
+         if the kernel mask is the same as the new mask, we assume it hasn't changed */
       if (oldmask == nev)
         goto dec_egen;
 
