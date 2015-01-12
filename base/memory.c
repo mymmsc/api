@@ -24,6 +24,8 @@ void api_freep(void *arg)
     *ptr = NULL;
 }
 
+#if 0
+
 #define DEF_OPT_FLAG_NONE   0
 #define DEF_OPT_FLAG_NOPT   1
 
@@ -327,6 +329,7 @@ void *_memcpy(void *to, const void *from, size_t len)
     return (nmemcpy(to, from, len));  
 }
 
+#endif
 //----------------< Memory Pool >----------------
 
 static void *api_palloc_block(api_pool_t *pool, size_t size);

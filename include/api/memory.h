@@ -91,12 +91,13 @@ extern "C" {
 API void* api_mallocz(size_t size);
 API void api_freep(void *arg);
 
+#if 0
 extern void *(* nmemcpy)(void *to, const void *from, size_t len);
 API void *sse_memcpy_32(void *to, const void *from, size_t len);
 API void *sse_memcpy_64(void *to, const void *from, size_t len);
 API void *mmx_memcpy_32(void *to, const void *from, size_t len);
 API void *mmx_memcpy_64(void *to, const void *from, size_t len);
-
+#endif
 
 //------------------------------< memory pool >------------------------------
 typedef struct pool_struct        api_pool_t;
