@@ -73,7 +73,7 @@ int main(int argc, char **argv)
     // 初始化,这里监听了io事件,写法参考官方文档的
 	g_iw_accept = io_watcher_new(g_asio);
 	io_watcher_add(g_iw_accept, g_sockfd, accept_cb, AE_READ, NULL);
-	asio_loop(g_asio); 
+	api_asio_loop(g_asio); 
 
     PRINTF(LEVEL_INFORM, "time to exit.\n");
     socks5_srv_exit(g_sockfd);
