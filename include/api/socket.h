@@ -7,7 +7,11 @@
 extern "C" {
 #endif
 
+#ifdef API_WINDOWS
+typedef SOCKET socket_t;
+#else
 typedef int socket_t;
+#endif
 
 API int api_tcp_nopush(socket_t s);
 API int api_tcp_push(socket_t s);
