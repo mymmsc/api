@@ -284,7 +284,7 @@ api_buffer_t * api_buffer_move(api_buffer_t *b, int from, int to)
 {
 	api_buffer_t *new_buff = NULL;
 	api_size_t old_size = b->size;
-	api_size_t old_used = b->used;
+	//api_size_t old_used = b->used;
  	
 	if (!b || from == to) {
 		new_buff = b;
