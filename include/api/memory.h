@@ -139,7 +139,7 @@ struct pool_struct {
     //api_log_t            *log;
 };
 
-
+API void * api_memalign(size_t alignment, size_t size);
 API api_pool_t *api_create_pool(size_t size);
 API void api_destroy_pool(api_pool_t *pool);
 API void api_reset_pool(api_pool_t *pool);
