@@ -282,30 +282,30 @@ int api_buffer_to_upper(api_buffer_t *b)
 
 api_buffer_t * api_buffer_move(api_buffer_t *b, int from, int to)
 {
- api_buffer_t *new_buff = NULL;
- api_size_t old_size = b->size;
- api_size_t old_used = b->used;
- 
- if (!b || from == to) {
-  new_buff = b;
- } else {
-  b->size -= (from - to);
-  b->used = b->size;
-  if (from > to) {
-   memmove(b->ptr + to, b->ptr + from, old_size - from);
-   // 缓冲区变小
-   b->ptr = realloc(b->ptr, b->size);
-  } else if (from < to) {
-   // 缓冲区变大
-   b->ptr = realloc(b->ptr, b->size);
-   memmove(b->ptr + to, b->ptr + from, old_size - from);
-   // 空白区域清零
-   memset(b->ptr + from, 0x00, to - from);
-  }
-  new_buff = b;
- }
- 
- return new_buff;
+	api_buffer_t *new_buff = NULL;
+	api_size_t old_size = b->size;
+	api_size_t old_used = b->used;
+ 	
+	if (!b || from == to) {
+		new_buff = b;
+	} else {
+		b->size -= (from - to);
+		b->used = b->size;
+  		if (from > to) {
+			memmove(b->ptr + to, b->ptr + from, old_size - from);
+			// 缓冲区变小
+			b->ptr = realloc(b->ptr, b->size);
+		} else if (from < to) {
+			// 缓冲区变大
+			b->ptr = realloc(b->ptr, b->size);
+			memmove(b->ptr + to, b->ptr + from, old_size - from);
+			// 空白区域清零
+			memset(b->ptr + from, 0x00, to - from);
+		}
+		new_buff = b;
+	}
+ 	
+	return new_buff;
 }
 
 int api_buffer_memcpy(api_buffer_t *b, const void *s, api_size_t s_len)
