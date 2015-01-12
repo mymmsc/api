@@ -2,9 +2,11 @@
 
 pid_t    api_pid = -1;
 uint32_t api_ncpu = 0;
-uint32_t api_pagesize;
-uint32_t api_pagesize_shift;
-uint32_t api_cacheline_size;
+uint32_t api_pagesize = 0;
+uint32_t api_pagesize_shift = 0;
+uint32_t api_cacheline_size = 0;
+
+int unused_result = -1;
 
 #if (( __i386__ || __amd64__ ) && ( __GNUC__ || __INTEL_COMPILER ))
 

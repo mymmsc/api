@@ -35,6 +35,9 @@ extern "C" {
  * @{
  */
 
+/** for -Werror */
+extern int unused_result;
+
 /** A constant representing a 'large' string. */
 #define HUGE_STRING_LEN 8192
 
