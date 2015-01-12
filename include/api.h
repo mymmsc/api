@@ -289,6 +289,9 @@ typedef intptr_t        api_flag_t;
 #include <api/memwatch.h>
 #endif
 
+/** for -Werror */
+extern int unused_result;
+
 #ifdef __cplusplus
 }
 #endif
