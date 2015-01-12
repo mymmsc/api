@@ -812,10 +812,7 @@ typedef struct
   #include "ev_wrap.h"
 
   static struct ev_loop default_loop_struct;
-  #ifdef EV_API_STATIC
-  EV_API_DECL 
-  #endif
-  struct ev_loop *ev_default_loop_ptr = 0; /* needs to be initialised to make it a definition despite extern */ 
+  EV_API_DECL struct ev_loop *ev_default_loop_ptr = 0; /* needs to be initialised to make it a definition despite extern */
 
 #else
 
@@ -924,7 +921,7 @@ array_nextsize (int elem, int cur, int cnt)
   while (cnt > ncur);
 
   /* if size is large, round to MALLOC_ROUND - 4 * longs to accommodate malloc overhead */
-  if (elem * ncur > (int)(MALLOC_ROUND - sizeof (void *) * 4))
+  if (elem * ncur > MALLOC_ROUND - sizeof (void *) * 4)
     {
       ncur *= elem;
       ncur = (ncur + elem + (MALLOC_ROUND - 1) + sizeof (void *) * 4) & ~(MALLOC_ROUND - 1);
@@ -1444,7 +1441,7 @@ evpipe_write (EV_P_ EV_ATOMIC_T *flag)
       if (evpipe [0] < 0)
         {
           uint64_t counter = 1;
-		  unused_result = write (evpipe [1], &counter, sizeof (uint64_t));
+          (void) write (evpipe [1], &counter, sizeof (uint64_t));
         }
       else
 #endif
@@ -1456,7 +1453,7 @@ evpipe_write (EV_P_ EV_ATOMIC_T *flag)
           buf.len = 1;
           WSASend (EV_FD_TO_WIN32_HANDLE (evpipe [1]), &buf, 1, &sent, 0, 0, 0);
 #else
-          unused_result = write (evpipe [1], &(evpipe [1]), 1);
+          write (evpipe [1], &(evpipe [1]), 1);
 #endif
         }
 
@@ -1477,7 +1474,7 @@ pipecb (EV_P_ ev_io *iow, int revents)
       if (evpipe [0] < 0)
         {
           uint64_t counter;
-          unused_result = read (evpipe [1], &counter, sizeof (uint64_t));
+          read (evpipe [1], &counter, sizeof (uint64_t));
         }
       else
 #endif
@@ -1489,9 +1486,9 @@ pipecb (EV_P_ ev_io *iow, int revents)
           DWORD flags = 0;
           buf.buf = dummy;
           buf.len = sizeof (dummy);
-          unused_result = WSARecv (EV_FD_TO_WIN32_HANDLE (evpipe [0]), &buf, 1, &recvd, &flags, 0, 0);
+          WSARecv (EV_FD_TO_WIN32_HANDLE (evpipe [0]), &buf, 1, &recvd, &flags, 0, 0);
 #else
-          unused_result = read (evpipe [0], &dummy, sizeof (dummy));
+          read (evpipe [0], &dummy, sizeof (dummy));
 #endif
         }
     }
