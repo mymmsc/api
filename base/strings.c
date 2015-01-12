@@ -925,7 +925,7 @@ int api_url_encode(char *buf, const char *str)
 
 int api_url_decode(char *buf, const char *str)
 {
-    static char blank[] = "";
+    //static char blank[] = "";
     
     if (!buf || !str)
     {
