@@ -32,16 +32,16 @@ enum {
   AE_ERROR    = (int)0x80000000  /* sent when an error occurs */
 };
 
-typedef struct asio_struct asio_t;
+typedef struct asio_struct api_asio_t;
 typedef struct io_watcher_struct io_watcher_t;
 
 typedef int (*ae_callback)(io_watcher_t *watcher, int revents, void *context);
 
-API asio_t *asio_init(void);
-API void asio_destory(asio_t *asio);
-API void asio_loop(asio_t *asio);
+API api_asio_t *api_asio_init(void);
+API void api_asio_destory(api_asio_t *asio);
+API void api_asio_loop(api_asio_t *asio);
 
-API io_watcher_t *io_watcher_new(asio_t *asio);
+API io_watcher_t *io_watcher_new(api_asio_t *asio);
 API void io_watcher_free(io_watcher_t *watcher);
 API int io_watcher_fd(io_watcher_t *watcher);
 API void io_watcher_add(io_watcher_t *watcher, int fd, ae_callback cb, int revents, void *owner);

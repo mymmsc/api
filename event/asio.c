@@ -19,12 +19,12 @@ struct io_watcher_struct
 	void           *owner;
 };
 
-asio_t *asio_init(void)
+api_asio_t *api_asio_init(void)
 {
-	asio_t *asio = NULL;
+	api_asio_t *asio = NULL;
 	struct ev_loop *loop = ev_default_loop(0);
 	if(loop != NULL) {
-		asio = (asio_t *)malloc(sizeof(asio_t));
+		asio = (api_asio_t *)malloc(sizeof(api_asio_t));
 		if(asio != NULL) {
 			ZERO_STRUCTP(asio);
 			asio->loop = loop;
@@ -33,7 +33,7 @@ asio_t *asio_init(void)
 	return asio;
 }
 
-void asio_destory(asio_t *asio)
+void api_asio_destory(api_asio_t *asio)
 {
 	if(asio != NULL) {
 		if(asio->loop != NULL) {
@@ -45,7 +45,7 @@ void asio_destory(asio_t *asio)
 	}
 }
 
-void asio_loop(asio_t *asio)
+void api_asio_loop(api_asio_t *asio)
 {
 	ev_loop(asio->loop, 0);
 }
@@ -60,7 +60,7 @@ static void read_cb(struct ev_loop *loop, struct ev_io *watcher, int revents)
 	}
 }
 
-io_watcher_t *io_watcher_new(asio_t *asio)
+io_watcher_t *io_watcher_new(api_asio_t *asio)
 {
 	io_watcher_t *watcher = (io_watcher_t *)malloc(sizeof(io_watcher_t));
 	if(watcher != NULL) {
@@ -118,5 +118,4 @@ void io_watcher_stop(io_watcher_t *watcher, int toClose)
 		}
 	}
 }
-
 
