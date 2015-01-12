@@ -7,9 +7,11 @@
 extern "C" {
 #endif
 
-#define LF     (unsigned char) '\n'
-#define CR     (unsigned char) '\r'
-#define CRLF   "\r\n"
+#ifndef LF
+# define LF     (unsigned char) '\n'
+# define CR     (unsigned char) '\r'
+# define CRLF   "\r\n"
+#endif
 
 extern uint32_t api_pagesize;
 extern uint32_t api_pagesize_shift;
