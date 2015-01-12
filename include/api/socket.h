@@ -9,6 +9,9 @@ extern "C" {
 
 typedef int socket_t;
 
+API int api_tcp_nopush(socket_t s);
+API int api_tcp_push(socket_t s);
+
 #ifdef __cplusplus
 }
 #endif
