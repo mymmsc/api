@@ -5,6 +5,7 @@
 static atomic_t have_realtime = -1;
 static atomic_t have_monotonic = -1;
 
+#if 0
 /// @brief Calculates the time difference between two struct timespecs
 /// @param t1 The first time.
 /// @param t2 The second time.
@@ -15,6 +16,7 @@ static double get_elapsed(struct timespec t1, struct timespec t2)
     double ft2 = t2.tv_sec + ((double)t2.tv_nsec / 1000000000.0);
     return ft2 - ft1;
 }
+#endif
 
 #ifdef API_APPLE
 
