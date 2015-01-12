@@ -436,7 +436,7 @@ char * api_str2rep(char *haystack, char * (*value_cb)(api_str_t *key, void *, si
 		byte_t ch;
 		p = haystack;
 		api_str_t key = api_null_string;
-		for(i = 0; i < len; i++) {
+		for(i = 0; i < (int)len; i++) {
 			//printf("%d: %c\n", i, ch);
 			ch = haystack[i];
 			//printf("%d: %c\n", i, ch);
