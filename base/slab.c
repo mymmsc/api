@@ -116,7 +116,7 @@ api_slab_pool_t *api_slab_init(void *addr, size_t size)
 		
 		pool->addr = addr;
 		pool->min_shift = 3;
-		pool->end = addr + (api_uint_t)size;
+		pool->end = (char *)addr + size;
 		if (api_shmtx_create(&pool->mutex, &pool->lock) == API_SUCCESS) {
         	slab_init(pool);
 		}
