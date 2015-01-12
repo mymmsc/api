@@ -26,8 +26,9 @@ if test "$GCC" = "yes" || test "$GCC" = "egcs"; then
 	API_CHECK_CFLAG_COMPILE([-fno-strict-aliasing])
 	API_CHECK_CFLAG_COMPILE([-D_FORTIFY_SOURCE=2])
 
-  API_CHECK_CFLAG_COMPILE([-Wdisable-optimization])
+	API_CHECK_CFLAG_COMPILE([-Wdisable-optimization])
 	API_CHECK_CFLAG_COMPILE([-Wunused-parameter], [-Wno-unused-parameter])
+	API_CHECK_CFLAG_COMPILE([-Wno-unused-parameter])
 	# 当函数在使用前没有函数原型时
 	API_CHECK_CFLAG_COMPILE([-Wmissing-prototypes])
 	# 如果函数的声明或定义没有指出参数类型，编译器就发出警告。很有用的警告。
