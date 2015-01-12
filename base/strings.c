@@ -425,7 +425,7 @@ static char ascii_from_hex(char c)
 //////////////////////////////////////////////////////////////////////////////////////////
 char * api_str2rep(char *haystack, char * (*value_cb)(api_str_t *key, void *, size_t *), void *data)
 {
-	int i = 0, j = 0;
+	int i = 0;//, j = 0;
 	size_t len = api_strlen(haystack);
 
 	if(len <= 4) {
