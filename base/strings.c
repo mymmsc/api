@@ -520,7 +520,7 @@ char * api_strfilter(char *haystack, char * (*value_cb)(api_str_t *key, void *, 
     if(len <= 4) {
         return haystack;
     } else {
-        char *str = haystack;
+        //char *str = haystack;
         char *p = NULL;
         int flag = 0;
         int fp = 0; // prefix
