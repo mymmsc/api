@@ -34,7 +34,7 @@ if test "$GCC" = "yes" || test "$GCC" = "egcs"; then
 	# 当函数在使用前没有函数原型时
 	#API_CHECK_CFLAG_COMPILE([-Wmissing-prototypes])
 	# 如果函数的声明或定义没有指出参数类型，编译器就发出警告。很有用的警告。
-	API_CHECK_CFLAG_COMPILE([-Wstrict-prototypes])
+	#API_CHECK_CFLAG_COMPILE([-Wstrict-prototypes])
 	#API_CHECK_CFLAG_COMPILE([-Wmissing-declarations])
 	
     if test "x$use_toolchain_hardening" = "x1"; then
