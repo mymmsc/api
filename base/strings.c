@@ -510,7 +510,7 @@ static char *filter_env(api_str_t *key, void *data, size_t *size)
 
 char * api_strfilter(char *haystack, char * (*value_cb)(api_str_t *key, void *, size_t *), void *data)
 {
-    int i = 0, j = 0;
+    int i = 0;//, j = 0;
     size_t len = api_strlen(haystack);
     
     if(value_cb == NULL) {
@@ -520,7 +520,7 @@ char * api_strfilter(char *haystack, char * (*value_cb)(api_str_t *key, void *, 
     if(len <= 4) {
         return haystack;
     } else {
-        const char *str = haystack;
+        char *str = haystack;
         char *p = NULL;
         int flag = 0;
         int fp = 0; // prefix
@@ -528,7 +528,7 @@ char * api_strfilter(char *haystack, char * (*value_cb)(api_str_t *key, void *, 
         byte_t ch;
         p = haystack;
         api_str_t key = api_null_string;
-        for(i = 0; i < len; i++) {
+        for(i = 0; i < (int)len; i++) {
             //printf("%d: %c\n", i, ch);
             ch = haystack[i];
             if(ch == '$') {
