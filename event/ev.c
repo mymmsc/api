@@ -37,6 +37,10 @@
  * either the BSD or the GPL.
  */
 
+#if defined(__APPLE__) && defined(__clang__)
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+#endif
+
 /* this big block deduces configuration from config.h */
 
 #ifndef EV_STANDALONE
