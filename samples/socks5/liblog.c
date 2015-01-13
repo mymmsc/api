@@ -37,7 +37,7 @@ static UINT32 g_range_srart = 0;
 static UINT32 g_range_end = -1;
 //static UINT64 g_dlevel = LEVEL_DEBUG;
 
-static INT32 log_init()
+static INT32 log_init(void)
 {
     UINT8 *log_file_path;
     UINT8 *log_path;
