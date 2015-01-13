@@ -33,7 +33,7 @@ INT32 get_cfg_from_file(char *key, char *value, INT32 value_len, char *cfg_path)
         return R_ERROR;
     }
 
-    while (((int)read = getline(&line, &len, fp)) != -1) {
+    while (((ssize_t)read = getline(&line, &len, fp)) != -1) {
         PRINTF(LEVEL_DEBUG, "%d:[%s]\n", read, line);
 
         real_line = line;
