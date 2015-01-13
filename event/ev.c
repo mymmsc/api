@@ -47,8 +47,8 @@
 # endif
 
 #if __GNUC__
-#pragma GCC diagnostic ignored "-Wunused-value, -Wunused-result"
-#pragma GCC system_header
+#pragma GCC diagnostic ignored "-W<unused-value, unused-result>"
+//#pragma GCC system_header
 #endif
 
 # if HAVE_FLOOR
