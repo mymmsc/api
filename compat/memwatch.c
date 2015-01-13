@@ -857,7 +857,7 @@ static int mwARI(const char *estr)
     char inbuf[81];
     int c;
     fprintf(mwSTDERR, "\n%s\nMEMWATCH: Abort, Retry or Ignore? ", estr);
-    (void) fgets(inbuf,sizeof(inbuf),stdin);
+    unused_result = fgets(inbuf,sizeof(inbuf),stdin);
     for(c=0; inbuf[c] && inbuf[c] <= ' '; c++) ;
     c = inbuf[c];
     if(c == 'R' || c == 'r') {
