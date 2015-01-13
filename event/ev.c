@@ -40,7 +40,8 @@
 /* this big block deduces configuration from config.h */
 
 #if __GNUC__
-#pragma  GCC diagnostic ignored  "-Wunused-value -Wunused_result"
+#pragma GCC diagnostic ignored "-Wunused-value"
+#pragma GCC diagnostic ignored "-Wunused_result"
 #endif
 
 #ifndef EV_STANDALONE
@@ -4090,7 +4091,8 @@ ev_walk (EV_P_ int types, void (*cb)(EV_P_ int type, void *w)) EV_THROW
 #endif
 
 #if __GNUC__
-#pragma  GCC diagnostic warning  "-Wunused-value -Wunused_result"
+#pragma GCC diagnostic warning "-Wunused-value"
+#pragma GCC diagnostic warning "-Wunused_result"
 #endif
 
 #if EV_MULTIPLICITY
