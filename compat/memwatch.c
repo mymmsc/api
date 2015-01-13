@@ -854,10 +854,11 @@ API_DECLARE_NONSTD(void *) mwUnmark(void *p, const char *file, unsigned line)
 
 static int mwARI(const char *estr)
 {
+	char *unused_chars = NULL;
     char inbuf[81];
     int c;
     fprintf(mwSTDERR, "\n%s\nMEMWATCH: Abort, Retry or Ignore? ", estr);
-    unused_result = fgets(inbuf,sizeof(inbuf),stdin);
+    unused_chars = fgets(inbuf, sizeof(inbuf), stdin);
     for(c=0; inbuf[c] && inbuf[c] <= ' '; c++) ;
     c = inbuf[c];
     if(c == 'R' || c == 'r') {
