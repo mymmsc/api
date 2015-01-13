@@ -47,8 +47,10 @@
 # endif
 
 #if __GNUC__
+#pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wunused-value"
-#pragma GCC diagnostic ignored "-Wunused"
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunused-result"
 #endif
 
 # if HAVE_FLOOR
