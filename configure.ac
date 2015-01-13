@@ -963,6 +963,7 @@ AC_SUBST(LDFLAGS)
 dnl ----------------------------- Checks for compiler flags expansion
 API_CONFIGURE_PART([Check for compiler flags expansion...])
 sinclude(build/api_options.m4)
+API_ADDTO(CFLAGS, [-W -Wextra])
 
 dnl ----------------------------- Configure options
 API_CONFIGURE_PART([Configure options])

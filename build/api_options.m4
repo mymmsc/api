@@ -14,8 +14,8 @@ CFLAGS="$saved_CFLAGS"
 if test "$GCC" = "yes" || test "$GCC" = "egcs"; then
     #API_CHECK_CFLAG_COMPILE([-pipe])
 	API_CHECK_CFLAG_COMPILE([-Wall])
-	API_CHECK_CFLAG_COMPILE([-W])
-	API_CHECK_CFLAG_COMPILE([-Wextra])
+	#API_CHECK_CFLAG_COMPILE([-W])
+	#API_CHECK_CFLAG_COMPILE([-Wextra])
 	#API_CHECK_CFLAG_COMPILE([-Werror])
 	API_CHECK_CFLAG_COMPILE([-Qunused-arguments])
 	API_CHECK_CFLAG_COMPILE([-Wunknown-warning-option])
