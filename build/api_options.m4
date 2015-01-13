@@ -21,7 +21,7 @@ if test "$GCC" = "yes" || test "$GCC" = "egcs"; then
 	API_CHECK_CFLAG_COMPILE([-Wunknown-warning-option])
 	API_CHECK_CFLAG_COMPILE([-Wpointer-arith])
 	API_CHECK_CFLAG_COMPILE([-Wuninitialized])
-	API_CHECK_CFLAG_COMPILE([-Wsign-compare])
+	#API_CHECK_CFLAG_COMPILE([-Wsign-compare])
 	API_CHECK_CFLAG_COMPILE([-Wformat-security])
 	API_CHECK_CFLAG_COMPILE([-Wsizeof-pointer-memaccess])
 	API_CHECK_CFLAG_COMPILE([-Wpointer-sign], [-Wno-pointer-sign])
