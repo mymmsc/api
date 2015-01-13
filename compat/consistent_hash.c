@@ -154,10 +154,10 @@ api_conhash_clear(api_conhash_t *conhash)
 api_status_t 
 api_conhash_init(api_conhash_t *conhash, size_t size, api_int_t vnode_cnt)
 {
-	api_conhash_ctx_t *conhash_ctx = NULL;
+	//api_conhash_ctx_t *conhash_ctx = NULL;
 	
-	api_str_t          name, *value, s;
-    api_conhash_t          **conhash_p;
+	//api_str_t          name, *value, s;
+    //api_conhash_t          **conhash_p;
     
     if (conhash == NULL) {
         return API_ERROR;
