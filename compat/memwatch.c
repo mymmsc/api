@@ -2108,7 +2108,8 @@ static void mwWrite(const char *format, ...)
 
 static void mwVerbose(const char *format, ...)
 {
-    int tot, oflow = 0;
+    int tot;
+	//int oflow = 0;
     va_list mark;
     mwAutoInit();
     va_start(mark, format);
