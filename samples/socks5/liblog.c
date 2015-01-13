@@ -111,6 +111,7 @@ _err:
 INT32 liblog_level(UINT64 level)
 {
     g_dlevel =  ((UINT64)level<<LEVEL_POS) & LEVEL_MASK;
+	return 0;
 }
 
 void liblog_range(UINT32 start, UINT32 end)
