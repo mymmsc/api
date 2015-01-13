@@ -47,9 +47,9 @@
 # endif
 
 #if __GNUC__
-#pragma GCC diagnostic ignored "-Wunused-value"
+#pragma GCC diagnostic ignored "-Wunused"
 
-#pragma GCC diagnostic ignored "-Wunused-result"
+//#pragma GCC diagnostic ignored "-Wunused-result"
 //#pragma GCC system_header
 #endif
 
@@ -4097,6 +4097,7 @@ ev_walk (EV_P_ int types, void (*cb)(EV_P_ int type, void *w)) EV_THROW
 #endif
 
 #if __GNUC__
-#pragma GCC diagnostic warning "-Wunused-value, -Wunused-result"
+#pragma GCC diagnostic warning "-Wunused"
+//#pragma GCC diagnostic warning "-Wunused-value, -Wunused-result"
 #endif
 
