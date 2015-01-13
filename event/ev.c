@@ -47,10 +47,7 @@
 # endif
 
 #if __GNUC__
-#pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wunused-value"
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wunused-result"
 #endif
 
 # if HAVE_FLOOR
@@ -4098,6 +4095,5 @@ ev_walk (EV_P_ int types, void (*cb)(EV_P_ int type, void *w)) EV_THROW
 
 #if __GNUC__
 #pragma GCC diagnostic warning "-Wunused-value"
-#pragma GCC diagnostic warning "-Wunused"
 #endif
 
