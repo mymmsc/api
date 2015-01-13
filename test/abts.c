@@ -424,7 +424,7 @@ int main(int argc, const char *const argv[]) {
         }
     }
     
-    for (i = 0; i < (sizeof(alltests) / sizeof(struct testlist *)); i++) {
+    for (i = 0; i < (int)(sizeof(alltests) / sizeof(struct testlist *)); i++) {
         suite = alltests[i].func(suite);
     }
     
