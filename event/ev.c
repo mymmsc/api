@@ -39,17 +39,17 @@
 
 /* this big block deduces configuration from config.h */
 
-#if __GNUC__
-#pragma GCC diagnostic ignored "-Wunused-value"
-#pragma GCC diagnostic ignored "-Wunused_result"
-#endif
-
 #ifndef EV_STANDALONE
 # ifdef EV_CONFIG_H
 #  include EV_CONFIG_H
 # else
 #  include "api_private.h"
 # endif
+
+#if __GNUC__
+#pragma GCC diagnostic ignored "-Wunused-value"
+#pragma GCC diagnostic ignored "-Wunused_result"
+#endif
 
 # if HAVE_FLOOR
 #  ifndef EV_USE_FLOOR
@@ -4090,12 +4090,12 @@ ev_walk (EV_P_ int types, void (*cb)(EV_P_ int type, void *w)) EV_THROW
 }
 #endif
 
-#if __GNUC__
-#pragma GCC diagnostic warning "-Wunused-value"
-#pragma GCC diagnostic warning "-Wunused_result"
-#endif
-
 #if EV_MULTIPLICITY
   #include "ev_wrap.h"
+#endif
+
+#if __GNUC__
+#pragma GCC diagnostic warning "-Wunused-value"
+#pragma GCC diagnostic warning "-Wunused-result"
 #endif
 
