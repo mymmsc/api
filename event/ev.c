@@ -38,6 +38,11 @@
  */
 
 /* this big block deduces configuration from config.h */
+
+#if __GNUC__
+#pragma  GCC diagnostic ignored  "-Wunused-value"
+#endif
+
 #ifndef EV_STANDALONE
 # ifdef EV_CONFIG_H
 #  include EV_CONFIG_H
@@ -4082,6 +4087,10 @@ ev_walk (EV_P_ int types, void (*cb)(EV_P_ int type, void *w)) EV_THROW
 // EV_STAT     0x00001000 /* stat data changed */
 // EV_EMBED    0x00010000 /* embedded event loop needs sweep */
 }
+#endif
+
+#if __GNUC__
+#pragma  GCC diagnostic warning  "-Wunused-value"
 #endif
 
 #if EV_MULTIPLICITY
