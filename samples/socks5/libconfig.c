@@ -17,7 +17,7 @@ INT32 get_cfg_from_file(char *key, char *value, INT32 value_len, char *cfg_path)
     char *real_line = NULL;
     char *tmp = NULL;
     size_t len = 0;
-    size_t read;
+    int read;
 
     if (NULL == key || NULL == value || 0 == value_len || NULL == cfg_path)
     {
@@ -33,7 +33,7 @@ INT32 get_cfg_from_file(char *key, char *value, INT32 value_len, char *cfg_path)
         return R_ERROR;
     }
 
-    while (((ssize_t)read = getline(&line, &len, fp)) != -1) {
+    while ((read = getline(&line, &len, fp)) != -1) {
         PRINTF(LEVEL_DEBUG, "%d:[%s]\n", read, line);
 
         real_line = line;
