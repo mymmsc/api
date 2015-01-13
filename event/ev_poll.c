@@ -39,9 +39,11 @@
 
 #include <poll.h>
 
+#if 0
 #if __GNUC__
 #pragma GCC diagnostic ignored "-Wunused-value"
 #pragma GCC diagnostic ignored "-Wunused_result"
+#endif
 #endif
 
 void inline_size
@@ -151,7 +153,9 @@ poll_destroy (EV_P)
   ev_free (polls);
 }
 
+#if 0
 #if __GNUC__
 #pragma GCC diagnostic warning "-Wunused-value"
 #pragma GCC diagnostic warning "-Wunused_result"
+#endif
 #endif
