@@ -19,7 +19,7 @@ int DELAY_CNT = 100;
 static uint32_t bar = 13; 
 static uint32_t *foo = &bar;
 
-void * fun1(void * arg)
+static void * fun1(void * arg)
 {
         int i = 0, id = *(int*)arg;
         printf("thread:%d\n",id);
@@ -37,9 +37,9 @@ void * fun1(void * arg)
         return 0;
 }
 
-pthread_mutex_t mlock = PTHREAD_MUTEX_INITIALIZER;
+static pthread_mutex_t mlock = PTHREAD_MUTEX_INITIALIZER;
 
-void * fun2(void * arg)
+static void * fun2(void * arg)
 {
         int i = 0, id = *(int*)arg;
         printf("thread:%d\n",id);
