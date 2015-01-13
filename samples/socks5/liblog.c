@@ -130,7 +130,7 @@ UINT32 liblog_range_end(void)
 
 INT32 liblog_log(UINT64 mode, char *format, ...)
 {
-    INT8        str[1024] = {0};
+    //INT8        str[1024] = {0};
     UINT64      dlevel = -1;
     va_list     arg;
 
