@@ -33,12 +33,12 @@ static socks5_cfg_t g_cfg = {0};
 static api_asio_t *g_asio = NULL; 
 static io_watcher_t *g_iw_accept = NULL;
 
-static void help();
+static void help(void);
 static INT32 check_para(int argc, char **argv);
 // signal信号回调函数
 static void signal_func(int sig);
 // singal信号注册初始化
-static void signal_init();
+static void signal_init(void);
 
 static INT32 socks5_srv_init(UINT16 port, INT32 backlog);
 static INT32 socks5_srv_exit(int sockfd);
@@ -81,7 +81,7 @@ int main(int argc, char **argv)
     return 0;
 }
 
-static void help()
+static void help(void)
 {
     printf("Usage: socks5 [options]\n");
     printf("Options:\n");
@@ -151,7 +151,7 @@ static INT32 check_para(int argc, char **argv)
     return R_OK;
 }
 
-static void signal_init()
+static void signal_init(void)
 {
     int sig;
 

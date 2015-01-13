@@ -56,8 +56,8 @@
 INT32 liblog_log(UINT64 mode, char *format, ...);
 
 void liblog_range(UINT32 start, UINT32 end);
-UINT32 liblog_range_start();
-UINT32 liblog_range_end();
+UINT32 liblog_range_start(void);
+UINT32 liblog_range_end(void);
 INT32 liblog_level(UINT64 level);
 
 /*#define PRINTF(mode, format, ...) \

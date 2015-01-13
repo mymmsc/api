@@ -119,11 +119,11 @@ void liblog_range(UINT32 start, UINT32 end)
     g_range_end = end;
 }
 
-UINT32 liblog_range_start()
+UINT32 liblog_range_start(void)
 {
     return g_range_srart;
 }
-UINT32 liblog_range_end()
+UINT32 liblog_range_end(void)
 {
     return g_range_end;
 }
