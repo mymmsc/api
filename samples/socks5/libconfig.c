@@ -1,4 +1,7 @@
+#ifndef _GNU_SOURCE
 #define _GNU_SOURCE
+#endif
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
@@ -30,7 +33,7 @@ INT32 get_cfg_from_file(char *key, char *value, INT32 value_len, char *cfg_path)
         return R_ERROR;
     }
 
-    while ((read = getline(&line, &len, fp)) != -1) {
+    while (((int)read = getline(&line, &len, fp)) != -1) {
         PRINTF(LEVEL_DEBUG, "%d:[%s]\n", read, line);
 
         real_line = line;
