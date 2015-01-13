@@ -47,7 +47,9 @@
 # endif
 
 #if __GNUC__
-#pragma GCC diagnostic ignored "-Wunused-value" ignored "-Wunused-result"
+#pragma GCC diagnostic ignored "-Wunused-value"
+
+#pragma GCC diagnostic ignored "-Wunused-result"
 //#pragma GCC system_header
 #endif
 
