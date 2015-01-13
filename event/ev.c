@@ -46,13 +46,6 @@
 #  include "api_private.h"
 # endif
 
-#if __GNUC__
-#pragma GCC diagnostic ignored "-Wunused-value"
-
-//#pragma GCC diagnostic ignored "-Wunused-result"
-//#pragma GCC system_header
-#endif
-
 # if HAVE_FLOOR
 #  ifndef EV_USE_FLOOR
 #   define EV_USE_FLOOR 1
@@ -4094,10 +4087,5 @@ ev_walk (EV_P_ int types, void (*cb)(EV_P_ int type, void *w)) EV_THROW
 
 #if EV_MULTIPLICITY
   #include "ev_wrap.h"
-#endif
-
-#if __GNUC__
-#pragma GCC diagnostic warning "-Wunused-value"
-//#pragma GCC diagnostic warning "-Wunused-value, -Wunused-result"
 #endif
 
