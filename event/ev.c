@@ -1445,7 +1445,7 @@ evpipe_write (EV_P_ EV_ATOMIC_T *flag)
       if (evpipe [0] < 0)
         {
           uint64_t counter = 1;
-          (void) write (evpipe [1], &counter, sizeof (uint64_t));
+          unused_result = write (evpipe [1], &counter, sizeof (uint64_t));
         }
       else
 #endif
@@ -1457,7 +1457,7 @@ evpipe_write (EV_P_ EV_ATOMIC_T *flag)
           buf.len = 1;
           WSASend (EV_FD_TO_WIN32_HANDLE (evpipe [1]), &buf, 1, &sent, 0, 0, 0);
 #else
-          write (evpipe [1], &(evpipe [1]), 1);
+          unused_result = write (evpipe [1], &(evpipe [1]), 1);
 #endif
         }
 
@@ -1478,7 +1478,7 @@ pipecb (EV_P_ ev_io *iow, int revents)
       if (evpipe [0] < 0)
         {
           uint64_t counter;
-          read (evpipe [1], &counter, sizeof (uint64_t));
+          unused_result = read (evpipe [1], &counter, sizeof (uint64_t));
         }
       else
 #endif
@@ -1492,7 +1492,7 @@ pipecb (EV_P_ ev_io *iow, int revents)
           buf.len = sizeof (dummy);
           WSARecv (EV_FD_TO_WIN32_HANDLE (evpipe [0]), &buf, 1, &recvd, &flags, 0, 0);
 #else
-          read (evpipe [0], &dummy, sizeof (dummy));
+          unused_result = read (evpipe [0], &dummy, sizeof (dummy));
 #endif
         }
     }
