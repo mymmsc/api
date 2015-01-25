@@ -30,8 +30,8 @@ extern "C" {
 typedef enum level_enum {
 	API_LOG_QUIET   = 0,
 	API_LOG_ERROR   = 0x01,
-	API_LOG_FATAL   = 0x02,
-	API_LOG_DEBUG   = 0x03,
+	API_LOG_DEBUG   = 0x02,
+	API_LOG_FATAL   = 0x03,
 	API_LOG_ALERT   = 0x04,
 	API_LOG_VERBOSE = 0x05,
 	API_LOG_INFO    = 0x06,

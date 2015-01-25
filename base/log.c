@@ -163,7 +163,7 @@ int api_log_core(log_level_e level, const char *fmt, va_list args)
 	char msgbuf[40960] = {0};
 	char *prefix = NULL;
 	
-	switch (level) {
+	switch (level & 0x0F) {
 		case API_LOG_ERROR:
 			prefix = "error";
 			out = fError;
@@ -176,17 +176,9 @@ int api_log_core(log_level_e level, const char *fmt, va_list args)
 			prefix = "debug";
 			out = fInfo;
 			break;
-		case API_LOG_INFO:
-			prefix = "info";
-			out = fInfo;
-			break;
-		case API_LOG_VERBOSE:
-			prefix = "info";
-			out = fInfo;
-			break;
 		default:
-			prefix = "warn";
-			out = fError;
+			prefix = "info";
+			out = fInfo;
 			break;
 	}
 	memset(fmtbuf, 0x00, sizeof(fmtbuf));
