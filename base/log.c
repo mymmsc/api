@@ -237,6 +237,7 @@ int api_log_core(log_level_e level, const char *fmt, va_list args)
 		if(log->fd == -1 || t2 > log->current) {
 			log->current = t2;
 			if(log->fd != -1) {
+				log_flush_data(log);
 				close(log->fd);
 				log->fd = -1;
 				log->size = 0;
@@ -280,12 +281,15 @@ int api_log_core(log_level_e level, const char *fmt, va_list args)
 		if(log->fd > 0) {
 			strcat(msgbuf, "\r\n");
 			size_t ms = api_strlen(msgbuf);
-			if(ms <= log->length - log->size) {
-				log->size += ms;
-				memcpy(log->buffer + log->size, msgbuf, ms);
+			if(ms > log->length - log->size) {
+				log_flush_data(log);
 			}
-			iRet = write(log->fd, msgbuf, ms);
-			
+			if(ms <= log->length - log->size) {
+				memcpy(log->buffer + log->size, msgbuf, ms);
+				log->size += ms;
+			} else {
+				iRet = write(log->fd, msgbuf, ms);
+			}			
 		}
 	}
 	return iRet;
