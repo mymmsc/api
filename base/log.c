@@ -98,7 +98,7 @@ static void log_flush_data(api_log_t *log)
 {
 	int rc;
 	api_spinlock(&log->buffer_mutex, 1, 2048);
-	(void)write(log->fd, log->buffer, log->size);
+	rc = write(log->fd, log->buffer, log->size);
 	log->size = 0;
 	api_unlock(&log->buffer_mutex);
 }
