@@ -25,12 +25,14 @@ typedef struct __log_struct{
 	int         fd;
 	int64_t     current;
 	int         interval;
-	off_t       length; // max
-	size_t      size; // use
 	byte_t      type;
 	char        prefix[64];
 //	char        rule[128];
 	char        fname[256];
+	
+	char        buffer[4096];
+	off_t		length; // max
+	size_t		size; // use
 }api_log_t;
 
 static api_log_t g_logger[16];
@@ -105,10 +107,10 @@ void api_logger_init(const char *path)
 	} else {
 		api_cpystrn(g_log_path, log_path_default, sizeof(g_log_path));
 	}
-	api_log_init(API_LOG_FACCESS, 3600, "access");
-	api_log_init(API_LOG_FERROR, 3600, "error");
-	api_log_init(API_LOG_FDEBUG, 3600, "debug");
-	api_log_init(API_LOG_FFATAL, 3600, "fatal");
+	api_log_init(API_LOG_FILE | API_LOG_ACCESS, 3600, "access");
+	api_log_init(API_LOG_FILE | API_LOG_ERROR, 3600, "error");
+	api_log_init(API_LOG_FILE | API_LOG_DEBUG, 3600, "debug");
+	api_log_init(API_LOG_FILE | API_LOG_FATAL, 3600, "fatal");
 }
 
 void api_logger_close(void)
@@ -149,6 +151,9 @@ void api_log_init(byte_t type, int interval, const char *prefix)
 		} else {
 			log->interval = 3600 * 24;
 		}
+		log->length = sizeof(log->buffer);
+		memset(log->buffer, 0x00, log->length);
+		log->size = 0;
 	}
 }
 
@@ -204,7 +209,9 @@ int api_log_core(log_level_e level, const char *fmt, va_list args)
 	        }
 	    }
 	}
-	iRet = fprintf(out, "%s\r\n", msgbuf);
+	if(level & API_LOG_STDOUT) {
+		iRet = fprintf(out, "%s\r\n", msgbuf);
+	}
 	if(level & API_LOG_FILE)
 	{
 		api_log_t *log = api_log_get(level);
@@ -220,12 +227,12 @@ int api_log_core(log_level_e level, const char *fmt, va_list args)
 				log->size = 0;
 			}
 			if(access(g_log_path, F_OK) != 0) {
-				trace_out("create path %s.", g_log_path);
+				//trace_out("create path %s.", g_log_path);
 				if(api_mkdirs(g_log_path) != 0) {
 					trace_err("mkdir error: %s", g_log_path);
 				}
 			}
-
+			
 			time_t t = time(NULL);
 			struct tm *dt = localtime(&t);
 			char logfile[1024];
@@ -246,18 +253,21 @@ int api_log_core(log_level_e level, const char *fmt, va_list args)
 					log->prefix,
 					dt->tm_year + 1900, dt->tm_mon + 1,	dt->tm_mday);
 			}
-			if((log->fd = open(logfile, O_RDWR|O_CREAT|O_APPEND
+			if((log->fd = open(logfile, O_WRONLY|O_CREAT|O_APPEND
 			#ifndef _WIN32
 				, S_IRUSR|S_IWUSR
 			#endif
 				)) == -1) {
 				log->fd = -1;
-				trace_out("can not open file: %s", logfile);
+				trace_err("can not open file: %s", logfile);
 			}
 		}
 		if(log->fd > 0) {
 			strcat(msgbuf, "\r\n");
 			size_t ms = api_strlen(msgbuf);
+			if(ms > log->length - log->size) {
+				
+			}
 			iRet = write(log->fd, msgbuf, ms);
 			log->size += ms;
 		}
