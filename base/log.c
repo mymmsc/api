@@ -94,10 +94,10 @@ static int current_timestring(int hires, char *buf, size_t len)
     return 0;
 }
 
-static int log_flush_data(api_log_t *log)
+static void log_flush_data(api_log_t *log)
 {
 	api_spinlock(&log->buffer_mutex, 1, 2048);
-	iRet = write(log->fd, log->buffer, log->size);
+	write(log->fd, log->buffer, log->size);
 	log->size = 0;
 	api_unlock(&log->buffer_mutex);
 }
