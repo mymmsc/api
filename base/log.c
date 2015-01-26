@@ -20,6 +20,7 @@
 #include <api/lib.h>
 #include <api/strings.h>
 #include <time.h>
+#include <api/atomic.h>
 
 typedef struct __log_struct{
 	int         fd;
