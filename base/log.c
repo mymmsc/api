@@ -97,10 +97,12 @@ static int current_timestring(int hires, char *buf, size_t len)
 static void log_flush_data(api_log_t *log)
 {
 	int rc;
-	api_spinlock(&log->buffer_mutex, 1, 2048);
-	rc = write(log->fd, log->buffer, log->size);
-	log->size = 0;
-	api_unlock(&log->buffer_mutex);
+	if(log->size > 0) {
+		api_spinlock(&log->buffer_mutex, 1, 2048);
+		rc = write(log->fd, log->buffer, log->size);
+		log->size = 0;
+		api_unlock(&log->buffer_mutex);
+	}
 }
 
 void api_logger_init(const char *path)
@@ -288,6 +290,7 @@ int api_log_core(log_level_e level, const char *fmt, va_list args)
 				memcpy(log->buffer + log->size, msgbuf, ms);
 				log->size += ms;
 			} else {
+				log_flush_data(log);
 				iRet = write(log->fd, msgbuf, ms);
 			}			
 		}
