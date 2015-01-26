@@ -29,7 +29,8 @@ typedef struct __log_struct{
 	char        prefix[64];
 //	char        rule[128];
 	char        fname[256];
-	
+
+	atomic_t    buffer_mutex;
 	char        buffer[4096];
 	off_t		length; // max
 	size_t		size; // use
@@ -92,6 +93,13 @@ static int current_timestring(int hires, char *buf, size_t len)
     return 0;
 }
 
+static int log_flush_data(api_log_t *log)
+{
+	api_spinlock(&log->buffer_mutex, 1, 2048);
+	iRet = write(log->fd, log->buffer, log->size);
+	log->size = 0;
+	api_unlock(&log->buffer_mutex);
+}
 
 void api_logger_init(const char *path)
 {
@@ -100,6 +108,7 @@ void api_logger_init(const char *path)
 	memset(g_logger, 0x00, sizeof(g_logger));
 	for(i = 0; i < num; i++) {
 		api_log_t *log = g_logger + i;
+		log->buffer_mutex = 0;
 		log->fd = -1;
 	}
 	if(api_strlen(path) > 0) {
@@ -120,8 +129,10 @@ void api_logger_close(void)
 	for(i = 0; i < num; i++) {
 		api_log_t *log = g_logger + i;
 		if(log->fd != -1) {
+			log_flush_data(log);
 			close(log->fd);
 			log->fd = -1;
+			log->buffer_mutex = 0;
 		}
 	}
 }
@@ -154,8 +165,10 @@ void api_log_init(byte_t type, int interval, const char *prefix)
 		log->length = sizeof(log->buffer);
 		memset(log->buffer, 0x00, log->length);
 		log->size = 0;
+		log->buffer_mutex = 0;
 	}
 }
+
 
 int api_log_core(log_level_e level, const char *fmt, va_list args)
 {
@@ -265,11 +278,12 @@ int api_log_core(log_level_e level, const char *fmt, va_list args)
 		if(log->fd > 0) {
 			strcat(msgbuf, "\r\n");
 			size_t ms = api_strlen(msgbuf);
-			if(ms > log->length - log->size) {
-				
+			if(ms <= log->length - log->size) {
+				log->size += ms;
+				memcpy(log->buffer + log->size, msgbuf, ms);
 			}
 			iRet = write(log->fd, msgbuf, ms);
-			log->size += ms;
+			
 		}
 	}
 	return iRet;
