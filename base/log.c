@@ -342,11 +342,9 @@ void api_log_fatal(log_level_e level, const char *fmt,...)
 void api_log_assert(log_level_e level, int exp, const char *exps, const char *filename, int line, const char *function)
 {
 	if(!exp) {
-		char fmtbuf[1024] = {0};
+		char fmtbuf[4096] = {0};
 		snprintf(fmtbuf, sizeof(fmtbuf), "%s, (%s), abort.", fmt_trace, exps);
 		api_log_message(level, fmtbuf, filename, line, function);
 		abort();
 	}
 }
-
-

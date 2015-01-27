@@ -87,4 +87,3 @@ API void api_log_assert(log_level_e level, int exp, const char *exps, const char
 
 
 #endif /* ! __API_LOG_H_INCLUDED__ */
-
