@@ -5,7 +5,7 @@ dnl Process this file with autoconf to produce a configure script.
 dnl Use ./autogen.sh to prepare build files and run autoconf for API.
 
 AC_PREREQ(2.59)
-AC_INIT(api, 1.0.5)
+AC_INIT(api, 1.0.6)
 
 AC_CONFIG_SRCDIR([build/api_common.m4])
 AC_CONFIG_HEADER([include/api/arch/unix/api_private.h])
@@ -47,7 +47,7 @@ AC_CANONICAL_SYSTEM
 API_CONFIGURE_PART([Configuring API library])
 API_CONFIGURE_PART([Platform: $host])
 
-AM_INIT_AUTOMAKE([libapi],[1.0.5])
+AM_INIT_AUTOMAKE([libapi],[1.0.6])
 AM_MAINTAINER_MODE
 
 dnl Some initial steps for configuration.  We setup the default directory
@@ -983,6 +983,8 @@ AC_CONFIG_FILES(Makefile \
                 base/Makefile \
                 event/Makefile \
                 compat/Makefile \
+                dbm/Makefile \
+                dbm/hiredis/Makefile \
                 samples/Makefile \
                 samples/conhash/Makefile \
                 samples/socks5/Makefile \
