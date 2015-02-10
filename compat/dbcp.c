@@ -71,7 +71,7 @@ static redisReply *redis_exec(api_str_t *host, const char *command, const char *
 			do_debug("#%d:%s => [%s], %d", api_getpid(), command, reply->str, reply->type);
 			break;
 		} else {
-			do_debug("#%d:redis-server[%V] connect error.", api_getpid(), &(node->name));
+			do_debug("#%d:redis-server[%V] connect error.", api_getpid(), host);
 			api_hashtable_remove(&g_servers, host->data, host->len);
 			redisFree(conn);
 			conn = NULL;
