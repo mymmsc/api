@@ -26,12 +26,12 @@ static redisContext *redis_connect(api_str_t *hostport)
 		conn = redisConnectWithTimeout(host, port, timeout);
 		if(conn->err)
 		{
-			do_debug("Connection error: %s,hp: %s", conn->errstr, hp);
+			do_error("Connection error: %s,hp: %s", conn->errstr, hp);
 			return NULL;
 		} else {
 			int rc = redisEnableKeepAlive(conn);
 			if(rc != REDIS_OK) {
-				do_debug("redisEnableKeepAlive error: %s,hp: %s", conn->errstr, hp);
+				do_error("redisEnableKeepAlive error: %s,hp: %s", conn->errstr, hp);
 			}
 		}
     }
@@ -68,7 +68,7 @@ static redisReply *redis_exec(api_str_t *host, const char *command, const char *
 		reply = redisCommand(conn, command);
 		if(reply)
 		{
-			do_debug("#%d:%s => [%s], %d", api_getpid(), command, reply->str, reply->type);
+			//do_debug("#%d:%s => [%s], %d", api_getpid(), command, reply->str, reply->type);
 			break;
 		} else {
 			do_error("#%d:redis-server[%V] connect error.", api_getpid(), host);
