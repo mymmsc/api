@@ -14,5 +14,5 @@ API int64_t api_dbcp_exec_int(api_str_t *host, const char *command, const char *
 }
 #endif
 
-#endif /* ! __API_CRC64_H_INCLUDE__ */
+#endif /* ! __API_DBCP_H_INCLUDED__ */
 
