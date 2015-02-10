@@ -54,7 +54,7 @@ static redisReply *redis_exec(api_str_t *host, const char *command, const char *
 	redisReply *reply = NULL;
 	size_t tsize = 0;
 	redisContext *conn = NULL;
-	conn = api_hashtable_get(g_servers, host->data, host->len, &tsize);
+	conn = api_hashtable_get(&g_servers, host->data, host->len, &tsize);
 	int tries = 2;
 	while( tries-- > 0) {
 		if(conn == NULL) {
@@ -62,7 +62,7 @@ static redisReply *redis_exec(api_str_t *host, const char *command, const char *
 			if(conn == NULL) {
 				break;
 			} else {
-				api_hashtable_insert(g_servers, host->data, host->len, conn, sizeof(conn));
+				api_hashtable_insert(&g_servers, host->data, host->len, conn, sizeof(conn));
 			}
 		}
 		reply = redisCommand(conn, command);
@@ -72,7 +72,7 @@ static redisReply *redis_exec(api_str_t *host, const char *command, const char *
 			break;
 		} else {
 			do_debug("#%d:redis-server[%V] connect error.", api_getpid(), &(node->name));
-			api_hashtable_remove(g_servers, host->data, host->len);
+			api_hashtable_remove(&g_servers, host->data, host->len);
 			redisFree(conn);
 			conn = NULL;
 		}
