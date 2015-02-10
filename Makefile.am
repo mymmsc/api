@@ -30,7 +30,7 @@ include include/include.am
 GENERIC_LDFLAGS = -version-info $(VERSION_INFO) $(RELEASE) $(NO_UNDEFINED)
 
 SYS_LIBS  =
-LTLIBOBJS = base/libbase.la dbm/libdbm.a event/libevent.la compat/libcompat.la
+LTLIBOBJS = base/libbase.la event/libevent.la compat/libcompat.la
 
 libapi_la_SOURCES = $(CORE_SRC)
 libapi_la_LIBADD = $(LTLIBOBJS) $(SYS_LIBS)

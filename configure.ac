@@ -983,8 +983,7 @@ AC_CONFIG_FILES(Makefile \
                 base/Makefile \
                 event/Makefile \
                 compat/Makefile \
-                dbm/Makefile \
-                dbm/hiredis/Makefile \
+                compat/hiredis/Makefile \
                 samples/Makefile \
                 samples/conhash/Makefile \
                 samples/socks5/Makefile \
