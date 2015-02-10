@@ -227,17 +227,15 @@ void* api_hashtable_get(api_hashtable_t *table, void *key, size_t key_size, size
     {
         if(he_key_compare(entry, &tmp))
         {
-            if(value_size != NULL)
+            if(value_size != NULL) {
                 *value_size = entry->value_size;
-
+            }
             return entry->value;
-        }
-        else
-        {
+        } else {
             entry = entry->next;
         }
     }
-
+	
     return NULL;
 }
 
