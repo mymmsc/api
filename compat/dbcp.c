@@ -1,5 +1,6 @@
 #include "api/dbcp.h"
 #include "api/hashtable.h"
+#include "hiredis/hiredis.h"
 
 static api_hashtable_t g_servers;
 
