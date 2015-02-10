@@ -257,21 +257,19 @@ void api_hashtable_remove(api_hashtable_t *table, void *key, size_t key_size)
         // parent and child in its place
         if(he_key_compare(entry, &tmp))
         {
-            if(prev == NULL)
+            if(prev == NULL) {
                 table->array[index] = entry->next;
-            else
+            } else {
                 prev->next = entry->next;
-
+            }
             table->key_count--;
 
-            if(prev != NULL)
-              table->collisions--;
-
+            if(prev != NULL) {
+            	table->collisions--;
+            }
             he_destroy(table->flags, entry);
             return;
-        }
-        else
-        {
+        } else {
             prev = entry;
             entry = entry->next;
         }
@@ -307,7 +305,7 @@ unsigned int api_hashtable_size(api_hashtable_t *table)
 void** api_hashtable_keys(api_hashtable_t *table, unsigned int *key_count)
 {
     void **ret;
-
+	
     if(table->key_count == 0){
       *key_count = 0;
       return NULL;
@@ -466,10 +464,12 @@ hash_entry *he_create(int flags, void *key, size_t key_size, void *value,
 
 void he_destroy(int flags, hash_entry *entry)
 {
-    if (!(flags & HT_KEY_CONST))
+    if (!(flags & HT_KEY_CONST)) {
         free(entry->key);
-    if (!(flags & HT_VALUE_CONST))
+    }
+    if (!(flags & HT_VALUE_CONST)) {
         free(entry->value);
+    }
     free(entry);
 }
 
@@ -478,18 +478,18 @@ int he_key_compare(hash_entry *e1, hash_entry *e2)
     char *k1 = e1->key;
     char *k2 = e2->key;
 
-    if(e1->key_size != e2->key_size)
+    if(e1->key_size != e2->key_size) {
         return 0;
-
+    }
     return (memcmp(k1,k2,e1->key_size) == 0);
 }
 
 void he_set_value(int flags, hash_entry *entry, void *value, size_t value_size)
 {
     if (!(flags & HT_VALUE_CONST)) {
-        if(entry->value)
+        if(entry->value) {
             free(entry->value);
-
+        }
         entry->value = malloc(value_size);
         if(entry->value == NULL) {
             debug("Failed to set entry value\n");
