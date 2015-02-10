@@ -17,6 +17,6 @@
 #define _OSX
 #endif
 
-#include "dsp/types.h"
+#include "api.h"
 
 #endif
