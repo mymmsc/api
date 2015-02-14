@@ -105,11 +105,11 @@ static int redisSetBlocking(redisContext *c, int blocking) {
         return REDIS_ERR;
     }
 
-    if (blocking)
+    if (blocking) {
         flags &= ~O_NONBLOCK;
-    else
+    } else {
         flags |= O_NONBLOCK;
-
+    }
     if (fcntl(c->fd, F_SETFL, flags) == -1) {
         __redisSetErrorFromErrno(c,REDIS_ERR_IO,"fcntl(F_SETFL)");
         redisContextCloseFd(c);
@@ -194,7 +194,7 @@ static int redisContextWaitReady(redisContext *c, const struct timeval *timeout)
             msec = INT_MAX;
         }
     }
-
+	
     if (errno == EINPROGRESS) {
         int res;
 
