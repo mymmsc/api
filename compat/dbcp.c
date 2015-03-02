@@ -91,6 +91,11 @@ int64_t api_dbcp_exec_int(api_str_t *host, const char *command, const char *key)
 		iRet = reply->integer;
 		freeReplyObject(reply);
 		reply = NULL;
+	} else if(reply->type == REDIS_REPLY_STRING){
+		//iRet = reply->integer;
+		iRet = api_atoi64(reply->str);
+		freeReplyObject(reply);
+		reply = NULL;
 	} else {
 		iRet = 0;
 	}
