@@ -126,6 +126,8 @@ API api_bool_t api_bitset_get(const api_bitset_t *bitset, api_off_t offset);
  */
 API api_status_t api_bitset_set(api_bitset_t *bitset, api_off_t offset);
 
+API api_status_t api_bitset_count(uint32_t n);
+
 /** @} */
 
 #ifdef __cplusplus

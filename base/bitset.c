@@ -82,4 +82,15 @@ api_status_t api_bitset_set(api_bitset_t *bitset, api_off_t offset)
     return bRet;
 }
 
+
+api_status_t api_bitset_count(uint32_t n)
+{
+	n = (n & 0x55555555) + ((n & 0xaaaaaaaa) >> 1);
+	n = (n & 0x33333333) + ((n & 0xcccccccc) >> 2);
+	n = (n & 0x0f0f0f0f) + ((n & 0xf0f0f0f0) >> 4);
+	n = (n & 0x00ff00ff) + ((n & 0xff00ff00) >> 8);
+	n = (n & 0x0000ffff) + ((n & 0xffff0000) >> 16);
+	return n;
+}
+
 //////////////////////////////////////////////////////////////////////////////////////////

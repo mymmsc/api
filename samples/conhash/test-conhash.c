@@ -6,6 +6,7 @@
 #include "api/log.h"
 
 #include "api/vector.h"
+#include "api/bitset.h"
 
 static void server_get (api_conhash_vnode_t *vnode, void *data)
 {
@@ -23,6 +24,10 @@ static int str_sort(const void *s1, const void *s2)
 int main(int argc, char* argv[])
 {
 	api_init();
+	{
+		int n = 123456789;
+		printf("n has [%d] 1.\n", api_bitset_count(n));
+	}
 	int rc = 0;
 	{
 		char s1[1024];
