@@ -82,7 +82,7 @@ api_status_t api_bitset_set(api_bitset_t *bitset, api_off_t offset)
     return bRet;
 }
 
-
+#if 0
 api_status_t api_bitset_count(uint32_t n)
 {
 	n = (n & 0x55555555) + ((n & 0xaaaaaaaa) >> 1);
@@ -92,5 +92,29 @@ api_status_t api_bitset_count(uint32_t n)
 	n = (n & 0x0000ffff) + ((n & 0xffff0000) >> 16);
 	return n;
 }
-
+#else
+api_status_t api_bitset_count(uint32_t x)
+{
+	int r = 0;
+	
+    x &= ~x + 1; /* this isolates the lowest bit */
+	
+#if 0
+	r += !!(x & 0xaaaaaaaa) << 0;
+    r += !!(x & 0xcccccccc) << 1;
+    r += !!(x & 0xf0f0f0f0) << 2;
+    r += !!(x & 0xff00ff00) << 3;
+    r += !!(x & 0xffff0000) << 4;
+#else
+    if (x & 0xaaaaaaaa) r +=  1;
+    if (x & 0xcccccccc) r +=  2;
+    if (x & 0xf0f0f0f0) r +=  4;
+    if (x & 0xff00ff00) r +=  8;
+    if (x & 0xffff0000) r += 16;
+#endif
+	
+    return r;
+	return n;
+}
+#endif
 //////////////////////////////////////////////////////////////////////////////////////////
