@@ -25,7 +25,7 @@ int main(int argc, char* argv[])
 {
 	api_init();
 	{
-		int n = 123456789;
+		int n = 0x01fffc;
 		printf("n has [%d] 1.\n", api_bitset_count(n));
 	}
 	int rc = 0;

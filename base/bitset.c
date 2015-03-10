@@ -81,7 +81,7 @@ api_status_t api_bitset_set(api_bitset_t *bitset, api_off_t offset)
     
     return bRet;
 }
-
+#if 0
 api_status_t api_bitset_count(uint32_t n)
 {
 	n = (n & 0x55555555) + ((n & 0xaaaaaaaa) >> 1);
@@ -89,7 +89,18 @@ api_status_t api_bitset_count(uint32_t n)
 	n = (n & 0x0f0f0f0f) + ((n & 0xf0f0f0f0) >> 4);
 	n = (n & 0x00ff00ff) + ((n & 0xff00ff00) >> 8);
 	n = (n & 0x0000ffff) + ((n & 0xffff0000) >> 16);
+	
 	return n;
 }
-
+#else
+api_status_t api_bitset_count(uint32_t x)
+{
+	x = (x & 0x55555555) + ((x>>1) & 0x55555555);
+	x = (x & 0x33333333) + ((x>>2) & 0x33333333);
+	x = (x & 0x0f0f0f0f) + ((x>>4) & 0x0f0f0f0f);
+	x += (x>>8);
+	x += (x>>16);
+	return (x & 0x00ff);
+}
+#endif
 //////////////////////////////////////////////////////////////////////////////////////////
