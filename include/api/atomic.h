@@ -52,7 +52,7 @@ typedef volatile atomic_int_t atomic_t;
 
 //////////////////////////////////////////////////////////////////////////
 
-#if defined(API_CC_GNUC)
+#if defined(API_CC_GNUC) && defined(API_OS_LINUX)
 #   define API_HAVE_ATOMIC_OPS 1
 #   define atomic_inc(var)           __sync_fetch_and_add        (&(var), 1)
 #   define atomic_dec(var)           __sync_fetch_and_sub        (&(var), 1)
@@ -87,6 +87,7 @@ typedef volatile atomic_int_t atomic_t;
 #	define api_memory_barrier()      __asm__("mfence")
 #	define api_cpu_pause()           __asm__ ("pause")
 #elif defined(API_OS_APPLE)
+#   define API_HAVE_ATOMIC_OPS 1
 #   define atomic_inc(var)           OSAtomicIncrement64(&(var))
 //#   define atomic_inc(var)           OSAtomicAdd64(1, (volatile int64_t *)var)
 #   define atomic_dec(var)           OSAtomicDecrement64(&(var))

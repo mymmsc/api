@@ -29,7 +29,8 @@ static api_status_t clock_gettime2(struct timespec *ts) {
 	// be more careful in a multithreaded environement
 	static double orwl_timebase = 0.0;
 	static uint64_t orwl_timestart = 0;
-	
+	have_realtime = -1;
+    have_monotonic = -1;
 	if (!orwl_timestart) {
 		mach_timebase_info_data_t tb = { 0 };
 		mach_timebase_info(&tb);
