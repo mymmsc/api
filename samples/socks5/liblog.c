@@ -11,6 +11,12 @@
 #endif
 #include <pthread.h>
 
+#if defined(__APPLE__) && defined(__clang__)
+#pragma clang diagnostic ignored "-Wsometimes-uninitialized"
+//#pragma clang diagnostic ignored "-Wtautological-constant-out-of-range-compare"
+#endif
+
+
 #include "defs.h"
 #include "liblog.h"
 #include "libthread.h"

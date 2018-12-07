@@ -1,6 +1,11 @@
 #ifndef __API_H_INCLUDED__
 #define __API_H_INCLUDED__
 
+#if defined(__APPLE__) && defined(__clang__)
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+#pragma clang diagnostic ignored "-Wunused-const-variable"
+#endif
+
 #include <api/platform.h>
 
 #if defined __DragonFly__ && !defined __FreeBSD__

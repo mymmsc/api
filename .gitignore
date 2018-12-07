@@ -59,4 +59,5 @@ CTestTestfile.cmake
 *.x86_64
 *.hex
 
+.deps/
 tafjcedepend/

@@ -2,6 +2,11 @@
 #include "api/memory.h"
 #include <assert.h>
 
+#if defined(__APPLE__) && defined(__clang__)
+#pragma clang diagnostic ignored "-Wint-to-void-pointer-cast"
+#pragma clang diagnostic ignored "-Wtautological-constant-out-of-range-compare"
+#endif
+
 inline trie_t *trie_init(void) {
     return api_calloc(1, sizeof(trie_t));
 }
