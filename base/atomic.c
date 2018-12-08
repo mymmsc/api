@@ -1,6 +1,6 @@
 #include "api/atomic.h"
 #include "api/core.h"
-
+  
 void
 api_spinlock(atomic_t *lock, atomic_int_t value, uint32_t spin)
 {
