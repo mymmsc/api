@@ -96,6 +96,13 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 ** 081101 AIO [2.7.2 修订文件创建方式为新建 (Wang Feng)]
 */
 
+#if defined(__APPLE__) && defined(__clang__)
+#pragma clang diagnostic ignored "-Wself-assign"
+#pragma clang diagnostic ignored "-Wnull-dereference"
+#pragma clang diagnostic ignored "-Wlogical-not-parentheses"
+#endif
+
+
 #define __MEMWATCH_C 1
 
 #ifdef MW_NOCPP
